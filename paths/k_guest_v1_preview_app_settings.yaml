@@ -120,7 +120,8 @@
                 type: string
                 description: The **Enable comments** setting.
               titleField:
-                $ref: ../components/schemas/PreviewAppSettingsPutTitleField.yaml
+                allOf:
+                  - $ref: ../components/schemas/PreviewAppSettingsPutTitleField.yaml
                 description: The record title.
               icon:
                 anyOf:
@@ -179,7 +180,8 @@
                   - `YELLOW`
                   - `BLACK`
               numberPrecision:
-                $ref: ../components/schemas/PreviewAppSettingsPutNumberPrecision.yaml
+                allOf:
+                  - $ref: ../components/schemas/PreviewAppSettingsPutNumberPrecision.yaml
                 description: |-
                   The **Precision of numbers and calculations** setting.
                   For more information, refer to the following article on the Kintone Help site:

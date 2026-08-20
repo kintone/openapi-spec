@@ -126,7 +126,8 @@
                 type: integer
                 description: The App ID.
               updateKey:
-                $ref: ../components/schemas/RecordPutUpdateKey.yaml
+                allOf:
+                  - $ref: ../components/schemas/RecordPutUpdateKey.yaml
                 description: The unique key of the record to be updated. Required, if _id_ will not be specified. To specify this field, the field must have the "Prohibit duplicate values" option turned on.
               record:
                 type: object
