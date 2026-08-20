@@ -1,0 +1,77 @@
+/k/v1/preview/app/deploy.json:
+  get:
+    operationId: getPreviewAppDeploy
+    summary: Get preview app deploy
+    tags:
+      - PREVIEWS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: apps
+        in: query
+        schema:
+          items:
+            format: long
+            type: string
+          type: array
+        required: true
+        description: |-
+          The list of Apps to check the deploy statuses of. The Maximum limit is 300.
+          If Apps in Guest Spaces are specified, all Apps specified in the request must belong to that Guest Space.
+    responses:
+      '200':
+        description: success case of preview/app/deploy/get
+        content:
+          application/json:
+            schema:
+              properties:
+                apps:
+                  items:
+                    $ref: ../components/schemas/PreviewAppDeployGetAppForm.yaml
+                  type: array
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the deployment status of the App settings for multiple Apps.
+  post:
+    operationId: deployApp
+    summary: Deploy app
+    tags:
+      - PREVIEWS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:write
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              revert:
+                type: boolean
+                description: Specify `true` to cancel all changes made to the pre-live settings. The pre-live settings will be reverted back to the current settings of the live app.
+              apps:
+                items:
+                  $ref: ../components/schemas/PreviewAppDeployPostAppForm.yaml
+                type: array
+                description: |-
+                  The list of Apps to deploy the pre-live settings to the live Apps. The Maximum limit is 300.
+                  If Apps are being deployed to Guest Spaces, Apps can only be deployed to the same Guest Space.
+            required:
+              - apps
+            type: object
+    responses:
+      '200':
+        description: success case of preview/app/deploy/post
+        content:
+          application/json:
+            schema:
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Updates the settings of a pre-live App to the live App.

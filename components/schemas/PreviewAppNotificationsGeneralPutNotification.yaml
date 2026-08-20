@@ -1,0 +1,76 @@
+properties:
+  recordEdited:
+    type: boolean
+    description: |-
+      Option to notify the entity when a record is edited.
+      - `true`: Notify when a record is edited
+      - `false`: Do not notify when a record is edited
+      If ignored, this value is false.
+  recordAdded:
+    type: boolean
+    description: |-
+      Option to notify the entity when a record is added.
+      - `true`: Notify when a record is added
+      - `false`: Do not notify when a record is added
+      If ignored, this value is false.
+  statusChanged:
+    type: boolean
+    description: |-
+      Option to notify the entity when a status is changed.
+      - `true`: Notify when a status is changed
+      - `false`: Do not notify when a status is changed
+      If ignored, this value is false.
+  includeSubs:
+    type: boolean
+    description: |-
+      The "Include affiliated departments" setting of the Department. This parameter is available if **notifications[].entity.type** parameter is specified to **ORGANIZATION** or **FIELD_ENTITY**.
+      - `true`: Affiliated departments do inherit the General Notification settings
+      - `false`: Affiliated departments do not inherit the General Notification settings
+      If ignored, this value is false.
+  entity:
+    properties:
+      code:
+        type: string
+        description: |-
+          The code of the entity the General Notification settings are configured to.
+          Specify the field code if the **notifications[].entity.type** parameter is specified as **FIELD_ENTITY**.
+          For guest users, add **guest/** before the login name.
+          Required when specifying the **entity** parameter.
+      type:
+        enum:
+          - USER
+          - GROUP
+          - ORGANIZATION
+          - FIELD_ENTITY
+        type: string
+        description: |-
+          The type of the entity the General Notification settings are configured to.
+          - **USER**: User
+          - **GROUP**: Group
+          - **ORGANIZATION**: Department
+          - **FIELD_ENTITY**: Created By, Updated By, User Selection, Group Selection, and Department Selection Fields
+          Required when specifying the **entity** parameter.
+    required:
+      - code
+      - type
+    type: object
+    description: |-
+      An object containing data of the entity the General Notification settings are configured to.
+      Required when specifying the **notifications** parameter.
+  fileImported:
+    type: boolean
+    description: |-
+      Option to notify the entity when a file is imported.
+      - `true`: Notify when a file is imported
+      - `false`: Do not notify when a file is imported
+      If ignored, this value is false.
+  commentAdded:
+    type: boolean
+    description: |-
+      Option to notify the entity when a comment is posted.
+      - `true`: Notify when a comment is posted
+      - `false`: Do not notify when a comment is posted
+      If ignored, this value is false.
+required:
+  - entity
+type: object

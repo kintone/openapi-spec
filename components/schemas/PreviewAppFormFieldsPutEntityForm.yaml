@@ -1,0 +1,35 @@
+properties:
+  code:
+    type: string
+    description: |-
+      The code of the default value for User/Group/Department selection fields.
+      Required, if setting the `defaultValue` parameter.
+      - For User selection fields, specify one of:
+      - User login name
+      - Group code
+      - Department code
+      - Function name (`LOGINUSER()` only)
+      For Apps in Guest Spaces, only User, Group, and Function can be specified.
+      - For Group selection fields, specify the Group code.
+      - For Department selection fields, specify one of:
+      - Department code
+      - Function name (`PRIMARY_ORGANIZATION()` only)
+      Deleted or disabled Users/Groups/Departments cannot be specified.
+  type:
+    enum:
+      - USER
+      - ORGANIZATION
+      - GROUP
+      - FUNCTION
+    type: string
+    description: |-
+      The type of the default value for User/Group/Department selection fields.
+      Required, if setting the `defaultValue` parameter.
+      - `USER`: User
+      - `GROUP`: Group
+      - `ORGANIZATION`: Department
+      - `FUNCTION`: Function
+required:
+  - code
+  - type
+type: object

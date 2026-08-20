@@ -1,0 +1,45 @@
+/k/v1/plugin/apps.json:
+  get:
+    operationId: getPluginApps
+    summary: Get plugin apps
+    tags:
+      - PLUGINS
+    security:
+      - passwordAuth: []
+    parameters:
+      - name: offset
+        in: query
+        schema:
+          type: string
+        description: |-
+          The number of plug-ins to skip from the list of plug-ins.
+          If ignored, this value is 0.
+      - name: limit
+        in: query
+        schema:
+          type: string
+        description: |-
+          The maximum number of plug-ins to retrieve.
+          Must be between 1 and 500.
+          The default number is 100.
+      - name: id
+        in: query
+        schema:
+          type: string
+        required: true
+        description: The ID of the plug-in.
+    responses:
+      '200':
+        description: success case of plugin/apps/get
+        content:
+          application/json:
+            schema:
+              properties:
+                apps:
+                  items:
+                    $ref: ../components/schemas/PluginAppsGetAppDto.yaml
+                  type: array
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets Apps that have the specified plug-In added.

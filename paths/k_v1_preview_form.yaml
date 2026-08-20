@@ -1,0 +1,57 @@
+/k/v1/preview/form.json:
+  get:
+    operationId: getPreviewForm
+    summary: Get preview form
+    tags:
+      - PREVIEWS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID.
+    responses:
+      '200':
+        description: success case of preview/form/get
+        content:
+          application/json:
+            schema:
+              properties:
+                properties:
+                  items:
+                    anyOf:
+                      - $ref: ../components/schemas/PreviewFormGetLayoutProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetLabelProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetBultinProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetCalcSimpleProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetDateSimpleProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetDatetimeSimpleProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetDecimalSimpleProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetEditorSimpleProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetFileSimpleProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetLinkSimpleProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetMultipleLineTextSimpleProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetMultipleSelectSimpleProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetSingleLineTextSimpleProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetSingleSelectSimpleProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetTimeSimpleProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetUserSelectSimpleProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetOrganizationSelectSimpleProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetGroupSelectSimpleProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetLookupSimpleProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetReferenceTableLayoutProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetSubTableLayoutProperties.yaml
+                      - $ref: ../components/schemas/PreviewFormGetSpacerProperties.yaml
+                    type: object
+                  type: array
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Retrieves the form details of an app.

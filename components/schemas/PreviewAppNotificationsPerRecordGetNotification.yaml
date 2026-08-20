@@ -1,0 +1,11 @@
+properties:
+  filterCond:
+    format: query
+    type: string
+  title:
+    type: string
+  targets:
+    items:
+      $ref: ./PreviewAppNotificationsPerRecordGetTarget.yaml
+    type: array
+type: object

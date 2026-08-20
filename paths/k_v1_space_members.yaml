@@ -1,0 +1,73 @@
+/k/v1/space/members.json:
+  get:
+    operationId: getSpaceMembers
+    summary: Get space members
+    tags:
+      - SPACES
+    security:
+      - passwordAuth: []
+    parameters:
+      - name: id
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The Space ID.
+    responses:
+      '200':
+        description: success case of space/members/get
+        content:
+          application/json:
+            schema:
+              properties:
+                members:
+                  items:
+                    anyOf:
+                      - $ref: ../components/schemas/SpaceMembersGetUserBean.yaml
+                      - $ref: ../components/schemas/SpaceMembersGetOrganizationBean.yaml
+                      - $ref: ../components/schemas/SpaceMembersGetGroupBean.yaml
+                    type: object
+                  type: array
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the list of Space Members of a Space.
+  put:
+    operationId: putSpaceMembers
+    summary: Put space members
+    tags:
+      - SPACES
+    security:
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              members:
+                items:
+                  $ref: ../components/schemas/SpaceMembersPutMemberForm.yaml
+                type: array
+                description: |-
+                  A list of members of the Space.
+                  At least one Space Administrator must be specified.
+                  Inactive and deleted users cannot be specified.
+              id:
+                format: int64
+                type: integer
+                description: The Space ID.
+            required:
+              - id
+            type: object
+    responses:
+      '200':
+        description: success case of space/members/put
+        content:
+          application/json:
+            schema:
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Updates the Members of a Space.

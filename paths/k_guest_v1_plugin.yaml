@@ -1,0 +1,130 @@
+/k/guest/{guestSpaceId}/v1/plugin.json:
+  delete:
+    operationId: uninstallPluginForGuestSpace
+    summary: Uninstall plugin (guest space)
+    tags:
+      - PLUGINS
+    security:
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                type: string
+                description: The ID of the plug-in.
+            required:
+              - id
+            type: object
+    responses:
+      '200':
+        description: success case of plugin/delete
+        content:
+          application/json:
+            schema:
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Uninstalls a plug-in from the Kintone environment.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+  post:
+    operationId: installPluginForGuestSpace
+    summary: Install plugin (guest space)
+    tags:
+      - PLUGINS
+    security:
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              fileKey:
+                type: string
+                description: |-
+                  The fileKey representing an uploaded file. Use the following API to upload the file and retrieve the fileKey:
+                  [Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/)
+            required:
+              - fileKey
+            type: object
+    responses:
+      '200':
+        description: success case of plugin/post
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  type: string
+                version:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Imports a plug-in into Kintone.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+  put:
+    operationId: putPluginForGuestSpace
+    summary: Put plugin (guest space)
+    tags:
+      - PLUGINS
+    security:
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              fileKey:
+                type: string
+                description: |-
+                  The fileKey representing an uploaded file. Use the following API to upload the file and retrieve the fileKey:
+                  [Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/)
+              id:
+                type: string
+                description: The ID of the plug-in to be updated.
+            required:
+              - fileKey
+              - id
+            type: object
+    responses:
+      '200':
+        description: success case of plugin/put
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  type: string
+                version:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Updates an imported plug-in in Kintone.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).

@@ -1,0 +1,21 @@
+properties:
+  type:
+    type: string
+    enum:
+      - ORGANIZATION_SELECT
+  value:
+    items:
+      $ref: ./OrganizationEntitySimpleValue.yaml
+    type: array
+required:
+  - value
+  - type
+type: object
+description: Department Selection
+example:
+  type: ORGANIZATION_SELECT
+  value:
+    - code: human_resources
+      name: Human Resources
+    - code: sales
+      name: Sales

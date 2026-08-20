@@ -1,0 +1,18 @@
+properties:
+  layout:
+    items:
+      $ref: ./AppFormLayoutGetRow.yaml
+    type: array
+  code:
+    maxLength: 128
+    type: string
+  type:
+    enum:
+      - ROW
+      - SUBTABLE
+      - GROUP
+    type: string
+required:
+  - code
+  - type
+type: object

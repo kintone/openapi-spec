@@ -1,0 +1,8 @@
+properties:
+  name:
+    type: string
+  id:
+    type: string
+  enabled:
+    type: boolean
+type: object

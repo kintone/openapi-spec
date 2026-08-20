@@ -1,0 +1,88 @@
+/k/v1/preview/app/adminNotes.json:
+  get:
+    operationId: getPreviewAppAdminNotes
+    summary: Get preview app admin notes
+    tags:
+      - PREVIEWS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+    parameters:
+      - name: app
+        in: query
+        schema:
+          type: string
+        required: true
+        description: The App ID.
+    responses:
+      '200':
+        description: success case of preview/app/adminNotes/get
+        content:
+          application/json:
+            schema:
+              properties:
+                content:
+                  type: string
+                includeInTemplateAndDuplicates:
+                  type: boolean
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets notes for app administrator and their settings.
+  put:
+    operationId: putPreviewAppAdminNotes
+    summary: Put preview app admin notes
+    tags:
+      - PREVIEWS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              app:
+                format: int64
+                type: integer
+                description: The App ID.
+              content:
+                maxLength: 10000
+                type: string
+                description: |-
+                  The content of the notes.
+                  The content must be between 0 to 10000 characters.
+                  If the parameter is omitted, the content will not change.
+              revision:
+                format: int64
+                type: integer
+                description: |-
+                  The revision number of the App settings.
+                  If the parameter does not match the actual revision number, it will be considered an error, and the content will not be updated.
+                  The revision will not be checked if this parameter is ignored or `-1` is specified.
+              includeInTemplateAndDuplicates:
+                type: string
+                description: |-
+                  The permission settings to include this note in app templates or duplicates
+                  - `true`: include
+                  - `false`: do not include
+                  If the parameter is omitted, the content will not change.
+            required:
+              - app
+            type: object
+    responses:
+      '200':
+        description: success case of preview/app/adminNotes/put
+        content:
+          application/json:
+            schema:
+              properties:
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Update the notes for App administrators and their settings.

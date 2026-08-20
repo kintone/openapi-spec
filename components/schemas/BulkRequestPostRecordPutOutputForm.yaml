@@ -1,0 +1,4 @@
+properties:
+  revision:
+    type: string
+type: object

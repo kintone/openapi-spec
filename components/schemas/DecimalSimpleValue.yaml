@@ -1,0 +1,14 @@
+properties:
+  type:
+    type: string
+    enum:
+      - NUMBER
+  value:
+    type: string
+type: object
+required:
+  - type
+description: Number
+example:
+  type: NUMBER
+  value: '777'

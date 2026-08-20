@@ -1,0 +1,66 @@
+properties:
+  noLabel:
+    format: boolean
+    type: boolean
+  protocol:
+    enum:
+      - WEB
+      - CALL
+      - MAIL
+    type: string
+  code:
+    maxLength: 128
+    minLength: 1
+    type: string
+  defaultValue:
+    type: string
+  minLength:
+    format: int64
+    type: integer
+  unique:
+    format: boolean
+    type: boolean
+  label:
+    maxLength: 128
+    minLength: 1
+    type: string
+  type:
+    enum:
+      - CALC
+      - CATEGORY
+      - CHECK_BOX
+      - CREATED_TIME
+      - CREATOR
+      - DATE
+      - DATETIME
+      - DROP_DOWN
+      - FILE
+      - GROUP
+      - GROUP_SELECT
+      - LINK
+      - MODIFIER
+      - MULTI_LINE_TEXT
+      - MULTI_SELECT
+      - NUMBER
+      - ORGANIZATION_SELECT
+      - RADIO_BUTTON
+      - RECORD_NUMBER
+      - REFERENCE_TABLE
+      - RICH_TEXT
+      - SINGLE_LINE_TEXT
+      - STATUS
+      - STATUS_ASSIGNEE
+      - SUBTABLE
+      - TIME
+      - UPDATED_TIME
+      - USER_SELECT
+    type: string
+  maxLength:
+    format: int64
+    type: integer
+  required:
+    format: boolean
+    type: boolean
+required:
+  - type
+type: object

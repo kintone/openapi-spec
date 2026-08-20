@@ -1,0 +1,10 @@
+properties:
+  relatedField:
+    type: string
+    description: |-
+      The field code of the field set for the mapping source.
+      Required, if setting the `lookup` parameter.
+  field:
+    type: string
+    description: The field code of the field set for the mapping endpoint. Required, if setting the `lookup` parameter.
+type: object

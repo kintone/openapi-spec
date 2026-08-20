@@ -1,0 +1,71 @@
+/k/guest/{guestSpaceId}/v1/app.json:
+  get:
+    operationId: getAppForGuestSpace
+    summary: Get app (guest space)
+    tags:
+      - APPS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+      - name: id
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID.
+    responses:
+      '200':
+        description: success case of app/get
+        content:
+          application/json:
+            schema:
+              properties:
+                threadId:
+                  type: string
+                  nullable: true
+                spaceId:
+                  type: string
+                  nullable: true
+                createdAt:
+                  format: date-time
+                  type: string
+                creator:
+                  properties:
+                    code:
+                      type: string
+                    name:
+                      type: string
+                  type: object
+                code:
+                  type: string
+                modifiedAt:
+                  format: date-time
+                  type: string
+                appId:
+                  type: string
+                modifier:
+                  properties:
+                    code:
+                      type: string
+                    name:
+                      type: string
+                  type: object
+                name:
+                  type: string
+                description:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets general information of an App, including the name, description, related Space, creator and updater information.

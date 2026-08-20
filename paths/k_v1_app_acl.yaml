@@ -1,0 +1,87 @@
+/k/v1/app/acl.json:
+  get:
+    operationId: getAppAcl
+    summary: Get app acl
+    tags:
+      - APPS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID
+    responses:
+      '200':
+        description: success case of app/acl/get
+        content:
+          application/json:
+            schema:
+              properties:
+                rights:
+                  items:
+                    $ref: ../components/schemas/AppAclGetRight.yaml
+                  type: array
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the App permissions of an App.
+  put:
+    operationId: putAppAcl
+    summary: Put app acl
+    tags:
+      - APPS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:write
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              app:
+                format: int64
+                type: integer
+                description: The App ID.
+              rights:
+                items:
+                  $ref: ../components/schemas/AppAclPutRight.yaml
+                type: array
+                description: |-
+                  An array listing data of App permissions, in order of priority.
+                  The "Everyone" group will be treated with the lowest priority, wherever it is placed in the list.
+              revision:
+                format: int64
+                type: integer
+                description: |-
+                  Specify the revision number of the settings that will be deployed.
+                  The request will fail if the revision number is not the latest revision.
+                  The revision will not be checked if this parameter is ignored, or -1 is specified.
+            required:
+              - app
+              - rights
+            type: object
+    responses:
+      '200':
+        description: success case of app/acl/put
+        content:
+          application/json:
+            schema:
+              properties:
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Updates the App permissions of an App.

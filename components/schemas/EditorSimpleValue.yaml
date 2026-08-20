@@ -1,0 +1,11 @@
+properties:
+  type:
+    type: string
+    enum:
+      - RICH_TEXT
+  value:
+    type: string
+type: object
+required:
+  - type
+description: Rich text

@@ -1,0 +1,24 @@
+properties:
+  code:
+    type: string
+    description: |-
+      The code of the entity the `Action` is granted to.
+      For guest users, add `guest/` before the login name.
+      Required when specifying the `actions.{actionname}.entities` parameter.
+  type:
+    enum:
+      - USER
+      - GROUP
+      - ORGANIZATION
+    type: string
+    description: |-
+      The type of the entity the `Action` is granted to.
+      - `USER`: User
+      - `GROUP`: Group
+      - `ORGANIZATION`: Department
+      For Apps in a guest space, specifying a Department will result in an error.
+      Required when specifying the `actions.{actionname}.entities` parameter.
+required:
+  - code
+  - type
+type: object

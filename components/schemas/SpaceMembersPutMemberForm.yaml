@@ -1,0 +1,42 @@
+properties:
+  isAdmin:
+    type: boolean
+    description: |-
+      The Space Administration settings of the user.
+      - `true`: The member will be the Administrator of the Space.
+      - `false`: The member will not be the Administrator of the Space.
+      At least 1 Space Administrator is required to be set in the API call.
+      If ignored, this value is false.
+  includeSubs:
+    type: boolean
+    description: |-
+      The "Include Affiliated Departments" settings of the department.
+      - `true`: Affiliated departments will be included.
+      - `false`: Affiliated departments will not be included.
+      If ignored, this value is false.
+  entity:
+    properties:
+      code:
+        type: string
+        description: The code of the entity.
+      type:
+        enum:
+          - USER
+          - GROUP
+          - ORGANIZATION
+        type: string
+        description: |-
+          The entity type of the Space member.
+          - **USER**: User
+          - **Group**: Group
+          - **ORGANIZATION**: Department
+    required:
+      - code
+      - type
+    type: object
+    description: |-
+      The entity information of the Space member.
+      Guest users cannot be specified.
+required:
+  - entity
+type: object

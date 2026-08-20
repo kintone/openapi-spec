@@ -1,0 +1,14 @@
+properties:
+  type:
+    type: string
+    enum:
+      - __REVISION__
+  value:
+    type: string
+type: object
+required:
+  - type
+description: Revision
+example:
+  type: __REVISION__
+  value: '9'

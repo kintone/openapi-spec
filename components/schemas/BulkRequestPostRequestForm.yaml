@@ -1,0 +1,26 @@
+properties:
+  method:
+    type: string
+    description: The API method for the request.
+  payload:
+    anyOf:
+      - $ref: ./BulkRequestPostRecordPostForm.yaml
+      - $ref: ./BulkRequestPostRecordPutForm.yaml
+      - $ref: ./BulkRequestPostRecordStatusPutForm.yaml
+      - $ref: ./BulkRequestPostRecordAssigneesPutForm.yaml
+      - $ref: ./BulkRequestPostRecordsDeleteForm.yaml
+      - $ref: ./BulkRequestPostRecordsPostForm.yaml
+      - $ref: ./BulkRequestPostRecordsPutForm.yaml
+      - $ref: ./BulkRequestPostRecordsStatusPutForm.yaml
+    type: object
+    description: |-
+      The parameters to be passed onto the API of the request.
+      Contents and formats will change depending on the API.
+  api:
+    type: string
+    description: The path of the API for the request.
+required:
+  - method
+  - payload
+  - api
+type: object

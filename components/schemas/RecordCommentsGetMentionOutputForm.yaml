@@ -1,0 +1,10 @@
+properties:
+  code:
+    type: string
+  type:
+    enum:
+      - USER
+      - ORGANIZATION
+      - GROUP
+    type: string
+type: object

@@ -1,0 +1,128 @@
+/k/v1/preview/app/views.json:
+  get:
+    operationId: getPreviewAppViews
+    summary: Get preview app views
+    tags:
+      - PREVIEWS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID
+      - name: lang
+        in: query
+        schema:
+          enum:
+            - default
+            - user
+            - ja
+            - en
+            - zh
+          type: string
+        description: |-
+          The localized language to retrieve the data in:
+          - `default`: retrieves the default names
+          - `en`: retrieves the localized English names
+          - `zh`: retrieves the localized Chinese names
+          - `ja`: retrieves the localized Japanese names
+          - `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.
+    responses:
+      '200':
+        description: success case of preview/app/views/get
+        content:
+          application/json:
+            schema:
+              properties:
+                views:
+                  type: object
+                  additionalProperties:
+                    anyOf:
+                      - $ref: ../components/schemas/PreviewAppViewsGetBuiltinListViewOutputForm.yaml
+                      - $ref: ../components/schemas/PreviewAppViewsGetBuiltinCalendarViewOutputForm.yaml
+                      - $ref: ../components/schemas/PreviewAppViewsGetListViewOutputForm.yaml
+                      - $ref: ../components/schemas/PreviewAppViewsGetCalendarViewOutputForm.yaml
+                      - $ref: ../components/schemas/PreviewAppViewsGetCustomViewOutputForm.yaml
+                    type: object
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the View settings of an App.
+  put:
+    operationId: putPreviewAppViews
+    summary: Put preview app views
+    tags:
+      - PREVIEWS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:write
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              app:
+                format: int64
+                type: integer
+                description: The App ID.
+              views:
+                type: object
+                additionalProperties:
+                  anyOf:
+                    - $ref: ../components/schemas/PreviewAppViewsPutListViewForm.yaml
+                    - $ref: ../components/schemas/PreviewAppViewsPutCalendarViewForm.yaml
+                    - $ref: ../components/schemas/PreviewAppViewsPutCustomViewForm.yaml
+                  type: object
+                  description: |-
+                    The setting of each Views.
+                    - Add a View:
+                    Specify the name of the View to be add as `views.{viewname}`.
+                    - Update a View:
+                    Specify the name of the View before update as `views.{viewname}`
+                    - Delete a View:
+                    Do not specify the View name to be deleted.
+                    When Process Management is enabled, specify **Assigned to me**.
+                description: |-
+                  An object of data of Views.
+                  When adding or updating views, specify the existing views.
+                  If not specified, those views will be deleted.
+              revision:
+                format: int64
+                type: integer
+                description: |-
+                  Specify the revision number of the settings that will be deployed.
+                  The request will fail if the revision number is not the latest revision.
+                  The revision will not be checked if this parameter is ignored, or `-1` is specified.
+            required:
+              - app
+              - views
+            type: object
+    responses:
+      '200':
+        description: success case of preview/app/views/put
+        content:
+          application/json:
+            schema:
+              properties:
+                views:
+                  type: object
+                  additionalProperties:
+                    $ref: ../components/schemas/PreviewAppViewsPutResult.yaml
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Updates the View settings of an App.

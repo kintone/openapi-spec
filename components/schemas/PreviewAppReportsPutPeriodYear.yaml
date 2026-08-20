@@ -1,0 +1,47 @@
+properties:
+  month:
+    format: int64
+    type: integer
+    description: |-
+      The month when the Periodic Report will be generated.
+      Specify the month as an integer, ranging from 1 (January) to 12 (December).
+      Required when the **reports.{graphname}.periodicReport.period.every** parameter is set to **YEAR**.
+  dayOfMonth:
+    format: int64
+    type: integer
+    description: |-
+      The day when the Periodic Report will be generated.
+      - Integers from 1 to 31: The specific day of the month
+      - **END_OF_MONTH**: The last day of the month*
+      *Only if **reports.{graphname}.periodicReport.period.every** parameter is set to **QUARTER** or **MONTH**.
+      Required when the **reports.{graphname}.periodicReport.period.every** parameter is set to **YEAR**, **QUARTER**, or **MONTH**.
+  time:
+    type: string
+    description: |-
+      The time when the Periodic Report will be generated.
+      Input the time in **HH:MM** format.
+      Required when the **reports.{graphname}.periodicReport.period.every** parameter is set to **YEAR**, **QUARTER**, **MONTH**, **WEEK**, or **DAY**.
+  every:
+    enum:
+      - YEAR
+      - QUARTER
+      - MONTH
+      - WEEK
+      - DAY
+      - HOUR
+    type: string
+    description: |-
+      The time interval type used to determine when to generate the Periodic Reports.
+      - **YEAR**: by the year
+      - **QUARTER**: by the quarter
+      - **MONTH**: by the month
+      - **WEEK**: by the week
+      - **DAY**: by the day
+      - **HOUR**: by the hour
+      Required when specifying the **reports.{graphname}.periodicReport.period** parameter.
+required:
+  - month
+  - dayOfMonth
+  - time
+  - every
+type: object

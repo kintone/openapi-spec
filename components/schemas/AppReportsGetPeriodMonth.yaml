@@ -1,0 +1,10 @@
+properties:
+  dayOfMonth:
+    type: string
+  time:
+    type: string
+  every:
+    enum:
+      - MONTH
+    type: string
+type: object

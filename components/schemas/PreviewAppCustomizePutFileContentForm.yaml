@@ -1,0 +1,36 @@
+properties:
+  file:
+    properties:
+      size:
+        type: string
+      name:
+        type: string
+      fileKey:
+        type: string
+        description: |-
+          The fileKey of the CSS file.
+          To attach a file, specify the fileKey that is responded when using the following API:
+          [Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/)
+          To keep the current CSS files that are attached to the App, specify the fileKeys that are responded when using the following API:
+          [Get Customization](https://kintone.dev/en/docs/kintone/rest-api/apps/settings/get-customization/)
+      contentType:
+        type: string
+    required:
+      - fileKey
+    type: object
+    description: |-
+      An Object containing data of CSS file uploads.
+      Specify, if `FILE` is selected for `desktop.css[].type` . Along with `desktop.css[].url`, up to 30 may be specified.
+  type:
+    enum:
+      - URL
+      - FILE
+    type: string
+    description: |-
+      The endpoint type of the CSS file:
+      - `URL`: the CSS file is specified with a URL.
+      - `FILE`: the CSS file is uploaded to the App.
+required:
+  - file
+  - type
+type: object

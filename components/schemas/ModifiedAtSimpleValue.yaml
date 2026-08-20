@@ -1,0 +1,15 @@
+properties:
+  type:
+    type: string
+    enum:
+      - UPDATED_TIME
+  value:
+    format: date-time
+    type: string
+type: object
+required:
+  - type
+description: Updated datetime
+example:
+  type: UPDATED_TIME
+  value: '2015-01-22T15:07:00Z'

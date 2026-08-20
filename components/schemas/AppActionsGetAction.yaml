@@ -1,0 +1,31 @@
+properties:
+  mappings:
+    items:
+      anyOf:
+        - $ref: ./AppActionsGetUrlMapping.yaml
+        - $ref: ./AppActionsGetFieldMapping.yaml
+      type: object
+    type: array
+  entities:
+    items:
+      $ref: ./AppActionsGetEntity.yaml
+    type: array
+  name:
+    type: string
+  index:
+    format: int64
+    type: integer
+  id:
+    format: int64
+    type: integer
+  filterCond:
+    type: string
+  destApp:
+    properties:
+      app:
+        format: int64
+        type: integer
+      code:
+        type: string
+    type: object
+type: object

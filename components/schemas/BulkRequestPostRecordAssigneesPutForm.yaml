@@ -1,0 +1,19 @@
+properties:
+  app:
+    format: int64
+    type: integer
+  assignees:
+    items:
+      type: string
+    type: array
+  id:
+    format: int64
+    type: integer
+  revision:
+    format: int64
+    type: integer
+required:
+  - app
+  - assignees
+  - id
+type: object

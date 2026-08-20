@@ -1,0 +1,14 @@
+properties:
+  type:
+    type: string
+    enum:
+      - CALC
+  value:
+    type: string
+type: object
+required:
+  - type
+description: Calculated
+example:
+  type: CALC
+  value: '777888999'

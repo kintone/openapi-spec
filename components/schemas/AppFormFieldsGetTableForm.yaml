@@ -1,0 +1,78 @@
+properties:
+  noLabel:
+    format: boolean
+    type: boolean
+  code:
+    maxLength: 128
+    minLength: 1
+    type: string
+  label:
+    maxLength: 128
+    minLength: 1
+    type: string
+  fields:
+    type: object
+    additionalProperties:
+      anyOf:
+        - $ref: ./AppFormFieldsGetCalcFieldForm.yaml
+        - $ref: ./AppFormFieldsGetCategoryFieldForm.yaml
+        - $ref: ./AppFormFieldsGetDateFieldForm.yaml
+        - $ref: ./AppFormFieldsGetDatetimeFieldForm.yaml
+        - $ref: ./AppFormFieldsGetDecimalFieldForm.yaml
+        - $ref: ./AppFormFieldsGetEditorFieldForm.yaml
+        - $ref: ./AppFormFieldsGetFileFieldForm.yaml
+        - $ref: ./AppFormFieldsGetGroupFieldForm.yaml
+        - $ref: ./AppFormFieldsGetGroupSelectFieldForm.yaml
+        - $ref: ./AppFormFieldsGetLinkFieldForm.yaml
+        - $ref: ./AppFormFieldsGetLookupFieldForm.yaml
+        - $ref: ./AppFormFieldsGetModifiedAtFieldForm.yaml
+        - $ref: ./AppFormFieldsGetModifierFieldForm.yaml
+        - $ref: ./AppFormFieldsGetMultipleCheckFieldForm.yaml
+        - $ref: ./AppFormFieldsGetMultipleLineTextFieldForm.yaml
+        - $ref: ./AppFormFieldsGetMultipleSelectFieldForm.yaml
+        - $ref: ./AppFormFieldsGetOrganizationSelectFieldForm.yaml
+        - $ref: ./AppFormFieldsGetRecordIdFieldForm.yaml
+        - $ref: ./AppFormFieldsGetReferenceTableFieldForm.yaml
+        - $ref: ./AppFormFieldsGetSingleCheckFieldForm.yaml
+        - $ref: ./AppFormFieldsGetSingleLineTextFieldForm.yaml
+        - $ref: ./AppFormFieldsGetSingleSelectFieldForm.yaml
+        - $ref: ./AppFormFieldsGetStatusAssigneeFieldForm.yaml
+        - $ref: ./AppFormFieldsGetStatusFieldForm.yaml
+        - $ref: ./AppFormFieldsGetTableForm.yaml
+        - $ref: ./AppFormFieldsGetTimeFieldForm.yaml
+        - $ref: ./AppFormFieldsGetUserSelectFieldForm.yaml
+      type: object
+  type:
+    enum:
+      - CALC
+      - CATEGORY
+      - CHECK_BOX
+      - CREATED_TIME
+      - CREATOR
+      - DATE
+      - DATETIME
+      - DROP_DOWN
+      - FILE
+      - GROUP
+      - GROUP_SELECT
+      - LINK
+      - MODIFIER
+      - MULTI_LINE_TEXT
+      - MULTI_SELECT
+      - NUMBER
+      - ORGANIZATION_SELECT
+      - RADIO_BUTTON
+      - RECORD_NUMBER
+      - REFERENCE_TABLE
+      - RICH_TEXT
+      - SINGLE_LINE_TEXT
+      - STATUS
+      - STATUS_ASSIGNEE
+      - SUBTABLE
+      - TIME
+      - UPDATED_TIME
+      - USER_SELECT
+    type: string
+required:
+  - type
+type: object

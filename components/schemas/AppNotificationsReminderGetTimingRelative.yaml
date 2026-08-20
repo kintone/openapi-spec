@@ -1,0 +1,10 @@
+properties:
+  hoursLater:
+    format: int64
+    type: integer
+  code:
+    type: string
+  daysLater:
+    format: int64
+    type: integer
+type: object

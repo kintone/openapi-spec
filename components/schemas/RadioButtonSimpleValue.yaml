@@ -1,0 +1,14 @@
+type: object
+properties:
+  type:
+    type: string
+    enum:
+      - RADIO_BUTTON
+  value:
+    type: string
+required:
+  - type
+description: Radio button
+example:
+  type: RADIO_BUTTON
+  value: Choice 3

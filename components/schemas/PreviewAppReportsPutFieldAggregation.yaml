@@ -1,0 +1,47 @@
+properties:
+  code:
+    type: string
+    description: |-
+      The field code of the field to be used in the "Function" option.
+      Elements with **type** set to **SUM** or **AVERAGE** can specify the following fields:
+      - **Number** fields
+      - **Calculated** fields (Number)
+      - **Calculated** fields (Number with thousands separator)
+      - **Calculated** fields (Hours & minutes) within tables
+      - **Calculated** fields (Days & hours & minutes) within tables
+      - **Lookup** fields with the Key Field set as a **Number** field
+      Elements with **type** set to **MAX** or **MIN** can specify the following fields:
+      - **Number** field
+      - **Calculated** fields (Number)
+      - **Calculated** fields (Number with thousands separator)
+      - **Calculated** fields (Date & time) within tables
+      - **Calculated** fields (Date) within tables
+      - **Calculated** fields (Time) within tables
+      - **Calculated** fields (Hours & minutes) within tables
+      - **Calculated** fields (Days & hours & minutes) within tables
+      - **Date** fields within tables
+      - **Date and time** fields within tables
+      - **Time** fields within tables
+      - **Created datetime** fields within tables
+      - **Updated datetime** fields within tables
+      - **Lookup** fields with the Key Field set as a **Number** field
+      Required for each element of the **reports.{graphname}.aggregations** parameter, except for elements with **type** set to **COUNT**.
+  type:
+    enum:
+      - SUM
+      - AVERAGE
+      - MAX
+      - MIN
+    type: string
+    description: |-
+      The type of the "Function" option.
+      - **COUNT**: number of records
+      - **SUM**: Total
+      - **AVERAGE**: Average
+      - **MAX**: Maximum
+      - **MIN**: Minimum
+      Required when specifying the **reports.{graphname}.aggregations** parameter.
+required:
+  - code
+  - type
+type: object

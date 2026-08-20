@@ -1,0 +1,14 @@
+properties:
+  month:
+    format: int64
+    type: integer
+  dayOfMonth:
+    format: int64
+    type: integer
+  time:
+    type: string
+  every:
+    enum:
+      - YEAR
+    type: string
+type: object

@@ -1,0 +1,18 @@
+properties:
+  type:
+    type: string
+    enum:
+      - CATEGORY
+  value:
+    items:
+      type: string
+    type: array
+type: object
+required:
+  - type
+description: Categories
+example:
+  type: CATEGORY
+  value:
+    - category1
+    - category2

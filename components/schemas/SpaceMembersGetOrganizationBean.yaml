@@ -1,0 +1,13 @@
+properties:
+  isAdmin:
+    type: boolean
+  includeSubs:
+    type: boolean
+  entity:
+    properties:
+      code:
+        type: string
+      type:
+        type: string
+    type: object
+type: object

@@ -1,0 +1,14 @@
+properties:
+  type:
+    type: string
+    enum:
+      - RECORD_NUMBER
+  value:
+    type: string
+type: object
+required:
+  - type
+description: Record number
+example:
+  type: RECORD_NUMBER
+  value: '7'

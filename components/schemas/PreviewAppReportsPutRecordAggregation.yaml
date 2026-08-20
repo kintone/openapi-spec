@@ -1,0 +1,16 @@
+properties:
+  type:
+    enum:
+      - COUNT
+    type: string
+    description: |-
+      The type of the "Function" option.
+      - **COUNT**: number of records
+      - **SUM**: Total
+      - **AVERAGE**: Average
+      - **MAX**: Maximum
+      - **MIN**: Minimum
+      Required when specifying the **reports.{graphname}.aggregations** parameter.
+required:
+  - type
+type: object

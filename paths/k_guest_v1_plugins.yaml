@@ -1,0 +1,55 @@
+/k/guest/{guestSpaceId}/v1/plugins.json:
+  get:
+    operationId: getPluginsForGuestSpace
+    summary: Get plugins (guest space)
+    tags:
+      - PLUGINS
+    security:
+      - passwordAuth: []
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+      - name: offset
+        in: query
+        schema:
+          type: string
+        description: |-
+          The number of plug-ins to skip from the list of installed plug-ins.
+          If ignored, this value is 0.
+      - name: limit
+        in: query
+        schema:
+          type: string
+        description: |-
+          The maximum number of plug-ins to retrieve.
+          Must be between 1 and 100.
+          The default number is 100.
+      - name: ids
+        in: query
+        schema:
+          items:
+            type: string
+          type: array
+        description: |-
+          The plug-in ids. The maximum limit of ids that can be specified is 100.
+          If `null` or an empty array is specified, this parameter will be ignored, and a list of plug-ins will be returned.
+    responses:
+      '200':
+        description: success case of plugins/get
+        content:
+          application/json:
+            schema:
+              properties:
+                plugins:
+                  items:
+                    $ref: ../components/schemas/PluginsGetPluginDto.yaml
+                  type: array
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the list of plug-ins imported into Kintone.

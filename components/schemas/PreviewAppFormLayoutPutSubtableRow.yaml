@@ -1,0 +1,52 @@
+properties:
+  code:
+    maxLength: 128
+    type: string
+    description: The field code of the Table or Group field. Ignore, if the row type is not a Table or a Group.
+  fields:
+    items:
+      anyOf:
+        - $ref: ./PreviewAppFormLayoutPutLabelField.yaml
+        - $ref: ./PreviewAppFormLayoutPutSingleLineTextField.yaml
+        - $ref: ./PreviewAppFormLayoutPutMultipleLineTextField.yaml
+        - $ref: ./PreviewAppFormLayoutPutEditorField.yaml
+        - $ref: ./PreviewAppFormLayoutPutDecimalField.yaml
+        - $ref: ./PreviewAppFormLayoutPutCalcField.yaml
+        - $ref: ./PreviewAppFormLayoutPutMultipleCheckField.yaml
+        - $ref: ./PreviewAppFormLayoutPutSingleCheckField.yaml
+        - $ref: ./PreviewAppFormLayoutPutSingleSelectField.yaml
+        - $ref: ./PreviewAppFormLayoutPutMultipleSelectField.yaml
+        - $ref: ./PreviewAppFormLayoutPutFileField.yaml
+        - $ref: ./PreviewAppFormLayoutPutDateField.yaml
+        - $ref: ./PreviewAppFormLayoutPutDatetimeField.yaml
+        - $ref: ./PreviewAppFormLayoutPutTimeField.yaml
+        - $ref: ./PreviewAppFormLayoutPutUserSelectField.yaml
+        - $ref: ./PreviewAppFormLayoutPutLinkField.yaml
+        - $ref: ./PreviewAppFormLayoutPutLookupField.yaml
+        - $ref: ./PreviewAppFormLayoutPutReferenceTableField.yaml
+        - $ref: ./PreviewAppFormLayoutPutSpacerField.yaml
+        - $ref: ./PreviewAppFormLayoutPutHrField.yaml
+        - $ref: ./PreviewAppFormLayoutPutRecordIdField.yaml
+        - $ref: ./PreviewAppFormLayoutPutCreatorField.yaml
+        - $ref: ./PreviewAppFormLayoutPutCreatedAtField.yaml
+        - $ref: ./PreviewAppFormLayoutPutModifierField.yaml
+        - $ref: ./PreviewAppFormLayoutPutModifiedAtField.yaml
+      type: object
+    type: array
+    description: The list of fields in the row.
+  type:
+    enum:
+      - ROW
+      - SUBTABLE
+      - GROUP
+    type: string
+    description: |-
+      The type of row.
+      - `ROW`: A normal row of fields.
+      - `SUBTABLE`: A Table.
+      - `GROUP`: A Group field.
+required:
+  - code
+  - fields
+  - type
+type: object

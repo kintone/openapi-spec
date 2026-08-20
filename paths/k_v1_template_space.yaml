@@ -1,0 +1,75 @@
+/k/v1/template/space.json:
+  post:
+    operationId: postTemplateSpace
+    summary: Post template space
+    tags:
+      - TEMPLATES
+    security:
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              fixedMember:
+                type: boolean
+                description: |-
+                  The "**Block users from joining or leaving the space and following or unfollowing the threads.**" settings of the Space.
+                  - `true`: Users will not be able to join/leave the Space or follow/unfollow threads.
+                  - `false`: Users will be able to join/leave the Space and follow/unfollow threads.
+                  If ignored, this value is `false`.
+              isGuest:
+                type: boolean
+                description: |-
+                  The Guest Space settings of the Space.
+                  - `true`: The Space will be a Guest Space
+                  - `false`: The Space will be a normal Space.
+                  If ignored, this value is `false`.
+              members:
+                items:
+                  $ref: ../components/schemas/TemplateSpacePostMemberForm.yaml
+                type: array
+                description: |-
+                  A list of members of the Space.
+                  At least one Space Administrator must be specified.
+                  Inactive and deleted users cannot be specified.
+              name:
+                maxLength: 128
+                minLength: 1
+                type: string
+                description: The new name of the Space.
+              id:
+                format: int64
+                type: integer
+                description: |-
+                  The Space Template ID.
+                  For instructions on creating Space Templates, refer to the following article:
+                  [Creating a Template from a Space](https://us.kintone.help/k/en/id/04075)
+                  The Space Template ID is listed on the Space Templates list page, found under https://{domainname}.kintone.com/k/admin/system/spacetemplate/
+              isPrivate:
+                type: boolean
+                description: |-
+                  The "**Private**" settings of the Space.
+                  - `true`: The Space will be Private.
+                  - `false`: The Space will not be Private.
+                  If the **isGuest** parameter is set to `true`, this value is also `true`.
+                  If ignored, this value is `false`.
+            required:
+              - name
+              - id
+            type: object
+    responses:
+      '200':
+        description: success case of template/space/post
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  format: int64
+                  type: integer
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Creates a Space from a Space template.

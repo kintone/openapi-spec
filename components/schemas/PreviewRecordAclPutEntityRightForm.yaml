@@ -1,0 +1,59 @@
+properties:
+  viewable:
+    type: boolean
+    description: |-
+      The view permission of the entity.
+      - `true`: Grant view permission
+      - `false`: Deny view permission
+      If ignored, the value is false.
+  editable:
+    type: boolean
+    description: |-
+      The edit permission of the entity.
+      - `true`: Grant edit permission
+      - `false`: Deny edit permission
+      If ignored, this value is false.
+      If the entity has no permission to view the record, this value is false.
+  deletable:
+    type: boolean
+    description: |-
+      The delete permission of the entity.
+      - `true`: Grant delete permission
+      - `false`: Deny delete permission
+      If ignored, this value is false.
+      If the entity has no permission to view the record, this value is false.
+  includeSubs:
+    type: boolean
+    description: |-
+      The permission inheritance settings of the department the permissions are granted to.
+      - `true`: Permissions are inherited.
+      - `false`: Permissions are not inherited.
+      If ignored, this value is false.
+  entity:
+    properties:
+      code:
+        type: string
+        description: |-
+          The code of the entity the permissions are granted to.
+          If the "Everyone" group is not specified, the "Everyone" group will have no permissions to view/edit/delete.
+          To specify guest space users, add the string "guest/" before the guest's log in name.
+      type:
+        enum:
+          - USER
+          - GROUP
+          - ORGANIZATION
+          - FIELD_ENTITY
+        type: string
+        description: |-
+          The type of the entity the permissions are granted to.
+          - **USER**: User
+          - **GROUP**: Group
+          - **ORGANIZATION**: Department
+          - **FIELD_ENTITY**: User field
+    required:
+      - type
+    type: object
+    description: An object containing data of the entity the permissions are granted to.
+required:
+  - entity
+type: object

@@ -1,0 +1,20 @@
+properties:
+  name:
+    type: string
+  index:
+    format: int64
+    type: integer
+  assignee:
+    properties:
+      entities:
+        items:
+          $ref: ./PreviewAppStatusGetAssigneeEntityForm.yaml
+        type: array
+      type:
+        enum:
+          - ONE
+          - ALL
+          - ANY
+        type: string
+    type: object
+type: object

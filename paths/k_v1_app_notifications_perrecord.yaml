@@ -1,0 +1,56 @@
+/k/v1/app/notifications/perRecord.json:
+  get:
+    operationId: getAppNotificationsPerRecord
+    summary: Get app notifications per record
+    tags:
+      - APPS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID.
+      - name: lang
+        in: query
+        schema:
+          enum:
+            - default
+            - user
+            - ja
+            - en
+            - zh
+          type: string
+        description: |-
+          Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:
+          [Setting Localized Names](https://us.kintone.help/k/en/id/040557)
+          The response parameter `notifications[].filterCond` will include the localized option names in the query string.
+          - `default`: retrieves the default names
+          - `en`: retrieves the localized English names
+          - `zh`: retrieves the localized Chinese names
+          - `ja`: retrieves the localized Japanese names
+          - `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.
+          If ignored, the default names will be retrieved.
+    responses:
+      '200':
+        description: success case of app/notifications/perRecord/get
+        content:
+          application/json:
+            schema:
+              properties:
+                notifications:
+                  items:
+                    $ref: ../components/schemas/AppNotificationsPerRecordGetNotification.yaml
+                  type: array
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the Per Record Notification settings of the App.

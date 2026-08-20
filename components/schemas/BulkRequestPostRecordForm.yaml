@@ -1,0 +1,14 @@
+properties:
+  updateKey:
+    $ref: ./BulkRequestPostUpdateKey.yaml
+  record:
+    type: object
+    additionalProperties:
+      $ref: ./RecordWritableObject.yaml
+  id:
+    format: int64
+    type: integer
+  revision:
+    format: int64
+    type: integer
+type: object

@@ -1,0 +1,48 @@
+/k/guest/{guestSpaceId}/v1/space/body.json:
+  put:
+    operationId: putSpaceBodyForGuestSpace
+    summary: Put space body (guest space)
+    tags:
+      - SPACES
+    security:
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                format: int64
+                type: integer
+                description: The Space ID.
+              body:
+                maxLength: 65535
+                type: string
+                description: |-
+                  The contents of the body as an HTML string.
+                  HTML tags that cannot be used will be automatically removed.
+                  HTML can be used to attach Apps, files and Emoji.
+                  The usage of the @ mark to mention a user will not notify that user.
+            required:
+              - id
+              - body
+            type: object
+    responses:
+      '200':
+        description: success case of space/body/put
+        content:
+          application/json:
+            schema:
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Updates the body of a Space.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).

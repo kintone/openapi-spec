@@ -1,0 +1,40 @@
+properties:
+  type:
+    type: string
+    enum:
+      - SUBTABLE
+  value:
+    items:
+      $ref: ./SimpleRowValue.yaml
+    type: array
+type: object
+required:
+  - type
+description: Table
+example:
+  type: SUBTABLE
+  value:
+    - id: '48277'
+      value:
+        textfield_0:
+          type: SINGLE_LINE_TEXT
+          value: Hello Kintone 1
+        numberfield_0:
+          type: NUMBER
+          value: '5'
+        checkboxfield_0:
+          type: CHECK_BOX
+          value:
+            - Choice1
+    - id: '48278'
+      value:
+        textfield_0:
+          type: SINGLE_LINE_TEXT
+          value: Hello Kintone 2
+        numberfield_0:
+          type: NUMBER
+          value: '7'
+        checkboxfield_0:
+          type: CHECK_BOX
+          value:
+            - Choice2

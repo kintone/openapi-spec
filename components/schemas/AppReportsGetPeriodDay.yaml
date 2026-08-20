@@ -1,0 +1,8 @@
+properties:
+  time:
+    type: string
+  every:
+    enum:
+      - DAY
+    type: string
+type: object

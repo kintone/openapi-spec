@@ -1,0 +1,17 @@
+type: object
+properties:
+  type:
+    type: string
+    enum:
+      - CREATOR
+  value:
+    $ref: ./UserEntitySimpleValue.yaml
+required:
+  - value
+  - type
+description: Created by
+example:
+  type: CREATOR
+  value:
+    code: john-d
+    name: John Doe

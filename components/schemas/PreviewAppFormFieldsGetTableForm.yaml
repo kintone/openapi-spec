@@ -1,0 +1,78 @@
+properties:
+  noLabel:
+    format: boolean
+    type: boolean
+  code:
+    maxLength: 128
+    minLength: 1
+    type: string
+  label:
+    maxLength: 128
+    minLength: 1
+    type: string
+  fields:
+    type: object
+    additionalProperties:
+      anyOf:
+        - $ref: ./PreviewAppFormFieldsGetCalcFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetCategoryFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetDateFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetDatetimeFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetDecimalFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetEditorFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetFileFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetGroupFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetGroupSelectFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetLinkFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetLookupFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetModifiedAtFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetModifierFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetMultipleCheckFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetMultipleLineTextFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetMultipleSelectFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetOrganizationSelectFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetRecordIdFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetReferenceTableFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetSingleCheckFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetSingleLineTextFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetSingleSelectFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetStatusAssigneeFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetStatusFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetTableForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetTimeFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsGetUserSelectFieldForm.yaml
+      type: object
+  type:
+    enum:
+      - CALC
+      - CATEGORY
+      - CHECK_BOX
+      - CREATED_TIME
+      - CREATOR
+      - DATE
+      - DATETIME
+      - DROP_DOWN
+      - FILE
+      - GROUP
+      - GROUP_SELECT
+      - LINK
+      - MODIFIER
+      - MULTI_LINE_TEXT
+      - MULTI_SELECT
+      - NUMBER
+      - ORGANIZATION_SELECT
+      - RADIO_BUTTON
+      - RECORD_NUMBER
+      - REFERENCE_TABLE
+      - RICH_TEXT
+      - SINGLE_LINE_TEXT
+      - STATUS
+      - STATUS_ASSIGNEE
+      - SUBTABLE
+      - TIME
+      - UPDATED_TIME
+      - USER_SELECT
+    type: string
+required:
+  - type
+type: object

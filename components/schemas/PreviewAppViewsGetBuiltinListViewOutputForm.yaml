@@ -1,0 +1,28 @@
+properties:
+  name:
+    type: string
+  index:
+    format: int64
+    type: integer
+  id:
+    format: int64
+    type: integer
+  sort:
+    type: string
+  fields:
+    items:
+      type: string
+    type: array
+  type:
+    enum:
+      - LIST
+      - CALENDAR
+      - CUSTOM
+    type: string
+  filterCond:
+    type: string
+  builtinType:
+    enum:
+      - ASSIGNEE
+    type: string
+type: object

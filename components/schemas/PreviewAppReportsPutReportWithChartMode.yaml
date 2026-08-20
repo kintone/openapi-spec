@@ -1,0 +1,106 @@
+properties:
+  periodicReport:
+    $ref: ./PreviewAppReportsPutPeriodicReport.yaml
+  chartType:
+    enum:
+      - PIE
+      - LINE
+      - SPLINE
+      - TABLE
+      - PIVOT_TABLE
+      - BAR
+      - COLUMN
+      - AREA
+      - SPLINE_AREA
+    type: string
+    description: |-
+      The chart type of the graph. For more information, refer to the following article:
+      [Chart Types and Their Usage](https://us.kintone.help/k/en/id/040581)
+      - **BAR**: Bar chart
+      - **COLUMN**: Column chart
+      - **PIE**: Pie chart
+      - **LINE**: Line chart
+      - **PIVOT_TABLE**: Pivot Table
+      - **TABLE**: Table
+      - **AREA**: Area chart
+      - **SPLINE**: Spline chart
+      - **SPLINE_AREA**: Spline area chart
+      Required when updating an existing graph, or creating a new graph.
+  name:
+    maxLength: 64
+    minLength: 1
+    type: string
+    description: |-
+      The name of the graph.
+      1 to 64 characters can be specified.
+      When adding a new graph, the request will fail if the value of this parameter is not the same as **reports.{graphname}**.
+      Required when adding a new graph.
+  index:
+    format: int64
+    type: integer
+    description: |-
+      The order of the graphs.
+      The graph is sorted in ascending order, starting from 0.
+      The request will fail if there are duplicate values.
+      Required when updating an existing graph, or creating a new graph.
+  groups:
+    items:
+      $ref: ./PreviewAppReportsPutGroup.yaml
+    type: array
+    description: |-
+      An array of objects containing the "Group by" options.
+      The order of the objects are in the order of "Level 1", "Level 2", and "Level 3".
+      The request will fail if the **reports.{graphname}.chartType** parameter is set to **PIVOT_TABLE** and **reports.{graphname}.groups** has less than one object.
+      Required when adding a new graph.
+  chartMode:
+    enum:
+      - NORMAL
+      - STACKED
+      - PERCENTAGE
+    type: string
+    description: |-
+      The display mode of the graph. For more information, refer to the following article:
+      [Chart Types and Their Usage](https://us.kintone.help/k/en/id/040581)
+      - **NORMAL**: Clustered graph or Non-stacked graph
+      - **STACKED**: Stacked graph
+      - **PERCENTAGE**: 100% stacked graph
+      If the **reports.{graphname}.chartType** parameter is set to **BAR** or **COLUMN**, **NORMAL** refers to "Clustered graph" display mode.
+      If the **reports.{graphname}.chartType** parameter is set to **AREA** or **SPLINE_AREA**, **NORMAL** refers to "Non-stacked graph" display mode.
+      Required when the **reports.{graphname}.chartType** parameter is set to **BAR**, **COLUMN**, **AREA**, or **SPLINE_AREA**.
+  filterCond:
+    format: query
+    type: string
+    description: |-
+      The record's filter condition in query string format that reflects the "Filter" option.
+      For more information on query formats refer to the following document:
+      [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)
+      There are restrictions on the conditions that can be specified:
+      [Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)
+      If this parameter is ignored for a new graph, it is the same as when "All records" is specified.
+      If this parameter is ignored for an existing graph, the filter setting will not be changed.
+      The request will fail if a deleted User, Group, or Organization is specified in the filter condition.
+  aggregations:
+    items:
+      anyOf:
+        - $ref: ./PreviewAppReportsPutRecordAggregation.yaml
+        - $ref: ./PreviewAppReportsPutFieldAggregation.yaml
+      type: object
+    type: array
+    description: |-
+      An array of objects containing the "Function" options.
+      The maximum limit is 10 elements in the array.
+      If the **reports.{graphname}.chartType** parameter is set to **PIVOT_TABLE**, only 1 element can be set in the array.
+      Required when adding a new graph.
+  sorts:
+    items:
+      $ref: ./PreviewAppReportsPutSort.yaml
+    type: array
+    description: |-
+      An array of objects containing the "Sort by" options.
+      The maximum limit is 3 elements in the array.
+      Required when adding a new graph.
+required:
+  - chartType
+  - index
+  - chartMode
+type: object

@@ -1,0 +1,39 @@
+/k/v1/plugins/required.json:
+  get:
+    operationId: getPluginsRequired
+    summary: Get plugins required
+    tags:
+      - PLUGINS
+    security:
+      - passwordAuth: []
+    parameters:
+      - name: offset
+        in: query
+        schema:
+          type: string
+        description: |-
+          The number of plug-ins to skip from the list of required plug-ins.
+          If ignored, this value is 0.
+      - name: limit
+        in: query
+        schema:
+          type: string
+        description: |-
+          The maximum number of plug-ins to retrieve.
+          Must be between 1 and 100.
+          The default number is 100.
+    responses:
+      '200':
+        description: success case of plugins/required/get
+        content:
+          application/json:
+            schema:
+              properties:
+                plugins:
+                  items:
+                    $ref: ../components/schemas/PluginsRequiredGetPluginDto.yaml
+                  type: array
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the list of plug-ins that have been deleted from Kintone, but have already been added to Apps.

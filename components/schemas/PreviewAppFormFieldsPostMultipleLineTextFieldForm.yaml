@@ -1,0 +1,96 @@
+properties:
+  noLabel:
+    type: boolean
+    description: |-
+      The **Hide field name** option.
+      - `true`: The field's name will be hidden.
+      - `false`: The field's name will be displayed.
+      If ignored, `false` will be set.
+  code:
+    maxLength: 128
+    minLength: 1
+    type: string
+    description: |-
+      The field code of the field.
+      Field codes have the following limitations:
+      - The maximum character limit is 128
+      - Duplicate field codes cannot exist
+      - _ is the only symbol that can be used
+      - Numbers cannot be used to start a field code
+  defaultValue:
+    type: string
+    description: |-
+      The default value.
+      For fields that can set multiple default values, specify the value as an array.
+      The `defaultNowValue` will take priority if it is also specified.
+      For the User selection, Group selection, and Department selection fields, an array of objects that include `code` and `type` is required.
+  label:
+    maxLength: 128
+    minLength: 1
+    type: string
+    description: The field name.
+  type:
+    enum:
+      - CALC
+      - CATEGORY
+      - CHECK_BOX
+      - CREATED_TIME
+      - CREATOR
+      - DATE
+      - DATETIME
+      - DROP_DOWN
+      - FILE
+      - GROUP
+      - GROUP_SELECT
+      - LINK
+      - MODIFIER
+      - MULTI_LINE_TEXT
+      - MULTI_SELECT
+      - NUMBER
+      - ORGANIZATION_SELECT
+      - RADIO_BUTTON
+      - RECORD_NUMBER
+      - REFERENCE_TABLE
+      - RICH_TEXT
+      - SINGLE_LINE_TEXT
+      - STATUS
+      - STATUS_ASSIGNEE
+      - SUBTABLE
+      - TIME
+      - UPDATED_TIME
+      - USER_SELECT
+    type: string
+    description: |-
+      The field type.
+      - `GROUP`: Group
+      - `GROUP_SELECT`: Group selection
+      - `CALC`: Calculated
+      - `CHECK_BOX`: Check box
+      - `DATE`: Date
+      - `DATETIME`: Date and time
+      - `DROP_DOWN`: Drop-down
+      - `FILE`: Attachment
+      - `LINK`: Link
+      - `MULTI_LINE_TEXT`: Text Area
+      - `MULTI_SELECT`: Multi-choice
+      - `NUMBER`: Number
+      - `ORGANIZATION_SELECT`: Department selection
+      - `RADIO_BUTTON`: Radio button
+      - `RECORD_NUMBER`: Record number
+      - `REFERENCE_TABLE`: Related Records
+      - `RICH_TEXT`: Rich text
+      - `SINGLE_LINE_TEXT`: Text
+      - `SUBTABLE`: Table
+      - `TIME`: Time
+      - `USER_SELECT`: User selection
+      For Lookup fields, specify depending on the Key field type it's looking up.
+  required:
+    type: boolean
+    description: |-
+      The **Required field** option.
+      - `true`: The field will be a required field.
+      - `false`: The field will not be a required field.
+      If ignored, `false` will be set.
+required:
+  - type
+type: object

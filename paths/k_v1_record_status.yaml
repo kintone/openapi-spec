@@ -1,0 +1,63 @@
+/k/v1/record/status.json:
+  put:
+    operationId: putRecordStatus
+    summary: Put record status
+    tags:
+      - RECORDS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_record:write
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              app:
+                format: int64
+                type: integer
+                description: The App ID.
+              action:
+                type: string
+                description: |-
+                  The Action name of the action to run.
+                  If the localization feature has been used to apply multiple translations of the Action name, specify the name of the Action in the language settings of the user that will run the API. API Tokens follow the language settings set in the User & System Administration settings. For more information, refer to the following article:
+                  [Configuring System Language](https://us.kintone.help/general/en/id/020114)
+              id:
+                format: int64
+                type: integer
+                description: The record ID.
+              assignee:
+                type: string
+                description: |-
+                  The next Assignee. Specify the Assignee's log in name.
+                  Required if one of the following conditions are met:
+                  - if the "_Assignee List_" of the current status is set to "_User chooses one assignee from the list to take action_", and a selectable assignee exists.
+                  - if the "_Assignee List_" of the initial status has been set to an `assignee`, and the status is being reverted to that initial status.
+              revision:
+                format: int64
+                type: integer
+                description: |-
+                  The revision number of the record before updating the status.
+                  If the specified revision is not the latest revision, the request will result in an error.
+                  The revision will not be checked if this parameter is ignored, or -1 is specified.
+            required:
+              - app
+              - action
+              - id
+            type: object
+    responses:
+      '200':
+        description: success case of record/status/put
+        content:
+          application/json:
+            schema:
+              properties:
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Updates the Status of a record of an App, that was set with the Process Management feature.

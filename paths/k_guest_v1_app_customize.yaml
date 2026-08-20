@@ -1,0 +1,78 @@
+/k/guest/{guestSpaceId}/v1/app/customize.json:
+  get:
+    operationId: getAppCustomizeForGuestSpace
+    summary: Get app customize (guest space)
+    tags:
+      - APPS
+    security:
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The app ID.
+    responses:
+      '200':
+        description: success case of app/customize/get
+        content:
+          application/json:
+            schema:
+              properties:
+                desktop:
+                  properties:
+                    css:
+                      items:
+                        anyOf:
+                          - $ref: ../components/schemas/AppCustomizeGetUrlContentForm.yaml
+                          - $ref: ../components/schemas/AppCustomizeGetFileContentForm.yaml
+                        type: object
+                      type: array
+                    js:
+                      items:
+                        anyOf:
+                          - $ref: ../components/schemas/AppCustomizeGetUrlContentForm.yaml
+                          - $ref: ../components/schemas/AppCustomizeGetFileContentForm.yaml
+                        type: object
+                      type: array
+                  type: object
+                scope:
+                  enum:
+                    - ALL
+                    - ADMIN
+                    - NONE
+                  type: string
+                mobile:
+                  properties:
+                    css:
+                      items:
+                        anyOf:
+                          - $ref: ../components/schemas/AppCustomizeGetUrlContentForm.yaml
+                          - $ref: ../components/schemas/AppCustomizeGetFileContentForm.yaml
+                        type: object
+                      type: array
+                    js:
+                      items:
+                        anyOf:
+                          - $ref: ../components/schemas/AppCustomizeGetUrlContentForm.yaml
+                          - $ref: ../components/schemas/AppCustomizeGetFileContentForm.yaml
+                        type: object
+                      type: array
+                  type: object
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the JavaScript and CSS Customization settings of an App.

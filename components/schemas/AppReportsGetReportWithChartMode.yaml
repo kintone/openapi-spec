@@ -1,0 +1,65 @@
+properties:
+  periodicReport:
+    properties:
+      period:
+        anyOf:
+          - $ref: ./AppReportsGetPeriodYear.yaml
+          - $ref: ./AppReportsGetPeriodQuarter.yaml
+          - $ref: ./AppReportsGetPeriodMonth.yaml
+          - $ref: ./AppReportsGetPeriodWeek.yaml
+          - $ref: ./AppReportsGetPeriodDay.yaml
+          - $ref: ./AppReportsGetPeriodHour.yaml
+        type: object
+      active:
+        type: boolean
+    type: object
+  chartType:
+    enum:
+      - PIE
+      - LINE
+      - SPLINE
+      - TABLE
+      - PIVOT_TABLE
+      - BAR
+      - COLUMN
+      - AREA
+      - SPLINE_AREA
+    type: string
+  name:
+    type: string
+  index:
+    format: int64
+    type: integer
+  groups:
+    items:
+      anyOf:
+        - $ref: ./AppReportsGetGroup.yaml
+        - $ref: ./AppReportsGetGroupDateTime.yaml
+        - $ref: ./AppReportsGetGroupDate.yaml
+        - $ref: ./AppReportsGetGroupTime.yaml
+      type: object
+    type: array
+  id:
+    format: int64
+    type: integer
+  chartMode:
+    enum:
+      - NORMAL
+      - STACKED
+      - PERCENTAGE
+    type: string
+  filterCond:
+    format: query
+    type: string
+  aggregations:
+    items:
+      anyOf:
+        - $ref: ./AppReportsGetRecordAggregation.yaml
+        - $ref: ./AppReportsGetFieldAggregation.yaml
+      type: object
+    type: array
+  sorts:
+    items:
+      $ref: ./AppReportsGetSort.yaml
+    type: array
+type: object

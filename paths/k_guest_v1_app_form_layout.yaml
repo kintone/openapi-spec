@@ -1,0 +1,47 @@
+/k/guest/{guestSpaceId}/v1/app/form/layout.json:
+  get:
+    operationId: getAppFormLayoutForGuestSpace
+    summary: Get app form layout (guest space)
+    tags:
+      - APPS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID.
+    responses:
+      '200':
+        description: success case of app/form/layout/get
+        content:
+          application/json:
+            schema:
+              properties:
+                layout:
+                  items:
+                    anyOf:
+                      - $ref: ../components/schemas/AppFormLayoutGetRow.yaml
+                      - $ref: ../components/schemas/AppFormLayoutGetGroupRow.yaml
+                      - $ref: ../components/schemas/AppFormLayoutGetSubtableRow.yaml
+                    type: object
+                  type: array
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the field layout info of a form in an App.

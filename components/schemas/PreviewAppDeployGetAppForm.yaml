@@ -1,0 +1,12 @@
+properties:
+  app:
+    format: int64
+    type: integer
+  status:
+    enum:
+      - PROCESSING
+      - SUCCESS
+      - FAIL
+      - CANCEL
+    type: string
+type: object

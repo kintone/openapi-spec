@@ -1,0 +1,22 @@
+properties:
+  code:
+    type: string
+    description: |-
+      The code of the user, group or department that will be mentioned.
+      The maximum number of mentions is 10.
+      The mentioned users will be placed in front of the comment text in the output.
+  type:
+    enum:
+      - USER
+      - ORGANIZATION
+      - GROUP
+    type: string
+    description: |-
+      The entity type of the mentioned target.
+      - **USER**: User
+      - **GROUP**: Group
+      - **ORGANIZATION**: Department
+required:
+  - code
+  - type
+type: object

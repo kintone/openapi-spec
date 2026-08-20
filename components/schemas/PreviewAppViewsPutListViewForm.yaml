@@ -1,0 +1,55 @@
+properties:
+  name:
+    type: string
+    description: |-
+      The name of the View.
+      The maximum character limit is 64.
+      Required, if `views.{viewname}` is a new View. In this case, specify the same new View name for this parameter.
+  index:
+    format: int64
+    type: integer
+    description: |-
+      The display order of the View.
+      In the list of views, specified with a number.
+      The list of views will be displayed in ascending order.
+  sort:
+    type: string
+    description: |-
+      The sort order in a query format.
+      For more information on query formats refer to the following document:
+      [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)
+  fields:
+    items:
+      type: string
+    type: array
+    description: |-
+      Used for List Views.
+      The list of fields to be displayed in the list. Specify fields by their field codes.
+      This parameter is required, if adding a new List View.
+  type:
+    enum:
+      - LIST
+      - CALENDAR
+      - CUSTOM
+    type: string
+    description: |-
+      The type of View.
+      - `LIST`: List View
+      - `CALENDAR`: Calendar View
+      - `CUSTOM`: Custom View
+  filterCond:
+    type: string
+    description: |-
+      The filter condition in a query format.
+      For more information on query formats refer to the following document:
+      [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)
+      There are restrictions on the conditions that can be specified:
+      [Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)
+  builtinType:
+    enum:
+      - ASSIGNEE
+    type: string
+required:
+  - index
+  - type
+type: object

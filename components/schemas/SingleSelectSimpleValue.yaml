@@ -1,0 +1,15 @@
+properties:
+  type:
+    type: string
+    enum:
+      - DROP_DOWN
+  value:
+    type: string
+    nullable: true
+type: object
+required:
+  - type
+description: Drop-down
+example:
+  type: DROP_DOWN
+  value: Choice 1

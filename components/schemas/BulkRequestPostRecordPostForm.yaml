@@ -1,0 +1,12 @@
+properties:
+  app:
+    format: int64
+    type: integer
+  record:
+    type: object
+    additionalProperties:
+      $ref: ./RecordWritableObject.yaml
+required:
+  - app
+  - record
+type: object

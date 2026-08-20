@@ -1,0 +1,23 @@
+properties:
+  code:
+    type: string
+    description: |-
+      The code of the user, group or organization that will be mentioned.
+      The maximum number of mentions is 10.
+      Mentioned users will be displayed at the start of the comment text when the API succeeds.
+      When specifying a guest user as the recipient, the `code` parameter must include the prefix `guest/` followed by the login email address.
+  type:
+    enum:
+      - USER
+      - ORGANIZATION
+      - GROUP
+    type: string
+    description: |-
+      The type of the mentioned target.
+      - `USER`: User
+      - `GROUP`: Group
+      - `ORGANIZATION`: Department
+required:
+  - code
+  - type
+type: object

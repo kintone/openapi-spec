@@ -1,0 +1,6 @@
+properties:
+  relatedField:
+    type: string
+  field:
+    type: string
+type: object

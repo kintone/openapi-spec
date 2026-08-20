@@ -1,0 +1,24 @@
+properties:
+  type:
+    type: string
+    enum:
+      - MODIFIER
+  value:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+    required:
+      - code
+    type: object
+required:
+  - value
+  - type
+type: object
+description: Updated by
+example:
+  type: MODIFIER
+  value:
+    code: john-d
+    name: John Doe

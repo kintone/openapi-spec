@@ -1,0 +1,79 @@
+/k/guest/{guestSpaceId}/v1/file.json:
+  get:
+    operationId: downloadFileForGuestSpace
+    summary: Download file (guest space)
+    tags:
+      - FILES
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:file:read
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+      - name: fileKey
+        in: query
+        schema:
+          type: string
+        required: true
+        description: The value that is set on the Attachment field in the response data returned when using the Get Record API.
+    responses:
+      '200':
+        description: success case of file/get
+        content:
+          '*/*':
+            schema:
+              type: string
+              format: binary
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Downloads files from an attachment field in an app.
+  post:
+    operationId: uploadFileForGuestSpace
+    summary: Upload file (guest space)
+    tags:
+      - FILES
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:file:write
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            required:
+              - file
+            properties:
+              file:
+                type: string
+                format: binary
+    responses:
+      '200':
+        description: success case of file/post
+        content:
+          application/json:
+            schema:
+              properties:
+                fileKey:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Uploads a file to Kintone.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).

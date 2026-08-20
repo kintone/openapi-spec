@@ -1,0 +1,31 @@
+/k/v1/apps/statistics.json:
+  get:
+    operationId: getAppsStatistics
+    summary: Get apps statistics
+    tags:
+      - APPS
+    security:
+      - passwordAuth: []
+    parameters:
+      - name: offset
+        in: query
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: string
+    responses:
+      '200':
+        description: success case of apps/statistics/get
+        content:
+          application/json:
+            schema:
+              properties:
+                apps:
+                  items:
+                    $ref: ../components/schemas/AppsStatisticsGetAppForm.yaml
+                  type: array
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml

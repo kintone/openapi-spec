@@ -1,0 +1,48 @@
+properties:
+  name:
+    maxLength: 64
+    minLength: 1
+    type: string
+    description: |-
+      The status name.
+      The maximum length is 64 characters.
+      Required, if stating a new status for `{status_name}`. In this case, state the same value used for `{status_name}`.
+  index:
+    format: int64
+    type: integer
+    description: The display order (ascending from 0) of the Status, when listed with the other statuses. Required, if setting the `{status_name}` parameter.
+  assignee:
+    properties:
+      entities:
+        items:
+          $ref: ./PreviewAppStatusPutAssigneeEntityForm.yaml
+        type: array
+        description: |-
+          An array listing data of the Assignees.
+          Required, if setting the `{status_name}.assignee` parameter.
+      type:
+        enum:
+          - ONE
+          - ALL
+          - ANY
+        type: string
+        description: |-
+          The Assignee List type of the Status.
+          - `ONE` : User chooses one assignee from the list to take action
+          - `ALL` : All Assignees in the list must take action
+          - `ANY` : One assignee in the list must take action
+          Required, if setting the `{status_name}.assignee` parameter.
+    required:
+      - entities
+      - type
+    type: object
+    description: An object containing data of the Assignee settings.
+required:
+  - index
+type: object
+description: |-
+  An object containing the settings of each status.
+  - Add a new status: Specify a status name that does not exist.
+  - Update a status: Specify the name of the status to be updated.
+  - Delete a status: Do not specify the status name for deletion.
+  The first status cannot be added. To change the first status, update the name of the existing first status.

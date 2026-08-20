@@ -1,0 +1,118 @@
+properties:
+  noLabel:
+    type: boolean
+    description: |-
+      The **Hide field name** option.
+      - `true`: The field's name will be hidden.
+      - `false`: The field's name will be displayed.
+      If ignored, `false` will be set.
+  code:
+    maxLength: 128
+    minLength: 1
+    type: string
+    description: |-
+      The field code of the field.
+      Field codes have the following limitations:
+      - The maximum character limit is 128
+      - Duplicate field codes cannot exist
+      - _ is the only symbol that can be used
+      - Numbers cannot be used to start a field code
+  label:
+    maxLength: 128
+    minLength: 1
+    type: string
+    description: The field name.
+  fields:
+    type: object
+    additionalProperties:
+      anyOf:
+        - $ref: ./PreviewAppFormFieldsPostCalcFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostCategoryFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostDateFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostDatetimeFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostDecimalFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostEditorFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostFileFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostGroupFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostGroupSelectFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostLinkFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostLookupFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostModifiedAtFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostModifierFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostMultipleCheckFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostMultipleLineTextFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostMultipleSelectFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostOrganizationSelectFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostRecordIdFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostReferenceTableFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostSingleCheckFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostSingleLineTextFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostSingleSelectFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostStatusAssigneeFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostStatusFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostTableForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostTimeFieldForm.yaml
+        - $ref: ./PreviewAppFormFieldsPostUserSelectFieldForm.yaml
+      type: object
+    description: |-
+      An object containing data of fields in a table.
+      The parameters of this object are the same as the `properties` parameter.
+      Required when adding a table.
+  type:
+    enum:
+      - CALC
+      - CATEGORY
+      - CHECK_BOX
+      - CREATED_TIME
+      - CREATOR
+      - DATE
+      - DATETIME
+      - DROP_DOWN
+      - FILE
+      - GROUP
+      - GROUP_SELECT
+      - LINK
+      - MODIFIER
+      - MULTI_LINE_TEXT
+      - MULTI_SELECT
+      - NUMBER
+      - ORGANIZATION_SELECT
+      - RADIO_BUTTON
+      - RECORD_NUMBER
+      - REFERENCE_TABLE
+      - RICH_TEXT
+      - SINGLE_LINE_TEXT
+      - STATUS
+      - STATUS_ASSIGNEE
+      - SUBTABLE
+      - TIME
+      - UPDATED_TIME
+      - USER_SELECT
+    type: string
+    description: |-
+      The field type.
+      - `GROUP`: Group
+      - `GROUP_SELECT`: Group selection
+      - `CALC`: Calculated
+      - `CHECK_BOX`: Check box
+      - `DATE`: Date
+      - `DATETIME`: Date and time
+      - `DROP_DOWN`: Drop-down
+      - `FILE`: Attachment
+      - `LINK`: Link
+      - `MULTI_LINE_TEXT`: Text Area
+      - `MULTI_SELECT`: Multi-choice
+      - `NUMBER`: Number
+      - `ORGANIZATION_SELECT`: Department selection
+      - `RADIO_BUTTON`: Radio button
+      - `RECORD_NUMBER`: Record number
+      - `REFERENCE_TABLE`: Related Records
+      - `RICH_TEXT`: Rich text
+      - `SINGLE_LINE_TEXT`: Text
+      - `SUBTABLE`: Table
+      - `TIME`: Time
+      - `USER_SELECT`: User selection
+      For Lookup fields, specify depending on the Key field type it's looking up.
+required:
+  - type
+type: object

@@ -1,0 +1,21 @@
+properties:
+  type:
+    type: string
+    enum:
+      - GROUP_SELECT
+  value:
+    items:
+      $ref: ./GroupEntitySimpleValue.yaml
+    type: array
+required:
+  - value
+  - type
+type: object
+description: Group Selection
+example:
+  type: GROUP_SELECT
+  value:
+    - code: project_manager
+      name: Project Manager
+    - code: team_leader
+      name: Team Leader

@@ -1,0 +1,13 @@
+properties:
+  isImplicit:
+    type: boolean
+  isAdmin:
+    type: boolean
+  entity:
+    properties:
+      code:
+        type: string
+      type:
+        type: string
+    type: object
+type: object

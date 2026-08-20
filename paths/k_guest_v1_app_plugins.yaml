@@ -1,0 +1,57 @@
+/k/guest/{guestSpaceId}/v1/app/plugins.json:
+  get:
+    operationId: getAppPluginsForGuestSpace
+    summary: Get app plugins (guest space)
+    tags:
+      - APPS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID.
+      - name: lang
+        in: query
+        schema:
+          enum:
+            - JA
+            - EN
+            - ZH
+            - ES
+          type: string
+        description: |-
+          The localized language to retrieve the data in:
+          - `en`: retrieves the localized English names
+          - `zh`: retrieves the localized Chinese names
+          - `ja`: retrieves the localized Japanese names
+          - `es`: retrieves the localized Spanish names
+          If ignored, the default names will be retrieved.
+    responses:
+      '200':
+        description: success case of app/plugins/get
+        content:
+          application/json:
+            schema:
+              properties:
+                plugins:
+                  items:
+                    $ref: ../components/schemas/AppPluginsGetPluginForm.yaml
+                  type: array
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the list of Plug-ins added to an App.

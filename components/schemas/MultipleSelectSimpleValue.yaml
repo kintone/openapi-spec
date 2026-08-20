@@ -1,0 +1,19 @@
+properties:
+  type:
+    type: string
+    enum:
+      - MULTI_SELECT
+  value:
+    items:
+      type: string
+    type: array
+required:
+  - value
+  - type
+type: object
+description: Multi-choice
+example:
+  type: MULTI_SELECT
+  value:
+    - Choice 1
+    - Choice 2

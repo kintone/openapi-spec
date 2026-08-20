@@ -1,0 +1,47 @@
+/k/v1/bulkRequest.json:
+  post:
+    operationId: postBulkRequest
+    summary: Post bulk request
+    tags:
+      - BULKREQUESTS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              requests:
+                items:
+                  $ref: ../components/schemas/BulkRequestPostRequestForm.yaml
+                type: array
+                description: An array of requests. The maximum number of requests is 20.
+            required:
+              - requests
+            type: object
+    responses:
+      '200':
+        description: success case of bulkRequest/post
+        content:
+          application/json:
+            schema:
+              properties:
+                results:
+                  items:
+                    anyOf:
+                      - $ref: ../components/schemas/BulkRequestPostRecordPostOutputForm.yaml
+                      - $ref: ../components/schemas/BulkRequestPostRecordPutOutputForm.yaml
+                      - $ref: ../components/schemas/BulkRequestPostRecordStatusPutOutputForm.yaml
+                      - $ref: ../components/schemas/BulkRequestPostRecordAssigneesPutOutputForm.yaml
+                      - $ref: ../components/schemas/BulkRequestPostRecordsDeleteOutputForm.yaml
+                      - $ref: ../components/schemas/BulkRequestPostRecordsPostOutputForm.yaml
+                      - $ref: ../components/schemas/BulkRequestPostRecordsPutOutputForm.yaml
+                      - $ref: ../components/schemas/BulkRequestPostRecordsStatusPutOutputForm.yaml
+                    type: object
+                  type: array
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Runs multiple API requests sequentially to multiple Apps.

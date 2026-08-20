@@ -1,0 +1,16 @@
+properties:
+  field:
+    type: string
+    description: |-
+      The field code of the unique key.
+      Required, if _updateKey_ will be specified.
+  value:
+    maxLength: 64
+    type: string
+    description: |-
+      The value of the unique key.
+      Required, if _updateKey_ will be specified.
+required:
+  - field
+  - value
+type: object

@@ -1,0 +1,105 @@
+/k/v1/record/acl.json:
+  get:
+    operationId: getRecordAcl
+    summary: Get record acl
+    tags:
+      - RECORDS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_record:read
+    parameters:
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID.
+      - name: lang
+        in: query
+        schema:
+          enum:
+            - default
+            - user
+            - ja
+            - en
+            - zh
+          type: string
+        description: |-
+          The localized language to retrieve the data in:
+          - `default`: retrieves the default names
+          - `en`: retrieves the localized English names
+          - `zh`: retrieves the localized Chinese names
+          - `ja`: retrieves the localized Japanese names
+          - `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.
+          If ignored, the default names will be retrieved.
+    responses:
+      '200':
+        description: success case of record/acl/get
+        content:
+          application/json:
+            schema:
+              properties:
+                rights:
+                  items:
+                    $ref: ../components/schemas/RecordAclGetRight.yaml
+                  type: array
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the Record permission settings of an App.
+  put:
+    operationId: putRecordAcl
+    summary: Put record acl
+    tags:
+      - RECORDS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_record:write
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              app:
+                format: int64
+                type: integer
+                description: The App ID.
+              rights:
+                items:
+                  $ref: ../components/schemas/RecordAclPutRightForm.yaml
+                type: array
+                description: An array listing data of record permissions. List in order of priority.
+              id:
+                format: int64
+                type: integer
+              revision:
+                format: int64
+                type: integer
+                description: |-
+                  Specify the revision number of the settings that will be deployed.
+                  The request will fail if the revision number is not the latest revision.
+                  The revision will not be checked if this parameter is ignored, or -1 is specified.
+            required:
+              - rights
+            type: object
+    responses:
+      '200':
+        description: success case of record/acl/put
+        content:
+          application/json:
+            schema:
+              properties:
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Updates the Record permission settings of an App.

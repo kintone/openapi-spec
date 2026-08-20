@@ -1,0 +1,19 @@
+properties:
+  destField:
+    type: string
+    description: |-
+      The field code of the field specified in the **Field Mappings** options as the destination.
+      Required when specifying the `actions.{actionname}.mappings` parameter.
+  srcType:
+    enum:
+      - RECORD_URL
+    type: string
+    description: |-
+      The type of source data that is to be copied.
+      - `FIELD`: Data stored in the source App's field
+      - `RECORD_URL`: The Record's permalink
+      Required when specifying the `actions.{actionname}.mappings` parameter.
+required:
+  - destField
+  - srcType
+type: object

@@ -1,0 +1,43 @@
+/k/guest/{guestSpaceId}/v1/space/guests.json:
+  put:
+    operationId: putSpaceGuestsForGuestSpace
+    summary: Put space guests (guest space)
+    tags:
+      - SPACES
+    security:
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              guests:
+                items:
+                  format: email
+                  type: string
+                type: array
+              id:
+                format: int64
+                type: integer
+            required:
+              - guests
+              - id
+            type: object
+    responses:
+      '200':
+        description: success case of space/guests/put
+        content:
+          application/json:
+            schema:
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).

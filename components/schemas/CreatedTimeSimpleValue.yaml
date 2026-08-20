@@ -1,0 +1,16 @@
+type: object
+properties:
+  type:
+    type: string
+    enum:
+      - CREATED_TIME
+  value:
+    type: string
+    format: date-time
+required:
+  - value
+  - type
+description: Created datetime
+example:
+  type: CREATED_TIME
+  value: '2015-01-22T15:07:00Z'

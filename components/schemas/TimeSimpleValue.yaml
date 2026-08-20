@@ -1,0 +1,15 @@
+properties:
+  type:
+    type: string
+    enum:
+      - TIME
+  value:
+    type: string
+    nullable: true
+type: object
+required:
+  - type
+description: Time
+example:
+  type: TIME
+  value: '09:00'

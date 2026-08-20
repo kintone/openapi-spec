@@ -1,0 +1,30 @@
+properties:
+  recordImportable:
+    type: boolean
+  appEditable:
+    type: boolean
+  recordExportable:
+    type: boolean
+  recordAddable:
+    type: boolean
+  recordViewable:
+    type: boolean
+  recordEditable:
+    type: boolean
+  includeSubs:
+    type: boolean
+  recordDeletable:
+    type: boolean
+  entity:
+    properties:
+      code:
+        type: string
+      type:
+        enum:
+          - USER
+          - ORGANIZATION
+          - GROUP
+          - CREATOR
+        type: string
+    type: object
+type: object

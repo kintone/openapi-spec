@@ -1,0 +1,23 @@
+properties:
+  file:
+    properties:
+      size:
+        type: string
+      name:
+        type: string
+      fileKey:
+        type: string
+      contentType:
+        type: string
+    required:
+      - fileKey
+    type: object
+  type:
+    enum:
+      - FILE
+      - PRESET
+    type: string
+required:
+  - file
+  - type
+type: object

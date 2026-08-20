@@ -1,0 +1,49 @@
+/k/guest/{guestSpaceId}/v1/records/acl/evaluate.json:
+  get:
+    operationId: getRecordsAclEvaluateForGuestSpace
+    summary: Get records acl evaluate (guest space)
+    tags:
+      - RECORDS
+    security:
+      - passwordAuth: []
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID.
+      - name: ids
+        in: query
+        schema:
+          items:
+            format: long
+            type: string
+          type: array
+        required: true
+        description: |-
+          An array of record IDs that will be evaluated.
+          The maximum limit is 100 IDs.
+    responses:
+      '200':
+        description: success case of records/acl/evaluate/get
+        content:
+          application/json:
+            schema:
+              properties:
+                rights:
+                  items:
+                    $ref: ../components/schemas/RecordsAclEvaluateGetRight.yaml
+                  type: array
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Evaluates the API users permission's for records and fields within an App.

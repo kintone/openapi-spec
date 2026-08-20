@@ -1,0 +1,21 @@
+properties:
+  createdAt:
+    format: date-time
+    type: string
+  creator:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+    type: object
+  mentions:
+    items:
+      $ref: ./RecordCommentsGetMentionOutputForm.yaml
+    type: array
+  id:
+    format: int64
+    type: integer
+  text:
+    type: string
+type: object

@@ -1,0 +1,38 @@
+/k/v1/app/notifications/general.json:
+  get:
+    operationId: getAppNotificationsGeneral
+    summary: Get app notifications general
+    tags:
+      - APPS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID.
+    responses:
+      '200':
+        description: success case of app/notifications/general/get
+        content:
+          application/json:
+            schema:
+              properties:
+                notifyToCommenter:
+                  type: boolean
+                notifications:
+                  items:
+                    $ref: ../components/schemas/AppNotificationsGeneralGetNotification.yaml
+                  type: array
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the General Notification settings of the App.

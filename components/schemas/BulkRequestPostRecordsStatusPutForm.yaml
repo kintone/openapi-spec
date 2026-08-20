@@ -1,0 +1,12 @@
+properties:
+  app:
+    format: int64
+    type: integer
+  records:
+    items:
+      $ref: ./BulkRequestPostRecordsStatusPutFormRecord.yaml
+    type: array
+required:
+  - app
+  - records
+type: object

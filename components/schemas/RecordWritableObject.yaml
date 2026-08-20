@@ -1,0 +1,213 @@
+description: |-
+  The value of a single field when writing a record.
+
+  **Always an object with a `value` property, never a bare value.**
+
+  ```
+  correct: { "fieldCode": { "value": "ABC" } }
+  wrong:   { "fieldCode": "ABC" }
+  ```
+
+  Sending a bare value returns HTTP 400. `type` is optional; when omitted, the App's field settings are used.
+
+  The shape of `value` depends on the field type, which `GET /k/v1/app/form/fields.json` reports:
+
+  | Field type | shape of `value` |
+  |---|---|
+  | Single-line text, Multi-line text, Rich text, Link, Number, Date, Time, Date and time, Drop-down, Radio button | string — numbers and dates are strings too, e.g. `"1200000"`, `"2026-08-31"` |
+  | Check box, Multi-choice | array of strings, each matching one of the App's choices exactly |
+  | User selection, Department selection, Group selection | array of `{ "code": "..." }` |
+  | Attachment | array of `{ "fileKey": "..." }` — upload the file first to obtain a key |
+  | Table | array of `{ "id": "...", "value": { "<fieldCode>": { "value": ... } } }` |
+
+  To clear a field, send an empty string for the text-like types, or an empty array for the array types.
+
+  **A field code that does not exist in the App is silently ignored.** The request still returns HTTP 200 and a new revision, so a typo looks like success even though nothing changed. Copy the codes from `GET /k/v1/app/form/fields.json` exactly.
+
+  **Table and Attachment fields are replaced, not merged.** When updating an existing record, every table row and every `fileKey` the request does not list is deleted. To change one cell of a table, send the whole table including the `id` of each row to keep. Fields left out of the request entirely are untouched.
+anyOf:
+  - type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - CHECK_BOX
+      value:
+        type: array
+        items:
+          type: string
+    required:
+      - value
+    description: Check box
+  - properties:
+      type:
+        type: string
+        enum:
+          - DATE
+      value:
+        type: string
+        format: date
+        nullable: true
+    type: object
+    description: Date
+  - properties:
+      type:
+        type: string
+        enum:
+          - DATETIME
+      value:
+        type: string
+        format: date-time
+        nullable: true
+    type: object
+    description: Date and time
+  - properties:
+      type:
+        type: string
+        enum:
+          - NUMBER
+      value:
+        type: string
+    type: object
+    description: Number
+  - properties:
+      type:
+        type: string
+        enum:
+          - RICH_TEXT
+      value:
+        type: string
+    type: object
+    description: Rich text
+  - properties:
+      type:
+        type: string
+        enum:
+          - FILE
+      value:
+        items:
+          $ref: ./SingleFileSimpleValue.yaml
+        type: array
+    required:
+      - value
+    type: object
+    description: Attachment
+  - properties:
+      type:
+        type: string
+        enum:
+          - GROUP_SELECT
+      value:
+        items:
+          $ref: ./GroupEntitySimpleValue.yaml
+        type: array
+    required:
+      - value
+    type: object
+    description: Group Selection
+  - properties:
+      type:
+        type: string
+        enum:
+          - LINK
+      value:
+        type: string
+    type: object
+    description: Link
+  - properties:
+      type:
+        type: string
+        enum:
+          - MULTI_LINE_TEXT
+      value:
+        type: string
+    type: object
+    description: Text area
+  - properties:
+      type:
+        type: string
+        enum:
+          - MULTI_SELECT
+      value:
+        items:
+          type: string
+        type: array
+    required:
+      - value
+    type: object
+    description: Multi-choice
+  - properties:
+      type:
+        type: string
+        enum:
+          - ORGANIZATION_SELECT
+      value:
+        items:
+          $ref: ./OrganizationEntitySimpleValue.yaml
+        type: array
+    required:
+      - value
+    type: object
+    description: Department Selection
+  - type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - RADIO_BUTTON
+      value:
+        type: string
+    description: Radio button
+  - properties:
+      type:
+        type: string
+        enum:
+          - SUBTABLE
+      value:
+        items:
+          $ref: ./SimpleRowWritableValue.yaml
+        type: array
+    type: object
+    description: Table
+  - properties:
+      type:
+        type: string
+        enum:
+          - SINGLE_LINE_TEXT
+      value:
+        type: string
+    type: object
+    description: Text
+  - properties:
+      type:
+        type: string
+        enum:
+          - DROP_DOWN
+      value:
+        type: string
+        nullable: true
+    type: object
+    description: Drop-down
+  - properties:
+      type:
+        type: string
+        enum:
+          - TIME
+      value:
+        type: string
+        nullable: true
+    type: object
+    description: Time
+  - properties:
+      type:
+        type: string
+        enum:
+          - USER_SELECT
+      value:
+        items:
+          $ref: ./UserEntitySimpleValue.yaml
+        type: array
+    required:
+      - value
+    type: object
+    description: User selection

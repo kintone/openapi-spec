@@ -1,0 +1,38 @@
+/k/guest/{guestSpaceId}/v1/spaces/statistics.json:
+  get:
+    operationId: getSpacesStatisticsForGuestSpace
+    summary: Get spaces statistics (guest space)
+    tags:
+      - SPACES
+    security:
+      - passwordAuth: []
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+      - name: offset
+        in: query
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: string
+    responses:
+      '200':
+        description: success case of spaces/statistics/get
+        content:
+          application/json:
+            schema:
+              properties:
+                spaces:
+                  items:
+                    $ref: ../components/schemas/SpacesStatisticsGetSpaceForm.yaml
+                  type: array
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
