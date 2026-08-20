@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: kintone REST API
-  version: 2026.8.20
+  version: 2026.8.21
   description: |-
     OpenAPI specification for the kintone REST API.
 
@@ -3732,7 +3732,8 @@ paths:
                   type: string
                   description: The **Enable comments** setting.
                 titleField:
-                  $ref: '#/components/schemas/PreviewAppSettingsPutTitleField'
+                  allOf:
+                    - $ref: '#/components/schemas/PreviewAppSettingsPutTitleField'
                   description: The record title.
                 icon:
                   anyOf:
@@ -3791,7 +3792,8 @@ paths:
                     - `YELLOW`
                     - `BLACK`
                 numberPrecision:
-                  $ref: '#/components/schemas/PreviewAppSettingsPutNumberPrecision'
+                  allOf:
+                    - $ref: '#/components/schemas/PreviewAppSettingsPutNumberPrecision'
                   description: |-
                     The **Precision of numbers and calculations** setting.
                     For more information, refer to the following article on the Kintone Help site:
@@ -4517,7 +4519,8 @@ paths:
                   type: integer
                   description: The App ID.
                 updateKey:
-                  $ref: '#/components/schemas/RecordPutUpdateKey'
+                  allOf:
+                    - $ref: '#/components/schemas/RecordPutUpdateKey'
                   description: The unique key of the record to be updated. Required, if _id_ will not be specified. To specify this field, the field must have the "Prohibit duplicate values" option turned on.
                 record:
                   type: object
@@ -9560,7 +9563,8 @@ paths:
                   type: string
                   description: The **Enable comments** setting.
                 titleField:
-                  $ref: '#/components/schemas/PreviewAppSettingsPutTitleField'
+                  allOf:
+                    - $ref: '#/components/schemas/PreviewAppSettingsPutTitleField'
                   description: The record title.
                 icon:
                   anyOf:
@@ -9619,7 +9623,8 @@ paths:
                     - `YELLOW`
                     - `BLACK`
                 numberPrecision:
-                  $ref: '#/components/schemas/PreviewAppSettingsPutNumberPrecision'
+                  allOf:
+                    - $ref: '#/components/schemas/PreviewAppSettingsPutNumberPrecision'
                   description: |-
                     The **Precision of numbers and calculations** setting.
                     For more information, refer to the following article on the Kintone Help site:
@@ -10255,7 +10260,8 @@ paths:
                   type: integer
                   description: The App ID.
                 updateKey:
-                  $ref: '#/components/schemas/RecordPutUpdateKey'
+                  allOf:
+                    - $ref: '#/components/schemas/RecordPutUpdateKey'
                   description: The unique key of the record to be updated. Required, if _id_ will not be specified. To specify this field, the field must have the "Prohibit duplicate values" option turned on.
                 record:
                   type: object
