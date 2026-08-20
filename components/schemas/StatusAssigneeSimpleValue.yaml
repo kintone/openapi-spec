@@ -1,0 +1,19 @@
+type: object
+properties:
+  type:
+    type: string
+    enum:
+      - STATUS_ASSIGNEE
+  value:
+    type: array
+    items:
+      $ref: ./UserEntitySimpleValue.yaml
+required:
+  - value
+  - type
+description: Assignee (Assignee of the process management status)
+example:
+  type: STATUS_ASSIGNEE
+  value:
+    - code: john-d
+      name: John Doe

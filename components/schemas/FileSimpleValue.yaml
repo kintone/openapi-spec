@@ -1,0 +1,25 @@
+properties:
+  type:
+    type: string
+    enum:
+      - FILE
+  value:
+    items:
+      $ref: ./SingleFileSimpleValue.yaml
+    type: array
+required:
+  - value
+  - type
+type: object
+description: Attachment
+example:
+  type: FILE
+  value:
+    - contentType: text/plain
+      fileKey: 20150417022053715283FF97DC413CBC4B7A41C
+      name: kintoneUpdates.txt
+      size: '25302'
+    - contentType: text/plain
+      fileKey: 20150417022159ECFC1223C4B34C939E1B9BD25
+      name: APIUpdatestxt
+      size: '20311'

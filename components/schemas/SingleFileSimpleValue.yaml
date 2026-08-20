@@ -1,0 +1,12 @@
+properties:
+  size:
+    type: string
+  name:
+    type: string
+  fileKey:
+    type: string
+  contentType:
+    type: string
+required:
+  - fileKey
+type: object

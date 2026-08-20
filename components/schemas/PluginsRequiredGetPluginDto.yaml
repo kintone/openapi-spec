@@ -1,0 +1,8 @@
+properties:
+  isMarketPlugin:
+    type: boolean
+  name:
+    type: string
+  id:
+    type: string
+type: object

@@ -1,0 +1,245 @@
+/k/guest/{guestSpaceId}/v1/space.json:
+  delete:
+    operationId: deleteSpaceForGuestSpace
+    summary: Delete space (guest space)
+    tags:
+      - SPACES
+    security:
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                format: int64
+                type: integer
+                description: The Space ID.
+            required:
+              - id
+            type: object
+    responses:
+      '200':
+        description: success case of space/delete
+        content:
+          application/json:
+            schema:
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Deletes a Space.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+  get:
+    operationId: getSpaceForGuestSpace
+    summary: Get space (guest space)
+    tags:
+      - SPACES
+    security:
+      - passwordAuth: []
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+      - name: id
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: |-
+          The Space ID.
+          The Space ID can be found in the URL of the Space.
+          A Space with the URL of **https://{domainname}.kintone.com/k/#/space/111** has a Space ID of 111.
+    responses:
+      '200':
+        description: success case of space/get
+        content:
+          application/json:
+            schema:
+              properties:
+                coverKey:
+                  type: string
+                creator:
+                  properties:
+                    code:
+                      type: string
+                    name:
+                      type: string
+                  type: object
+                isGuest:
+                  type: boolean
+                modifier:
+                  properties:
+                    code:
+                      type: string
+                    name:
+                      type: string
+                  type: object
+                memberCount:
+                  format: int64
+                  type: integer
+                attachedApps:
+                  items:
+                    $ref: ../components/schemas/SpaceGetAttachedApp.yaml
+                  type: array
+                isPrivate:
+                  type: boolean
+                body:
+                  type: string
+                showAppList:
+                  type: boolean
+                coverUrl:
+                  type: string
+                coverType:
+                  enum:
+                    - BLOB
+                    - PRESET
+                  type: string
+                fixedMember:
+                  type: boolean
+                permissions:
+                  properties:
+                    createApp:
+                      enum:
+                        - EVERYONE
+                        - ADMIN
+                      type: string
+                  type: object
+                name:
+                  type: string
+                useMultiThread:
+                  type: boolean
+                showMemberList:
+                  type: boolean
+                showRelatedLinkList:
+                  type: boolean
+                id:
+                  format: int64
+                  type: integer
+                showAnnouncement:
+                  type: boolean
+                showThreadList:
+                  type: boolean
+                defaultThread:
+                  format: int64
+                  type: integer
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets information of a Space.
+  put:
+    operationId: putSpaceForGuestSpace
+    summary: Put space (guest space)
+    tags:
+      - SPACES
+    security:
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              fixedMember:
+                type: boolean
+                description: |-
+                  The options set for the **Block users from joining or leaving the space and following or unfollowing the threads** setting.
+                  `true`: Users cannot join/leave the Space or follow/unfollow threads.
+                  `false`: Users can join/leave the Space and follow/unfollow threads.
+              permissions:
+                properties:
+                  createApp:
+                    enum:
+                      - EVERYONE
+                      - ADMIN
+                    type: string
+                    description: |-
+                      The option set for the **Only Allow Space Administrators to Create Apps** setting
+                      `EVERYONE`: all users can create apps.
+                      `ADMIN`: only administrators can create apps.
+                type: object
+                description: An object containing information of the space's permission settings.
+              name:
+                maxLength: 128
+                minLength: 1
+                type: string
+                description: The new name of the Space.
+              useMultiThread:
+                type: boolean
+                description: |-
+                  The **Enable multiple threads** setting.
+                  `true`: The Space is a Multi-threaded Space.
+                  `false`: The setting will not be updated, as a Multi-Threaded Space can not be reverted to a Single-threaded Space.
+              showMemberList:
+                type: boolean
+                description: |-
+                  The display status for the **People** widget.
+                  `true`: The **People** widget is displayed.
+                  `false`: The **People** widget is not displayed.
+              showRelatedLinkList:
+                type: boolean
+                description: |-
+                  The display status for the **Related Apps & Spaces** widget.
+                  `true`: The **Related Apps & Spaces** widget is displayed.
+                  `false`: The **Related Apps & Spaces** widget is not displayed.
+              id:
+                format: int64
+                type: integer
+                description: The Space ID.
+              isPrivate:
+                type: boolean
+                description: |-
+                  The **Private** settings of the Space.
+                  `true`: The Space is private.
+                  `false`: The Space is not private.
+              showAnnouncement:
+                type: boolean
+                description: |-
+                  The display status for the **Announcement** widget.
+                  `true`: The **Announcement** widget is displayed.
+                  `false`: The **Announcement** widget is not displayed.
+              showThreadList:
+                type: boolean
+                description: |-
+                  The display status for the **Threads** widget.
+                  `true`: The **Threads** widget is displayed.
+                  `false`: The **Threads** widget is not displayed.
+              showAppList:
+                type: boolean
+                description: |-
+                  The display status for the **Apps** widget.
+                  `true`: The **Apps** widget is displayed.
+                  `false`: The **Apps** widget is not displayed.
+            required:
+              - id
+            type: object
+    responses:
+      '200':
+        description: success case of space/put
+        content:
+          application/json:
+            schema:
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Updates the settings of a Space.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).

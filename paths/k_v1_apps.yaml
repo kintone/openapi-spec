@@ -1,0 +1,89 @@
+/k/v1/apps.json:
+  get:
+    operationId: getApps
+    summary: Get apps
+    tags:
+      - APPS
+    security:
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: codes
+        in: query
+        schema:
+          items:
+            type: string
+          type: array
+        description: |-
+          The App Code.
+          Up to 100 App Codes can be specified.
+          Each App Code must be between 1 to 64 characters. An exact match search will be used, and will be case sensitive.
+          If `null` or an empty array is specified, this parameter will be ignored.
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: |-
+          The number of retrievals that will be skipped.
+          Must be between 0 and 2,147,483,647. If nothing is specified, it will default to 0.
+      - name: name
+        in: query
+        schema:
+          maxLength: 64
+          type: string
+        description: |-
+          The App Name or a part of it.
+          Each App Name must be specified within 64 characters.
+          A partial search will be used, and the search will be case insensitive.
+          The localized name of the App in the user's locale will also be included in the search.
+          If `null` or an empty array is specified, this parameter will be ignored.
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: |-
+          The number of Apps to retrieve.
+          Must be between 1 and 100.
+          If nothing is specified, it will default to 100.
+      - name: ids
+        in: query
+        schema:
+          items:
+            format: long
+            type: string
+          type: array
+        description: |-
+          The App IDs.
+          Integers from 1 to 9,223,372,036,854,775,807 can be specified.
+          Up to 100 IDs can be specified.
+          If `null` or an empty array is specified, this parameter will be ignored.
+      - name: spaceIds
+        in: query
+        schema:
+          items:
+            format: long
+            type: string
+          type: array
+        description: |-
+          The Space ID of where the App resides in.
+          Integers from 1 to 9,223,372,036,854,775,807 can be specified.
+          Up to 100 IDs can be specified.
+          If `null` or an empty array is specified, this parameter will be ignored.
+    responses:
+      '200':
+        description: success case of apps/get
+        content:
+          application/json:
+            schema:
+              properties:
+                apps:
+                  items:
+                    $ref: ../components/schemas/AppsGetAppWithSpaceIdForm.yaml
+                  type: array
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets general information of multiple Apps, including the name, description, related Space, creator and updater information.

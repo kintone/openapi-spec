@@ -1,0 +1,14 @@
+properties:
+  type:
+    type: string
+    enum:
+      - STATUS
+  value:
+    type: string
+type: object
+required:
+  - type
+description: Status (Process management status)
+example:
+  type: STATUS
+  value: Not started

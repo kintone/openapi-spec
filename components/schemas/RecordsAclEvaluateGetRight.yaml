@@ -1,0 +1,18 @@
+properties:
+  record:
+    properties:
+      viewable:
+        type: boolean
+      editable:
+        type: boolean
+      deletable:
+        type: boolean
+    type: object
+  id:
+    format: int64
+    type: integer
+  fields:
+    type: object
+    additionalProperties:
+      $ref: ./RecordsAclEvaluateGetField.yaml
+type: object

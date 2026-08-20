@@ -1,0 +1,58 @@
+/k/guest/{guestSpaceId}/v1/preview/app.json:
+  post:
+    operationId: postPreviewAppForGuestSpace
+    summary: Post preview app (guest space)
+    tags:
+      - PREVIEWS
+    security:
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:write
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              name:
+                type: string
+                description: |-
+                  The App name.
+                  The maximum length is 64 characters.
+              thread:
+                format: int64
+                type: integer
+                description: |-
+                  The Thread ID of the thread in the Space where the App will be created.
+                  *It is recommended to ignore this parameter so that Apps are created in the default thread. There is currently no helpful reason to create Apps in threads other than the default thread, as there are no visual representations in Kintone of Apps being related to threads. There are only visual representations of Apps being related to Spaces.
+              space:
+                format: int64
+                type: integer
+                description: The Space ID of where the App will be created.
+            required:
+              - name
+            type: object
+    responses:
+      '200':
+        description: success case of preview/app/post
+        content:
+          application/json:
+            schema:
+              properties:
+                app:
+                  format: int64
+                  type: integer
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Creates a preview App.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).

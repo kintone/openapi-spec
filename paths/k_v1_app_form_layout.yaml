@@ -1,0 +1,40 @@
+/k/v1/app/form/layout.json:
+  get:
+    operationId: getAppFormLayout
+    summary: Get app form layout
+    tags:
+      - APPS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID.
+    responses:
+      '200':
+        description: success case of app/form/layout/get
+        content:
+          application/json:
+            schema:
+              properties:
+                layout:
+                  items:
+                    anyOf:
+                      - $ref: ../components/schemas/AppFormLayoutGetRow.yaml
+                      - $ref: ../components/schemas/AppFormLayoutGetGroupRow.yaml
+                      - $ref: ../components/schemas/AppFormLayoutGetSubtableRow.yaml
+                    type: object
+                  type: array
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the field layout info of a form in an App.

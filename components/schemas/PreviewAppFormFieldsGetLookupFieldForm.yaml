@@ -1,0 +1,74 @@
+properties:
+  noLabel:
+    format: boolean
+    type: boolean
+  lookup:
+    properties:
+      lookupPickerFields:
+        items:
+          type: string
+        type: array
+      relatedKeyField:
+        type: string
+      relatedApp:
+        properties:
+          app:
+            format: int64
+            type: integer
+          code:
+            type: string
+        type: object
+      fieldMappings:
+        items:
+          $ref: ./PreviewAppFormFieldsGetFieldMappingForm.yaml
+        type: array
+      sort:
+        type: string
+      filterCond:
+        type: string
+    type: object
+  code:
+    maxLength: 128
+    minLength: 1
+    type: string
+  label:
+    maxLength: 128
+    minLength: 1
+    type: string
+  type:
+    enum:
+      - CALC
+      - CATEGORY
+      - CHECK_BOX
+      - CREATED_TIME
+      - CREATOR
+      - DATE
+      - DATETIME
+      - DROP_DOWN
+      - FILE
+      - GROUP
+      - GROUP_SELECT
+      - LINK
+      - MODIFIER
+      - MULTI_LINE_TEXT
+      - MULTI_SELECT
+      - NUMBER
+      - ORGANIZATION_SELECT
+      - RADIO_BUTTON
+      - RECORD_NUMBER
+      - REFERENCE_TABLE
+      - RICH_TEXT
+      - SINGLE_LINE_TEXT
+      - STATUS
+      - STATUS_ASSIGNEE
+      - SUBTABLE
+      - TIME
+      - UPDATED_TIME
+      - USER_SELECT
+    type: string
+  required:
+    format: boolean
+    type: boolean
+required:
+  - type
+type: object

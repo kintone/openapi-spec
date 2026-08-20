@@ -1,0 +1,14 @@
+properties:
+  type:
+    type: string
+    enum:
+      - MULTI_LINE_TEXT
+  value:
+    type: string
+type: object
+required:
+  - type
+description: Text area
+example:
+  type: MULTI_LINE_TEXT
+  value: Hello\nKintone

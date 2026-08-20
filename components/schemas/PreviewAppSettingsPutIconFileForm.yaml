@@ -1,0 +1,37 @@
+properties:
+  file:
+    properties:
+      size:
+        type: string
+      name:
+        type: string
+      fileKey:
+        type: string
+        description: |-
+          The fileKey of the icon.
+          To attach a file, specify the fileKey responded when using the following API:
+          [Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/)
+          The maximum file size limit is 800KB.
+          Required, if the `icon.type` parameter is set as `FILE`.
+      contentType:
+        type: string
+    required:
+      - fileKey
+    type: object
+    description: |-
+      An object containing information of uploaded icon files.
+      Required, if the `icon.type` parameter is set as `FILE`.
+  type:
+    enum:
+      - FILE
+      - PRESET
+    type: string
+    description: |-
+      The icon type. Specify one of the following:
+      - `FILE`: An uploaded image.
+      - `PRESET`: A preset icon within Kintone.
+      Required, if the `icon` parameter will be set.
+required:
+  - file
+  - type
+type: object

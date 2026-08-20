@@ -1,0 +1,164 @@
+/k/v1/preview/app/customize.json:
+  get:
+    operationId: getPreviewAppCustomize
+    summary: Get preview app customize
+    tags:
+      - PREVIEWS
+    security:
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The app ID.
+    responses:
+      '200':
+        description: success case of preview/app/customize/get
+        content:
+          application/json:
+            schema:
+              properties:
+                desktop:
+                  properties:
+                    css:
+                      items:
+                        anyOf:
+                          - $ref: ../components/schemas/PreviewAppCustomizeGetUrlContentForm.yaml
+                          - $ref: ../components/schemas/PreviewAppCustomizeGetFileContentForm.yaml
+                        type: object
+                      type: array
+                    js:
+                      items:
+                        anyOf:
+                          - $ref: ../components/schemas/PreviewAppCustomizeGetUrlContentForm.yaml
+                          - $ref: ../components/schemas/PreviewAppCustomizeGetFileContentForm.yaml
+                        type: object
+                      type: array
+                  type: object
+                scope:
+                  enum:
+                    - ALL
+                    - ADMIN
+                    - NONE
+                  type: string
+                mobile:
+                  properties:
+                    css:
+                      items:
+                        anyOf:
+                          - $ref: ../components/schemas/PreviewAppCustomizeGetUrlContentForm.yaml
+                          - $ref: ../components/schemas/PreviewAppCustomizeGetFileContentForm.yaml
+                        type: object
+                      type: array
+                    js:
+                      items:
+                        anyOf:
+                          - $ref: ../components/schemas/PreviewAppCustomizeGetUrlContentForm.yaml
+                          - $ref: ../components/schemas/PreviewAppCustomizeGetFileContentForm.yaml
+                        type: object
+                      type: array
+                  type: object
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the JavaScript and CSS Customization settings of an App.
+  put:
+    operationId: putPreviewAppCustomize
+    summary: Put preview app customize
+    tags:
+      - PREVIEWS
+    security:
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:write
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              app:
+                format: int64
+                type: integer
+                description: The App ID.
+              desktop:
+                properties:
+                  css:
+                    items:
+                      anyOf:
+                        - $ref: ../components/schemas/PreviewAppCustomizePutUrlContentForm.yaml
+                        - $ref: ../components/schemas/PreviewAppCustomizePutFileContentForm.yaml
+                      type: object
+                    type: array
+                    description: An array listing data of CSS files for desktop.
+                  js:
+                    items:
+                      anyOf:
+                        - $ref: ../components/schemas/PreviewAppCustomizePutUrlContentForm.yaml
+                        - $ref: ../components/schemas/PreviewAppCustomizePutFileContentForm.yaml
+                      type: object
+                    type: array
+                    description: An array listing data of JavaScript files.
+                type: object
+                description: An object containing data of JavaScript and CSS files for the desktop.
+              scope:
+                enum:
+                  - ALL
+                  - ADMIN
+                  - NONE
+                type: string
+                description: |-
+                  The scope of customization
+                  - `ALL`: Affect all users
+                  - `ADMIN`: Affect only App administrators
+                  - `NONE`: Disable
+              mobile:
+                properties:
+                  css:
+                    items:
+                      anyOf:
+                        - $ref: ../components/schemas/PreviewAppCustomizePutUrlContentForm.yaml
+                        - $ref: ../components/schemas/PreviewAppCustomizePutFileContentForm.yaml
+                      type: object
+                    type: array
+                    description: An array listing data of CSS files for mobile.
+                  js:
+                    items:
+                      anyOf:
+                        - $ref: ../components/schemas/PreviewAppCustomizePutUrlContentForm.yaml
+                        - $ref: ../components/schemas/PreviewAppCustomizePutFileContentForm.yaml
+                      type: object
+                    type: array
+                    description: An array listing data of JavaScript files.
+                type: object
+                description: An object containing data of JavaScript and CSS files for the mobile.
+              revision:
+                format: int64
+                type: integer
+                description: |-
+                  Specify the revision number of the settings that will be deployed.
+                  The request will fail if the revision number is not the latest revision.
+                  The revision will not be checked if this parameter is ignored, or `-1` is specified.
+            required:
+              - app
+            type: object
+    responses:
+      '200':
+        description: success case of preview/app/customize/put
+        content:
+          application/json:
+            schema:
+              properties:
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Updates the JavaScript and CSS Customization settings of an App.

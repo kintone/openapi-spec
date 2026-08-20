@@ -1,0 +1,19 @@
+properties:
+  type:
+    enum:
+      - URL
+      - FILE
+    type: string
+    description: |-
+      The endpoint type of the CSS file:
+      - `URL`: the CSS file is specified with a URL.
+      - `FILE`: the CSS file is uploaded to the App.
+  url:
+    type: string
+    description: |-
+      The URL of the CSS file.
+      Specify, if `URL` is selected for `desktop.css[].type` . Along with `desktop.css[].file`, up to 30 may be specified.
+required:
+  - type
+  - url
+type: object

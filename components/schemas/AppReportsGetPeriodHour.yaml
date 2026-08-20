@@ -1,0 +1,9 @@
+properties:
+  every:
+    enum:
+      - HOUR
+    type: string
+  minute:
+    format: int64
+    type: integer
+type: object

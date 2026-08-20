@@ -1,0 +1,6 @@
+properties:
+  viewable:
+    type: boolean
+  editable:
+    type: boolean
+type: object

@@ -1,0 +1,25 @@
+properties:
+  action:
+    type: string
+    description: |-
+      The Action name of the action to run.
+      If the localization feature has been used to apply multiple translations of the Action name, specify the name of the Action in the language settings of the user that will run the API. API Tokens follow the language settings set in the User & System Administration settings. For more information, refer to the following article:
+      [Configuring System Language](https://us.kintone.help/general/en/id/020114)
+  id:
+    format: int64
+    type: integer
+    description: The Record ID.
+  assignee:
+    type: string
+    description: The next Assignee. Specify the Assignee's log in name.
+  revision:
+    format: int64
+    type: integer
+    description: |-
+      The revision number of the record before updating the status.
+      If the specified revision is not the latest revision, the request will result in an error.
+      The revision will not be checked if this parameter is ignored, or -1 is specified.
+required:
+  - action
+  - id
+type: object

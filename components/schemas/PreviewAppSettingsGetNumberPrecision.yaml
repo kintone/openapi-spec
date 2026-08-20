@@ -1,0 +1,12 @@
+properties:
+  roundingMode:
+    enum:
+      - HALF_EVEN
+      - UP
+      - DOWN
+    type: string
+  decimalPlaces:
+    type: string
+  digits:
+    type: string
+type: object

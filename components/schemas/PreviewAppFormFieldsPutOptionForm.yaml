@@ -1,0 +1,21 @@
+properties:
+  index:
+    format: int64
+    type: integer
+    description: |-
+      The display order (ascending) of the option, when listed with the other options.
+      Required, if setting the `properties.{fieldcode}.options` parameter.
+  label:
+    maxLength: 128
+    minLength: 1
+    type: string
+    description: |-
+      The display name of the option.
+      If a new option is specified for `properties.{fieldcode}.options.{optionname}`, specify the same value for this parameter.
+required:
+  - index
+type: object
+description: |-
+  An object with data of the settings of the options.
+  Specify the current option names for this parameter. Options that are not specified will be deleted.
+  If a new option is specified for this parameter, it will be treated as a new option.

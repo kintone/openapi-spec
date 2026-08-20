@@ -1,0 +1,8 @@
+properties:
+  id:
+    type: string
+  value:
+    type: object
+    additionalProperties:
+      $ref: ./RecordObject.yaml
+type: object

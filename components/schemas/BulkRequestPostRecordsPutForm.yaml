@@ -1,0 +1,14 @@
+properties:
+  app:
+    format: int64
+    type: integer
+  records:
+    items:
+      $ref: ./BulkRequestPostRecordForm.yaml
+    type: array
+  upsert:
+    type: boolean
+required:
+  - app
+  - records
+type: object

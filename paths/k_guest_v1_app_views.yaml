@@ -1,0 +1,66 @@
+/k/guest/{guestSpaceId}/v1/app/views.json:
+  get:
+    operationId: getAppViewsForGuestSpace
+    summary: Get app views (guest space)
+    tags:
+      - APPS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID
+      - name: lang
+        in: query
+        schema:
+          enum:
+            - default
+            - user
+            - ja
+            - en
+            - zh
+          type: string
+        description: |-
+          The localized language to retrieve the data in:
+          - `default`: retrieves the default names
+          - `en`: retrieves the localized English names
+          - `zh`: retrieves the localized Chinese names
+          - `ja`: retrieves the localized Japanese names
+          - `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.
+    responses:
+      '200':
+        description: success case of app/views/get
+        content:
+          application/json:
+            schema:
+              properties:
+                views:
+                  type: object
+                  additionalProperties:
+                    anyOf:
+                      - $ref: ../components/schemas/AppViewsGetBuiltinListViewOutputForm.yaml
+                      - $ref: ../components/schemas/AppViewsGetBuiltinCalendarViewOutputForm.yaml
+                      - $ref: ../components/schemas/AppViewsGetListViewOutputForm.yaml
+                      - $ref: ../components/schemas/AppViewsGetCalendarViewOutputForm.yaml
+                      - $ref: ../components/schemas/AppViewsGetCustomViewOutputForm.yaml
+                    type: object
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the View settings of an App.

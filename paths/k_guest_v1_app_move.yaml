@@ -1,0 +1,45 @@
+/k/guest/{guestSpaceId}/v1/app/move.json:
+  post:
+    operationId: postAppMoveForGuestSpace
+    summary: Post app move (guest space)
+    tags:
+      - APPS
+    security:
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              app:
+                format: int64
+                type: integer
+                description: The App ID.
+              space:
+                format: int64
+                type: integer
+                description: |-
+                  The Space ID of where the App will be moved to.
+                  To remove an App from its current space, `null` can be specified.
+            required:
+              - app
+            type: object
+    responses:
+      '200':
+        description: success case of app/move/post
+        content:
+          application/json:
+            schema:
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Changes the Space where an App belongs to.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).

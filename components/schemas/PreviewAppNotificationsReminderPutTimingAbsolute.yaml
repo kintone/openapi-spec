@@ -1,0 +1,32 @@
+properties:
+  code:
+    type: string
+    description: |-
+      The field code of the field used to determine the Reminder notification's timing.
+      The field code of the following fields can be used:
+      - Created datetime
+      - Updated datetime
+      - Date
+      - Date and time
+      Required when specifying the **notifications[].timing** parameter.
+  time:
+    type: string
+    description: |-
+      The time when the Reminder notification is sent.
+      Input the time in **HH:MM** format.
+      MM must be "00", "10", "20", "30", "40" or "50".
+      Examples: "09:00", "14:30", or "23:50"
+      Required when specifying the **notifications[].timing** parameter and not specifying the **notifications[].timing.hoursLater** parameter.
+  daysLater:
+    format: int64
+    type: integer
+    description: |-
+      The number of days after the **notifications[].timing.code** date/datetime when the Reminder notification is sent.
+      Input a negative value for the number of days before the **notifications[].timing.code** date/datetime.
+      The value must be between -10000 and 10000.
+      Required when specifying the **notifications[].timing** parameter.
+required:
+  - code
+  - time
+  - daysLater
+type: object

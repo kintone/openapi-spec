@@ -1,0 +1,37 @@
+properties:
+  createdAt:
+    format: date-time
+    type: string
+  creator:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+    type: object
+  isGuest:
+    type: boolean
+  modifiedAt:
+    format: date-time
+    type: string
+  memberCount:
+    format: int64
+    type: integer
+  modifier:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+    type: object
+  name:
+    type: string
+  id:
+    format: int64
+    type: integer
+  isPrivate:
+    type: boolean
+  administratorCount:
+    format: int64
+    type: integer
+type: object

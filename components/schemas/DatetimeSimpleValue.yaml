@@ -1,0 +1,16 @@
+properties:
+  type:
+    type: string
+    enum:
+      - DATETIME
+  value:
+    type: string
+    format: date-time
+    nullable: true
+type: object
+required:
+  - type
+description: Date and time
+example:
+  type: DATETIME
+  value: '2015-03-17T10:20:00Z'

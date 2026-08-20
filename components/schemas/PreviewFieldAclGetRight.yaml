@@ -1,0 +1,8 @@
+properties:
+  code:
+    type: string
+  entities:
+    items:
+      $ref: ./PreviewFieldAclGetEntityRight.yaml
+    type: array
+type: object

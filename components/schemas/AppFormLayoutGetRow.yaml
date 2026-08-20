@@ -1,0 +1,41 @@
+properties:
+  fields:
+    items:
+      anyOf:
+        - $ref: ./AppFormLayoutGetLabelField.yaml
+        - $ref: ./AppFormLayoutGetSingleLineTextField.yaml
+        - $ref: ./AppFormLayoutGetMultipleLineTextField.yaml
+        - $ref: ./AppFormLayoutGetEditorField.yaml
+        - $ref: ./AppFormLayoutGetDecimalField.yaml
+        - $ref: ./AppFormLayoutGetCalcField.yaml
+        - $ref: ./AppFormLayoutGetMultipleCheckField.yaml
+        - $ref: ./AppFormLayoutGetSingleCheckField.yaml
+        - $ref: ./AppFormLayoutGetSingleSelectField.yaml
+        - $ref: ./AppFormLayoutGetMultipleSelectField.yaml
+        - $ref: ./AppFormLayoutGetFileField.yaml
+        - $ref: ./AppFormLayoutGetDateField.yaml
+        - $ref: ./AppFormLayoutGetDatetimeField.yaml
+        - $ref: ./AppFormLayoutGetTimeField.yaml
+        - $ref: ./AppFormLayoutGetUserSelectField.yaml
+        - $ref: ./AppFormLayoutGetLinkField.yaml
+        - $ref: ./AppFormLayoutGetLookupField.yaml
+        - $ref: ./AppFormLayoutGetReferenceTableField.yaml
+        - $ref: ./AppFormLayoutGetSpacerField.yaml
+        - $ref: ./AppFormLayoutGetHrField.yaml
+        - $ref: ./AppFormLayoutGetRecordIdField.yaml
+        - $ref: ./AppFormLayoutGetCreatorField.yaml
+        - $ref: ./AppFormLayoutGetCreatedAtField.yaml
+        - $ref: ./AppFormLayoutGetModifierField.yaml
+        - $ref: ./AppFormLayoutGetModifiedAtField.yaml
+      type: object
+    type: array
+  type:
+    enum:
+      - ROW
+      - SUBTABLE
+      - GROUP
+    type: string
+required:
+  - fields
+  - type
+type: object

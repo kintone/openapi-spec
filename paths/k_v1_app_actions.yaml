@@ -1,0 +1,54 @@
+/k/v1/app/actions.json:
+  get:
+    operationId: getAppActions
+    summary: Get app actions
+    tags:
+      - APPS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID.
+      - name: lang
+        in: query
+        schema:
+          enum:
+            - default
+            - user
+            - ja
+            - en
+            - zh
+          type: string
+        description: |-
+          The localized language to retrieve the data in:
+          - `default`: retrieves the default names
+          - `en`: retrieves the localized English names
+          - `zh`: retrieves the localized Chinese names
+          - `ja`: retrieves the localized Japanese names
+          - `user`: retrieves the localized names in the same language as the language setting* set on the user used for the authentication.
+          If ignored, the default names will be retrieved.
+    responses:
+      '200':
+        description: success case of app/actions/get
+        content:
+          application/json:
+            schema:
+              properties:
+                actions:
+                  type: object
+                  additionalProperties:
+                    $ref: ../components/schemas/AppActionsGetAction.yaml
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the Action settings of the App.

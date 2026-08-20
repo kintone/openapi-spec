@@ -1,0 +1,71 @@
+/k/v1/record/comments.json:
+  get:
+    operationId: getRecordComments
+    summary: Get record comments
+    tags:
+      - RECORDS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_record:read
+    parameters:
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID.
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: |-
+          This skips the retrieval of the first number of comments.
+          "offset": 30 skips the first 30 comments, and retrieves from the 31st comment. There is no maximum for this value.
+      - name: record
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The Record ID.
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int64
+        description: |-
+          The number of records to retrieve.
+          "limit": 5 will retrieve the first 5 comments. The default and maximum is 10 comments.
+      - name: order
+        in: query
+        schema:
+          enum:
+            - ASC
+            - DESC
+          type: string
+        description: |-
+          The sort order of the Comment ID. Specifying "asc" will sort the comments in ascending order, and "desc" will sort the comments in descending order.
+          If ignored, "desc" will be set.
+    responses:
+      '200':
+        description: success case of record/comments/get
+        content:
+          application/json:
+            schema:
+              properties:
+                newer:
+                  type: boolean
+                comments:
+                  items:
+                    $ref: ../components/schemas/RecordCommentsGetCommentOutputForm.yaml
+                  type: array
+                older:
+                  type: boolean
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Retrieves multiple comments from a record in an app.

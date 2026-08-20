@@ -1,0 +1,16 @@
+properties:
+  width:
+    type: string
+    description: |-
+      A width can be specified if the attachment file is an image.
+      The minimum is 100, and the maximum is 750.
+      If this parameter is ignored, the original width will be set (this width is the same size as the size when "Original" is chosen when adding an image to a thread via GUI). This parameter is ignored if the file is not an image.
+  fileKey:
+    type: string
+    description: |-
+      The fileKey of the attachment file.
+      fileKeys can be found from the response of the Upload File API. For more information, refer to the following article:
+      [Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/)
+required:
+  - fileKey
+type: object

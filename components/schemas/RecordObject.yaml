@@ -1,0 +1,60 @@
+oneOf:
+  - $ref: ./CalcSimpleValue.yaml
+  - $ref: ./CategorySimpleValue.yaml
+  - $ref: ./CheckBoxSimpleValue.yaml
+  - $ref: ./CreatedTimeSimpleValue.yaml
+  - $ref: ./CreatorSimpleValue.yaml
+  - $ref: ./DateSimpleValue.yaml
+  - $ref: ./DatetimeSimpleValue.yaml
+  - $ref: ./DecimalSimpleValue.yaml
+  - $ref: ./EditorSimpleValue.yaml
+  - $ref: ./FileSimpleValue.yaml
+  - $ref: ./GroupSelectSimpleValue.yaml
+  - $ref: ./LinkSimpleValue.yaml
+  - $ref: ./ModifiedAtSimpleValue.yaml
+  - $ref: ./ModifierSimpleValue.yaml
+  - $ref: ./MultipleLineTextSimpleValue.yaml
+  - $ref: ./MultipleSelectSimpleValue.yaml
+  - $ref: ./OrganizationSelectSimpleValue.yaml
+  - $ref: ./RadioButtonSimpleValue.yaml
+  - $ref: ./RawRecordIdSimpleValue.yaml
+  - $ref: ./RecordIdSimpleValue.yaml
+  - $ref: ./RevisionSimpleValue.yaml
+  - $ref: ./SimpleTableValue.yaml
+  - $ref: ./SingleLineTextSimpleValue.yaml
+  - $ref: ./SingleSelectSimpleValue.yaml
+  - $ref: ./StatusAssigneeSimpleValue.yaml
+  - $ref: ./StatusSimpleValue.yaml
+  - $ref: ./TimeSimpleValue.yaml
+  - $ref: ./UserSelectSimpleValue.yaml
+discriminator:
+  propertyName: type
+  mapping:
+    CALC: '#/components/schemas/CalcSimpleValue'
+    CATEGORY: '#/components/schemas/CategorySimpleValue'
+    CHECK_BOX: '#/components/schemas/CheckBoxSimpleValue'
+    CREATED_TIME: '#/components/schemas/CreatedTimeSimpleValue'
+    CREATOR: '#/components/schemas/CreatorSimpleValue'
+    DATE: '#/components/schemas/DateSimpleValue'
+    DATETIME: '#/components/schemas/DatetimeSimpleValue'
+    NUMBER: '#/components/schemas/DecimalSimpleValue'
+    RICH_TEXT: '#/components/schemas/EditorSimpleValue'
+    FILE: '#/components/schemas/FileSimpleValue'
+    GROUP_SELECT: '#/components/schemas/GroupSelectSimpleValue'
+    LINK: '#/components/schemas/LinkSimpleValue'
+    UPDATED_TIME: '#/components/schemas/ModifiedAtSimpleValue'
+    MODIFIER: '#/components/schemas/ModifierSimpleValue'
+    MULTI_LINE_TEXT: '#/components/schemas/MultipleLineTextSimpleValue'
+    MULTI_SELECT: '#/components/schemas/MultipleSelectSimpleValue'
+    ORGANIZATION_SELECT: '#/components/schemas/OrganizationSelectSimpleValue'
+    RADIO_BUTTON: '#/components/schemas/RadioButtonSimpleValue'
+    __ID__: '#/components/schemas/RawRecordIdSimpleValue'
+    RECORD_NUMBER: '#/components/schemas/RecordIdSimpleValue'
+    __REVISION__: '#/components/schemas/RevisionSimpleValue'
+    SUBTABLE: '#/components/schemas/SimpleTableValue'
+    SINGLE_LINE_TEXT: '#/components/schemas/SingleLineTextSimpleValue'
+    DROP_DOWN: '#/components/schemas/SingleSelectSimpleValue'
+    STATUS_ASSIGNEE: '#/components/schemas/StatusAssigneeSimpleValue'
+    STATUS: '#/components/schemas/StatusSimpleValue'
+    TIME: '#/components/schemas/TimeSimpleValue'
+    USER_SELECT: '#/components/schemas/UserSelectSimpleValue'

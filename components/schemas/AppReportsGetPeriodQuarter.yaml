@@ -1,0 +1,16 @@
+properties:
+  dayOfMonth:
+    type: string
+  pattern:
+    enum:
+      - JAN_APR_JUL_OCT
+      - FEB_MAY_AUG_NOV
+      - MAR_JUN_SEP_DEC
+    type: string
+  time:
+    type: string
+  every:
+    enum:
+      - QUARTER
+    type: string
+type: object

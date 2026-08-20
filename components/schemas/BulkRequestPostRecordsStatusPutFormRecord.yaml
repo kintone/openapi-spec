@@ -1,0 +1,15 @@
+properties:
+  action:
+    type: string
+  id:
+    format: int64
+    type: integer
+  assignee:
+    type: string
+  revision:
+    format: int64
+    type: integer
+required:
+  - action
+  - id
+type: object

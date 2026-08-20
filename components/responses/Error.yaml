@@ -1,0 +1,9 @@
+description: Error response. When a request fails, an HTTP status code other than 2xx is returned together with an error object containing id / code / message.
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/KintoneError.yaml
+    example:
+      id: 1505999166-897850006
+      code: CB_IJ01
+      message: Invalid JSON string.

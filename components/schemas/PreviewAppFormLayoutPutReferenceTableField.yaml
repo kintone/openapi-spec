@@ -1,0 +1,66 @@
+properties:
+  code:
+    maxLength: 128
+    type: string
+    description: The field code of the field. Ignore, if the field is a Label, Blank space or a Border.
+  type:
+    enum:
+      - CALC
+      - CHECK_BOX
+      - CREATED_TIME
+      - CREATOR
+      - DATE
+      - DATETIME
+      - DROP_DOWN
+      - FILE
+      - HR
+      - LABEL
+      - LINK
+      - MODIFIER
+      - MULTI_LINE_TEXT
+      - MULTI_SELECT
+      - NUMBER
+      - RADIO_BUTTON
+      - RECORD_NUMBER
+      - REFERENCE_TABLE
+      - RICH_TEXT
+      - SINGLE_LINE_TEXT
+      - SPACER
+      - TIME
+      - UPDATED_TIME
+      - USER_SELECT
+      - ORGANIZATION_SELECT
+      - GROUP_SELECT
+    type: string
+    description: |-
+      The type of field.
+      - `CALC`: Calculated
+      - `CHECK_BOX`: Check box
+      - `CREATED_TIME`: Created datetime
+      - `CREATOR`: Created by
+      - `DATE`: Date
+      - `DATETIME`: Date and time
+      - `DROP_DOWN`: Drop-down
+      - `FILE`: Attachment
+      - `HR`: Border
+      - `LABEL`: Label
+      - `LINK`: Link
+      - `MODIFIER`: Updated by
+      - `MULTI_LINE_TEXT`: Text Area
+      - `MULTI_SELECT`: Multi-choice
+      - `NUMBER`: Number
+      - `ORGANIZATION_SELECT`: Department selection
+      - `RADIO_BUTTON`: Radio button
+      - `RECORD_NUMBER`: Record number
+      - `REFERENCE_TABLE`: Related Records
+      - `RICH_TEXT`: Rich text
+      - `SINGLE_LINE_TEXT`: Text
+      - `SPACER`: Blank space
+      - `TIME`: Time
+      - `UPDATED_TIME`: Updated datetime
+      - `USER_SELECT`: User selection
+      For Lookup fields, specify depending on the Key field type it's looking up.
+required:
+  - code
+  - type
+type: object

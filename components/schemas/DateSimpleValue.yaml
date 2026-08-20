@@ -1,0 +1,16 @@
+properties:
+  type:
+    type: string
+    enum:
+      - DATE
+  value:
+    type: string
+    format: date
+    nullable: true
+type: object
+required:
+  - type
+description: Date
+example:
+  type: DATE
+  value: '2015-04-15'

@@ -1,0 +1,43 @@
+properties:
+  timing:
+    anyOf:
+      - $ref: ./PreviewAppNotificationsReminderPutTimingRelative.yaml
+      - $ref: ./PreviewAppNotificationsReminderPutTimingAbsolute.yaml
+    type: object
+    description: |-
+      An object containing the Reminder notification's timing.
+      Required when specifying the **notifications** parameter.
+  filterCond:
+    format: query
+    type: string
+    description: |-
+      The record's filter condition in query string format.
+      For more information on query formats refer to the following article:
+      [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)
+      There are restrictions on the conditions that can be specified:
+      [Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)
+      [Additional Restrictions for Each API](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#additional-restrictions-for-each-api)
+      The following cases will have the same result:
+      - "All records" is specified.
+      - "null" is specified.
+      - An empty string is specified.
+      - The parameter is ignored.
+      The request will fail if a deleted User, Group, or Organization is specified in the filter condition.
+  title:
+    maxLength: 100
+    type: string
+    description: |-
+      The notification subject that is saved under "Summary".
+      The maximum limit is 100 characters.
+      If ignored, the notification subject will be an empty string.
+  targets:
+    items:
+      $ref: ./PreviewAppNotificationsReminderPutTarget.yaml
+    type: array
+    description: |-
+      An array of objects containing the recipients of the Reminder Notification.
+      Required when specifying the **notifications** parameter.
+required:
+  - timing
+  - targets
+type: object

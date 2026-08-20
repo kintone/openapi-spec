@@ -1,0 +1,64 @@
+/k/guest/{guestSpaceId}/v1/form.json:
+  get:
+    operationId: getFormForGuestSpace
+    summary: Get form (guest space)
+    tags:
+      - FORMS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID.
+    responses:
+      '200':
+        description: success case of form/get
+        content:
+          application/json:
+            schema:
+              properties:
+                properties:
+                  items:
+                    anyOf:
+                      - $ref: ../components/schemas/FormGetLayoutProperties.yaml
+                      - $ref: ../components/schemas/FormGetLabelProperties.yaml
+                      - $ref: ../components/schemas/FormGetBultinProperties.yaml
+                      - $ref: ../components/schemas/FormGetCalcSimpleProperties.yaml
+                      - $ref: ../components/schemas/FormGetDateSimpleProperties.yaml
+                      - $ref: ../components/schemas/FormGetDatetimeSimpleProperties.yaml
+                      - $ref: ../components/schemas/FormGetDecimalSimpleProperties.yaml
+                      - $ref: ../components/schemas/FormGetEditorSimpleProperties.yaml
+                      - $ref: ../components/schemas/FormGetFileSimpleProperties.yaml
+                      - $ref: ../components/schemas/FormGetLinkSimpleProperties.yaml
+                      - $ref: ../components/schemas/FormGetMultipleLineTextSimpleProperties.yaml
+                      - $ref: ../components/schemas/FormGetMultipleSelectSimpleProperties.yaml
+                      - $ref: ../components/schemas/FormGetSingleLineTextSimpleProperties.yaml
+                      - $ref: ../components/schemas/FormGetSingleSelectSimpleProperties.yaml
+                      - $ref: ../components/schemas/FormGetTimeSimpleProperties.yaml
+                      - $ref: ../components/schemas/FormGetUserSelectSimpleProperties.yaml
+                      - $ref: ../components/schemas/FormGetOrganizationSelectSimpleProperties.yaml
+                      - $ref: ../components/schemas/FormGetGroupSelectSimpleProperties.yaml
+                      - $ref: ../components/schemas/FormGetLookupSimpleProperties.yaml
+                      - $ref: ../components/schemas/FormGetReferenceTableLayoutProperties.yaml
+                      - $ref: ../components/schemas/FormGetSubTableLayoutProperties.yaml
+                      - $ref: ../components/schemas/FormGetSpacerProperties.yaml
+                    type: object
+                  type: array
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Retrieves the form details of an app.

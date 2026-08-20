@@ -1,0 +1,37 @@
+/k/v1/app/move.json:
+  post:
+    operationId: postAppMove
+    summary: Post app move
+    tags:
+      - APPS
+    security:
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              app:
+                format: int64
+                type: integer
+                description: The App ID.
+              space:
+                format: int64
+                type: integer
+                description: |-
+                  The Space ID of where the App will be moved to.
+                  To remove an App from its current space, `null` can be specified.
+            required:
+              - app
+            type: object
+    responses:
+      '200':
+        description: success case of app/move/post
+        content:
+          application/json:
+            schema:
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Changes the Space where an App belongs to.

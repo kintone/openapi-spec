@@ -1,0 +1,8 @@
+properties:
+  entities:
+    items:
+      $ref: ./RecordAclGetEntityRight.yaml
+    type: array
+  filterCond:
+    type: string
+type: object

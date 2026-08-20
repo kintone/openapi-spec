@@ -1,0 +1,19 @@
+type: object
+properties:
+  type:
+    type: string
+    enum:
+      - CHECK_BOX
+  value:
+    type: array
+    items:
+      type: string
+required:
+  - value
+  - type
+description: Check box
+example:
+  type: CHECK_BOX
+  value:
+    - Choice 1
+    - Choice 2

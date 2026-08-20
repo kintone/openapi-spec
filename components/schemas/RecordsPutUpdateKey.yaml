@@ -1,0 +1,20 @@
+properties:
+  field:
+    type: string
+    description: The field code of the unique key. Required, if `updateKey` will be specified.
+  value:
+    maxLength: 64
+    type: string
+    description: The value of the unique key. Required, if `updateKey` will be specified.
+required:
+  - field
+  - value
+type: object
+description: |-
+  The unique key of the record to be updated. Required, if `id` will not be specified.
+  Fields that can be specified:
+  - Text fields, with the **Prohibit duplicate values** option turned on
+  - Number fields, with the **Prohibit duplicate values** option turned on
+  If `upsert` is set to `true`:
+  - If the record exists, the record will be updated
+  - If the record does not exist, it will be added as a new record

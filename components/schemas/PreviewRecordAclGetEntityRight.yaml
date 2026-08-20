@@ -1,0 +1,22 @@
+properties:
+  viewable:
+    type: boolean
+  editable:
+    type: boolean
+  deletable:
+    type: boolean
+  includeSubs:
+    type: boolean
+  entity:
+    properties:
+      code:
+        type: string
+      type:
+        enum:
+          - USER
+          - GROUP
+          - ORGANIZATION
+          - FIELD_ENTITY
+        type: string
+    type: object
+type: object

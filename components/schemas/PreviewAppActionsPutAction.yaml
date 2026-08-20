@@ -1,0 +1,74 @@
+properties:
+  mappings:
+    items:
+      anyOf:
+        - $ref: ./PreviewAppActionsPutFieldMapping.yaml
+        - $ref: ./PreviewAppActionsPutUrlMapping.yaml
+      type: object
+    type: array
+    description: |-
+      An array of objects containing the **Field Mappings** options.
+      If the array is empty, the `Action` will not have **Field Mappings** options set.
+      Required when specifying the `actions.{actionname}.destApp` parameter, or creating a new `Action`.
+  entities:
+    items:
+      $ref: ./PreviewAppActionsPutEntity.yaml
+    type: array
+    description: |-
+      An array of objects containing the entities the `Action` is granted to.
+      This reflects the **Available To** options.
+      If the array is empty, the `Action` will not be available to any users/departments/groups.
+      Required when creating a new `Action`.
+  name:
+    maxLength: 32
+    minLength: 1
+    type: string
+    description: |-
+      The name of the `Action`.
+      1 to 32 characters can be specified.
+      When creating a new `Action`, the request will fail if this parameter's value is not the same as `actions.{actionname}`.
+      Required when updating an existing `Action`, or creating a new `Action`.
+  index:
+    format: int64
+    type: integer
+    description: |-
+      The order of the `Actions`.
+      The `Action` is sorted in ascending order, starting from 0.
+      The request will fail if there are duplicate values.
+      Required when updating an existing `Action`, or creating a new `Action`.
+  filterCond:
+    type: string
+    description: |-
+      The query string that App Action can be used.
+      If ignored, the condition will not be changed.
+      If an empty string is specified when creating or updating the `Action`, the condition will be set as `All records`.
+      For more information on query string, refer to the following article:
+      [Query string](https://kintone.dev/en/docs/kintone/overview/query-string/)
+      There are restrictions on the conditions that can be specified:
+      [Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)
+  destApp:
+    properties:
+      app:
+        format: int64
+        type: integer
+        description: |-
+          The App ID of the copy destination App.
+          Required if the `actions.{actionname}.destApp.code` is not specified.
+      code:
+        type: string
+        description: |-
+          The App Code of the copy destination App.
+          Required if the `actions.{actionname}.destApp.app` is not specified.
+          If both `actions.{actionname}.destApp.app` and `actions.{actionname}.destApp.code` are specified, code takes precedence.
+    type: object
+    description: |-
+      An object containing the Target option that specifies the destination App where data is to be copied.
+      Required when creating a new `Action`.
+required:
+  - index
+type: object
+description: |-
+  An object listing `Action` information of 1 `Action`.
+  If _actionname_ is equal to the name of an existing `Action`, the `Action` will be updated with the values in the object.
+  If _actionname_ is not equal to a name of an existing `Action`, a new `Action` will be created with the values in the object.
+  Any existing `Action` that is not set for this parameter will be deleted.

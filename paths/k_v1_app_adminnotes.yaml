@@ -1,0 +1,33 @@
+/k/v1/app/adminNotes.json:
+  get:
+    operationId: getAppAdminNotes
+    summary: Get app admin notes
+    tags:
+      - APPS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+    parameters:
+      - name: app
+        in: query
+        schema:
+          type: string
+        required: true
+        description: The App ID.
+    responses:
+      '200':
+        description: success case of app/adminNotes/get
+        content:
+          application/json:
+            schema:
+              properties:
+                content:
+                  type: string
+                includeInTemplateAndDuplicates:
+                  type: boolean
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets notes for app administrator and their settings.

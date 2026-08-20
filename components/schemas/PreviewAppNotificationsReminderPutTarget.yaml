@@ -1,0 +1,42 @@
+properties:
+  includeSubs:
+    type: boolean
+    description: |-
+      The "Include affiliated departments" setting of the Department. This parameter is available if **notifications[].targets[].entity.type** parameter is specified to **ORGANIZATION** or **FIELD_ENTITY**.
+      - `true`: Affiliated departments do inherit the Reminder Notification settings
+      - `false`: Affiliated departments do not inherit the Reminder Notification settings
+      If ignored, this value is false.
+  entity:
+    properties:
+      code:
+        type: string
+        description: |-
+          The code of the entity the Reminder Notification settings are configured to.
+          Specify the field code if the **notifications[].targets[].entity.type** parameter is specified as **FIELD_ENTITY**.
+          For guest users, the login name is preceded by **guest/**.
+          Required when specifying the **notifications[].targets[].entity** parameter.
+      type:
+        enum:
+          - USER
+          - GROUP
+          - ORGANIZATION
+          - FIELD_ENTITY
+        type: string
+        description: |-
+          The type of the entity the Reminder Notification settings are configured to.
+          - **USER**: User
+          - **GROUP**: Group
+          - **ORGANIZATION**: Department
+          - **FIELD_ENTITY**: Created By, Updated By, User Selection, Group Selection, and Department Selection Fields
+          For Apps in a guest space, specifying a Department will result in an error.
+          Required when specifying the **notifications[].targets[].entity** parameter.
+    required:
+      - code
+      - type
+    type: object
+    description: |-
+      An object containing entity details per recipient of the Reminder Notification.
+      Required when specifying the **notifications[].targets** parameter.
+required:
+  - entity
+type: object

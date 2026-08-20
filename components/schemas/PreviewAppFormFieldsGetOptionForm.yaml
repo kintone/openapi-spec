@@ -1,0 +1,11 @@
+properties:
+  index:
+    format: int64
+    type: integer
+  label:
+    maxLength: 128
+    minLength: 1
+    type: string
+required:
+  - index
+type: object

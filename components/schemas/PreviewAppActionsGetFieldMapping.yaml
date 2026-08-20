@@ -1,0 +1,10 @@
+properties:
+  destField:
+    type: string
+  srcType:
+    enum:
+      - FIELD
+    type: string
+  srcField:
+    type: string
+type: object

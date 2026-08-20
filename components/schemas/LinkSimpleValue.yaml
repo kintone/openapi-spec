@@ -1,0 +1,14 @@
+properties:
+  type:
+    type: string
+    enum:
+      - LINK
+  value:
+    type: string
+type: object
+required:
+  - type
+description: Link
+example:
+  type: LINK
+  value: https://www.kintone.com/

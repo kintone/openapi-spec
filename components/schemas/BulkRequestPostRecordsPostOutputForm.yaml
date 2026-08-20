@@ -1,0 +1,12 @@
+properties:
+  ids:
+    items:
+      format: int64
+      type: integer
+    type: array
+  revisions:
+    items:
+      format: int64
+      type: integer
+    type: array
+type: object

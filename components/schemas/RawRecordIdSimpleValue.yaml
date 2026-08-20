@@ -1,0 +1,14 @@
+properties:
+  type:
+    type: string
+    enum:
+      - __ID__
+  value:
+    type: string
+type: object
+required:
+  - type
+description: Record ID
+example:
+  type: __ID__
+  value: '3'

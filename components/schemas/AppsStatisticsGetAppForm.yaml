@@ -1,0 +1,66 @@
+properties:
+  fieldCount:
+    format: int64
+    type: integer
+  creator:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+    type: object
+  customized:
+    type: boolean
+  modifiedAt:
+    format: date-time
+    type: string
+  recordCount:
+    format: int64
+    type: integer
+  modifier:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+    type: object
+  apiTokenCount:
+    format: int64
+    type: integer
+  space:
+    properties:
+      name:
+        type: string
+      id:
+        format: int64
+        type: integer
+    type: object
+  recordUpdatedAt:
+    format: date-time
+    type: string
+  createdAt:
+    format: date-time
+    type: string
+  webhookCount:
+    format: int64
+    type: integer
+  dailyRequestCount:
+    format: int64
+    type: integer
+  appGroup:
+    type: string
+  storageUsage:
+    format: int64
+    type: integer
+  name:
+    type: string
+  id:
+    format: int64
+    type: integer
+  status:
+    enum:
+      - NOT_ACTIVATED
+      - ACTIVATED
+      - CHANGED
+    type: string
+type: object

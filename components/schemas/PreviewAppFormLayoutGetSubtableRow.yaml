@@ -1,0 +1,45 @@
+properties:
+  code:
+    maxLength: 128
+    type: string
+  fields:
+    items:
+      anyOf:
+        - $ref: ./PreviewAppFormLayoutGetLabelField.yaml
+        - $ref: ./PreviewAppFormLayoutGetSingleLineTextField.yaml
+        - $ref: ./PreviewAppFormLayoutGetMultipleLineTextField.yaml
+        - $ref: ./PreviewAppFormLayoutGetEditorField.yaml
+        - $ref: ./PreviewAppFormLayoutGetDecimalField.yaml
+        - $ref: ./PreviewAppFormLayoutGetCalcField.yaml
+        - $ref: ./PreviewAppFormLayoutGetMultipleCheckField.yaml
+        - $ref: ./PreviewAppFormLayoutGetSingleCheckField.yaml
+        - $ref: ./PreviewAppFormLayoutGetSingleSelectField.yaml
+        - $ref: ./PreviewAppFormLayoutGetMultipleSelectField.yaml
+        - $ref: ./PreviewAppFormLayoutGetFileField.yaml
+        - $ref: ./PreviewAppFormLayoutGetDateField.yaml
+        - $ref: ./PreviewAppFormLayoutGetDatetimeField.yaml
+        - $ref: ./PreviewAppFormLayoutGetTimeField.yaml
+        - $ref: ./PreviewAppFormLayoutGetUserSelectField.yaml
+        - $ref: ./PreviewAppFormLayoutGetLinkField.yaml
+        - $ref: ./PreviewAppFormLayoutGetLookupField.yaml
+        - $ref: ./PreviewAppFormLayoutGetReferenceTableField.yaml
+        - $ref: ./PreviewAppFormLayoutGetSpacerField.yaml
+        - $ref: ./PreviewAppFormLayoutGetHrField.yaml
+        - $ref: ./PreviewAppFormLayoutGetRecordIdField.yaml
+        - $ref: ./PreviewAppFormLayoutGetCreatorField.yaml
+        - $ref: ./PreviewAppFormLayoutGetCreatedAtField.yaml
+        - $ref: ./PreviewAppFormLayoutGetModifierField.yaml
+        - $ref: ./PreviewAppFormLayoutGetModifiedAtField.yaml
+      type: object
+    type: array
+  type:
+    enum:
+      - ROW
+      - SUBTABLE
+      - GROUP
+    type: string
+required:
+  - code
+  - fields
+  - type
+type: object

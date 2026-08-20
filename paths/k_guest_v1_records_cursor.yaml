@@ -1,0 +1,152 @@
+/k/guest/{guestSpaceId}/v1/records/cursor.json:
+  delete:
+    operationId: deleteRecordsCursorForGuestSpace
+    summary: Delete records cursor (guest space)
+    tags:
+      - RECORDS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                type: string
+                description: The cursor ID.
+            required:
+              - id
+            type: object
+    responses:
+      '200':
+        description: success case of records/cursor/delete
+        content:
+          application/json:
+            schema:
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Deletes a cursor by specifying the cursor ID.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+  get:
+    operationId: getRecordsCursorForGuestSpace
+    summary: Get records cursor (guest space)
+    tags:
+      - RECORDS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+      - name: id
+        in: query
+        schema:
+          type: string
+        required: true
+        description: The cursor ID.
+    responses:
+      '200':
+        description: success case of records/cursor/get
+        content:
+          application/json:
+            schema:
+              properties:
+                next:
+                  type: boolean
+                records:
+                  items:
+                    type: object
+                    additionalProperties:
+                      $ref: ../components/schemas/RecordObject.yaml
+                  type: array
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Retrieves multiple records from an App by specifying the cursor ID.
+  post:
+    operationId: postRecordsCursorForGuestSpace
+    summary: Post records cursor (guest space)
+    tags:
+      - RECORDS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              app:
+                format: int64
+                type: integer
+                description: The App ID.
+              size:
+                format: int64
+                type: integer
+                description: |-
+                  The maximum number of records the Get Cursor API can retrieve from this cursor with one request.
+                  The maximum number is 500 records. If ignored, the default number of records to be retrieved is 100.
+                  To retrieve all records, repeatedly call the Get Cursor API.
+                  For more information, refer to the following article:
+                  [Get Cursor](https://kintone.dev/en/docs/kintone/rest-api/records/get-cursor/)
+              query:
+                format: query
+                type: string
+                description: |-
+                  The search condition for the records the cursor will walk over, written in kintone's own query syntax.
+                  The operators and functions are the same as for the `query` parameter of `GET /k/v1/records.json` — see that parameter for the table of operators each field type allows.
+
+                  **`order by`, `limit` and `offset` cannot be used here.** The cursor manages paging itself: set the batch size with the `size` parameter, then call `GET /k/v1/records/cursor.json` repeatedly until it reports `next: false`.
+
+                  Ignoring this parameter creates a cursor over all records that the credential can access.
+              fields:
+                items:
+                  type: string
+                type: array
+                description: |-
+                  The field codes to be included in the response when using the Get Cursor API. For more information, refer to the following document:
+                  [Get Cursor](https://kintone.dev/en/docs/kintone/rest-api/records/get-cursor/)
+                  If ignored, all accessible fields in the app will be returned.
+            required:
+              - app
+            type: object
+    responses:
+      '200':
+        description: success case of records/cursor/post
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  type: string
+                totalCount:
+                  type: string
+                  nullable: true
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Adds a cursor so that large amount of records can be obtained from an App.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).

@@ -1,0 +1,89 @@
+properties:
+  recordImportable:
+    type: boolean
+    description: |-
+      The file import permission of the entity.
+      The record add permissions must also be enabled to set this value as `true`.
+      - `true`: Files will be importable
+      - `false`: Files will not be importable
+      If ignored, this value is false.
+  appEditable:
+    type: boolean
+    description: |-
+      The App management permission of the entity.
+      - The App's settings will be accessible.
+      - The App's settings will not be accessible.
+      If ignored, this value is false.
+  recordExportable:
+    type: boolean
+    description: |-
+      The file export permission of the entity.
+      - `true`: Files will be exportable
+      - `false`: Files will not be exportable
+      If ignored, this value is false.
+  recordAddable:
+    type: boolean
+    description: |-
+      The record add permission of the entity
+      - `true`: Records can be added.
+      - `false`: Records cannot be added.
+      If ignored, this value is false.
+  recordViewable:
+    type: boolean
+    description: |-
+      The record view permission of the entity.
+      - `true`: Records will be viewable.
+      - `false`: Records will not be viewable.
+      If ignored, this value is false.
+  recordEditable:
+    type: boolean
+    description: |-
+      The record edit permission of the entity.
+      The record view permissions must also be enabled to set this value as `true`.
+      - `true`: Records will be editable.
+      - `false`: Records will not be editable.
+      If ignored, this value is false.
+  recordDeletable:
+    type: boolean
+    description: |-
+      The record delete permission of the entity.
+      The record view permissions must also be enabled to set this value as `true`.
+      - `true`: Records will be deletable.
+      - `false`: Records will not be deletable.
+      If ignored, this value is false.
+  includeSubs:
+    type: boolean
+    description: |-
+      The permission inheritance settings of the department the permission is granted to. This parameter is available if "ORGANIZATION" is specified for the **rights[].entity.type** parameter.
+      - `true`: Permissions will be inherited.
+      - `false`: Permissions will not be inherited.
+      If ignored, this value is false.
+  entity:
+    properties:
+      code:
+        type: string
+        description: |-
+          The code of the entity the permission is granted to.
+          To specify guest space users, add the string "guest/" before the guest's log in name.
+          If the "Everyone" group is not specified, the "Everyone" group will have no permissions to view/edit/delete.
+          If "CREATOR" is specified for the **rights[].entity.type** parameter, ignore this parameter. Otherwise, this parameter is required.
+      type:
+        enum:
+          - USER
+          - ORGANIZATION
+          - GROUP
+          - CREATOR
+        type: string
+        description: |-
+          The type of the entity the permission will be granted to.
+          - **USER**: User
+          - **GROUP**: Group
+          - **ORGANIZATION**: Department
+          - **CREATOR**: The creator of the App
+    required:
+      - type
+    type: object
+    description: An object containing data of the entity the permission is granted to.
+required:
+  - entity
+type: object

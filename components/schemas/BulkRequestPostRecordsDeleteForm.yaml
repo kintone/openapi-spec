@@ -1,0 +1,18 @@
+properties:
+  app:
+    format: int64
+    type: integer
+  ids:
+    items:
+      format: int64
+      type: integer
+    type: array
+  revisions:
+    items:
+      format: int64
+      type: integer
+    type: array
+required:
+  - app
+  - ids
+type: object

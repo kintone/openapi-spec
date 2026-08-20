@@ -1,0 +1,29 @@
+properties:
+  pager:
+    type: boolean
+  name:
+    type: string
+  index:
+    format: int64
+    type: integer
+  html:
+    type: string
+  id:
+    format: int64
+    type: integer
+  sort:
+    type: string
+  type:
+    enum:
+      - LIST
+      - CALENDAR
+      - CUSTOM
+    type: string
+  filterCond:
+    type: string
+  device:
+    enum:
+      - DESKTOP
+      - ANY
+    type: string
+type: object

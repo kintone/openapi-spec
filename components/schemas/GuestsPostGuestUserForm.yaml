@@ -1,0 +1,69 @@
+properties:
+  division:
+    maxLength: 100
+    type: string
+    description: |-
+      The Department name to display on the Guest User's profile.
+      The maximum limit is 100 characters.
+  callto:
+    maxLength: 256
+    type: string
+    description: |-
+      The Skype Name of the Guest user.
+      The maximum limit is 256 characters.
+  image:
+    type: string
+    description: |-
+      The profile image of the Guest user.
+      Specify a fileKey of an uploaded file. fileKeys can be found from the response of the Upload File API. For more information, refer to the following article:
+      [Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/)
+      If ignored, a default image will be set.
+  password:
+    maxLength: 64
+    minLength: 3
+    type: string
+    description: The log in password of the Guest user.
+  code:
+    format: email
+    type: string
+    description: The email address (log in name) of the Guest user.
+  phone:
+    maxLength: 100
+    type: string
+    description: |-
+      The Phone number to display on the Guest User's profile.
+      The maximum limit is 100 characters.
+  timezone:
+    format: timezone
+    type: string
+    description: The timezone of the Guest user.
+  name:
+    maxLength: 128
+    minLength: 1
+    type: string
+    description: |-
+      The display name of the user.
+      Must be between 1 - 128 characters.
+  surNameReading:
+    maxLength: 64
+    type: string
+    description: The Phonetic Surname settings of the Guest User. The maximum limit is 64 characters.
+  company:
+    maxLength: 100
+    type: string
+    description: |-
+      The Company name to display on the Guest User's profile.
+      The maximum limit is 100 characters.
+  locale:
+    format: locale
+    type: string
+  givenNameReading:
+    maxLength: 64
+    type: string
+    description: The Phonetic Given Name settings of the Guest User. The maximum limit is 64 characters.
+required:
+  - password
+  - code
+  - timezone
+  - name
+type: object

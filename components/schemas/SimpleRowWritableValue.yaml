@@ -1,0 +1,14 @@
+properties:
+  id:
+    type: string
+  value:
+    type: object
+    additionalProperties:
+      $ref: ./RecordWritableObject.yaml
+type: object
+description: |-
+  One row of a table when writing a record.
+
+  Include the `id` of an existing row to keep that row; omit `id` to add a new row. Rows the request does not list are deleted.
+
+  `value` is keyed by the field codes inside the table, and each cell follows the same `{"value": ...}` rule as a top-level field.

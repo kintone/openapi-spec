@@ -1,0 +1,48 @@
+properties:
+  accessibility:
+    enum:
+      - WRITE
+      - READ
+      - NONE
+    type: string
+    description: |-
+      The permission to grant to the entity.
+      - `READ`: Permissions to view only.
+      - `WRITE`: Permissions to view and edit.
+      - `NONE`: No permissions to view and edit
+  includeSubs:
+    type: boolean
+    description: |-
+      The permission inheritance settings of the department the permissions are granted to.
+      - `true`: Permissions are inherited.
+      - `false`: Permissions are not inherited.
+      If ignored, this value is false.
+  entity:
+    properties:
+      code:
+        type: string
+        description: |-
+          The code of the entity the permission is granted to.
+          If the `Everyone` group is not specified, the `Everyone` group will have no permissions to view/edit/delete.
+          To specify guest space users, add the string `guest/` before the guest's log in name.
+      type:
+        enum:
+          - USER
+          - GROUP
+          - ORGANIZATION
+          - FIELD_ENTITY
+        type: string
+        description: |-
+          The type of the entity the permission is granted to.
+          - `USER`: User
+          - `GROUP`: Group
+          - `ORGANIZATION`: Department
+          - `FIELD_ENTITY`: User field
+    required:
+      - type
+    type: object
+    description: An object containing data of the entity the permission is granted to.
+required:
+  - accessibility
+  - entity
+type: object

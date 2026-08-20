@@ -1,0 +1,62 @@
+properties:
+  noLabel:
+    format: boolean
+    type: boolean
+  code:
+    maxLength: 128
+    minLength: 1
+    type: string
+  defaultValue:
+    maxLength: 128
+    minLength: 1
+    type: string
+  options:
+    type: object
+    additionalProperties:
+      $ref: ./PreviewAppFormFieldsGetOptionForm.yaml
+  label:
+    maxLength: 128
+    minLength: 1
+    type: string
+  align:
+    enum:
+      - HORIZONTAL
+      - VERTICAL
+    type: string
+  type:
+    enum:
+      - CALC
+      - CATEGORY
+      - CHECK_BOX
+      - CREATED_TIME
+      - CREATOR
+      - DATE
+      - DATETIME
+      - DROP_DOWN
+      - FILE
+      - GROUP
+      - GROUP_SELECT
+      - LINK
+      - MODIFIER
+      - MULTI_LINE_TEXT
+      - MULTI_SELECT
+      - NUMBER
+      - ORGANIZATION_SELECT
+      - RADIO_BUTTON
+      - RECORD_NUMBER
+      - REFERENCE_TABLE
+      - RICH_TEXT
+      - SINGLE_LINE_TEXT
+      - STATUS
+      - STATUS_ASSIGNEE
+      - SUBTABLE
+      - TIME
+      - UPDATED_TIME
+      - USER_SELECT
+    type: string
+  required:
+    format: boolean
+    type: boolean
+required:
+  - type
+type: object

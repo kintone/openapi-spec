@@ -1,0 +1,98 @@
+/k/guest/{guestSpaceId}/v1/app/settings.json:
+  get:
+    operationId: getAppSettingsForGuestSpace
+    summary: Get app settings (guest space)
+    tags:
+      - APPS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The app ID.
+      - name: lang
+        in: query
+        schema:
+          enum:
+            - default
+            - user
+            - ja
+            - en
+            - zh
+          type: string
+        description: |-
+          The localized language to retrieve the data in:
+          - `default`: retrieves the default names
+          - `en`: retrieves the localized English names
+          - `zh`: retrieves the localized Chinese names
+          - `ja`: retrieves the localized Japanese names
+          - `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.
+          If ignored, the default names will be retrieved.
+    responses:
+      '200':
+        description: success case of app/settings/get
+        content:
+          application/json:
+            schema:
+              properties:
+                enableComments:
+                  type: boolean
+                titleField:
+                  $ref: ../components/schemas/AppSettingsGetTitleField.yaml
+                icon:
+                  anyOf:
+                    - $ref: ../components/schemas/AppSettingsGetIconPresetForm.yaml
+                    - $ref: ../components/schemas/AppSettingsGetIconFileForm.yaml
+                  type: object
+                description:
+                  maxLength: 10000
+                  type: string
+                enableThumbnails:
+                  type: boolean
+                enableDuplicateRecord:
+                  type: boolean
+                revision:
+                  type: string
+                enableInlineRecordEditing:
+                  type: boolean
+                enableBulkDeletion:
+                  type: boolean
+                name:
+                  maxLength: 64
+                  minLength: 1
+                  type: string
+                theme:
+                  enum:
+                    - WHITE
+                    - CLIPBOARD
+                    - BINDER
+                    - PENCIL
+                    - CLIPS
+                    - RED
+                    - GREEN
+                    - BLUE
+                    - YELLOW
+                    - BLACK
+                  type: string
+                numberPrecision:
+                  $ref: ../components/schemas/AppSettingsGetNumberPrecision.yaml
+                firstMonthOfFiscalYear:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the description, name, icon, revision and color theme of an App.

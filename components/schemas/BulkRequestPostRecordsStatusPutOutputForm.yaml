@@ -1,0 +1,6 @@
+properties:
+  records:
+    items:
+      $ref: ./BulkRequestPostRecordsStatusPutOutputFormRecord.yaml
+    type: array
+type: object

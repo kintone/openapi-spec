@@ -1,0 +1,121 @@
+/k/guest/{guestSpaceId}/v1/record/comment.json:
+  delete:
+    operationId: deleteRecordCommentForGuestSpace
+    summary: Delete record comment (guest space)
+    tags:
+      - RECORDS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_record:write
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              app:
+                format: int64
+                type: integer
+                description: The App ID.
+              record:
+                format: int64
+                type: integer
+                description: The Record ID.
+              comment:
+                format: int64
+                type: integer
+                description: The Comment ID.
+            required:
+              - app
+              - record
+              - comment
+            type: object
+    responses:
+      '200':
+        description: success case of record/comment/delete
+        content:
+          application/json:
+            schema:
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Delete a comment in a record in an app.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+  post:
+    operationId: postRecordCommentForGuestSpace
+    summary: Post record comment (guest space)
+    tags:
+      - RECORDS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_record:write
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              app:
+                format: int64
+                type: integer
+                description: The App ID.
+              record:
+                format: int64
+                type: integer
+                description: The Record ID.
+              comment:
+                properties:
+                  mentions:
+                    items:
+                      $ref: ../components/schemas/RecordCommentPostMentionForm.yaml
+                    type: array
+                    description: An array including information to mention other users.
+                  text:
+                    maxLength: 65535
+                    minLength: 1
+                    type: string
+                    description: |-
+                      The comment text.
+                      The maximum length is 65,535 characters.
+                required:
+                  - text
+                type: object
+                description: An object including comment details.
+            required:
+              - app
+              - record
+              - comment
+            type: object
+    responses:
+      '200':
+        description: success case of record/comment/post
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  format: int64
+                  type: integer
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Add a comment to a record in an App.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).

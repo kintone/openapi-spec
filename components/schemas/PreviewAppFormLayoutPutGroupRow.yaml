@@ -1,0 +1,27 @@
+properties:
+  layout:
+    items:
+      $ref: ./PreviewAppFormLayoutPutRow.yaml
+    type: array
+    description: |-
+      A list of field layouts for each row inside a Group field.
+      The parameters for this are the same for the `layout` property.
+  code:
+    maxLength: 128
+    type: string
+    description: The field code of the Table or Group field. Ignore, if the row type is not a Table or a Group.
+  type:
+    enum:
+      - ROW
+      - SUBTABLE
+      - GROUP
+    type: string
+    description: |-
+      The type of row.
+      - `ROW`: A normal row of fields.
+      - `SUBTABLE`: A Table.
+      - `GROUP`: A Group field.
+required:
+  - code
+  - type
+type: object

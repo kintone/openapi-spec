@@ -1,0 +1,95 @@
+/k/v1/space/thread.json:
+  post:
+    operationId: postSpaceThread
+    summary: Post space thread
+    tags:
+      - SPACES
+    security:
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              name:
+                maxLength: 128
+                minLength: 1
+                type: string
+                description: |-
+                  The new name of the Thread.
+                  Must be between 1 - 128 characters.
+              space:
+                format: int64
+                type: integer
+                description: The Space ID.
+            required:
+              - name
+              - space
+            type: object
+    responses:
+      '200':
+        description: success case of space/thread/post
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  format: int64
+                  type: integer
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Adds a Thread in a Space.
+  put:
+    operationId: putSpaceThread
+    summary: Put space thread
+    tags:
+      - SPACES
+    security:
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              name:
+                maxLength: 128
+                minLength: 1
+                type: string
+                description: |-
+                  The new name of the Thread.
+                  Must be between 1 - 128 characters.
+                  The name will not be updated if this parameter is ignored.
+                  The Thread name of single threaded Spaces cannot be updated.
+              id:
+                format: int64
+                type: integer
+                description: |-
+                  The Thread ID.
+                  The Thread ID can be found in the URL of the Thread.
+                  A Space with the URL of `https://{subdomain}.kintone.com/k/#/space/111/thread/222` has a Space ID of 111 and a Thread ID of 222.
+              body:
+                maxLength: 65535
+                type: string
+                description: |-
+                  The contents of the Thread body.
+                  Write the contents as an HTML string, within 65535 characters.
+                  The Thread body will not be updated if this parameter is ignored.
+                  HTML tags that cannot be used will be automatically removed.
+                  HTML can be used to attach Apps, files and Emoji.
+                  The usage of the @ mark to mention a user will not notify that user.
+            required:
+              - id
+            type: object
+    responses:
+      '200':
+        description: success case of space/thread/put
+        content:
+          application/json:
+            schema:
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Updates a Thread of a Space.

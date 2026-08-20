@@ -1,0 +1,19 @@
+properties:
+  name:
+    type: string
+  executableUser:
+    properties:
+      entities:
+        items:
+          $ref: ./AppStatusGetExecutableUserEntityForm.yaml
+        type: array
+    type: object
+  from:
+    type: string
+  to:
+    type: string
+  filterCond:
+    type: string
+  type:
+    type: string
+type: object

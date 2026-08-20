@@ -1,0 +1,82 @@
+/k/guest/{guestSpaceId}/v1/guests.json:
+  delete:
+    operationId: deleteGuestsForGuestSpace
+    summary: Delete guests (guest space)
+    tags:
+      - GUESTS
+    security:
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              guests:
+                items:
+                  format: email
+                  type: string
+                type: array
+                description: |-
+                  A list of email addresses of Guest users.
+                  Up to 100 Guests can be deleted.
+            required:
+              - guests
+            type: object
+    responses:
+      '200':
+        description: success case of guests/delete
+        content:
+          application/json:
+            schema:
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Deletes a Guest user from Kintone.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+  post:
+    operationId: postGuestsForGuestSpace
+    summary: Post guests (guest space)
+    tags:
+      - GUESTS
+    security:
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              guests:
+                items:
+                  $ref: ../components/schemas/GuestsPostGuestUserForm.yaml
+                type: array
+                description: A list of Guest user data.
+            required:
+              - guests
+            type: object
+    responses:
+      '200':
+        description: success case of guests/post
+        content:
+          application/json:
+            schema:
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Adds Guest users to Kintone.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).

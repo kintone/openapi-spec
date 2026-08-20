@@ -1,0 +1,30 @@
+properties:
+  filterCond:
+    format: query
+    type: string
+    description: |-
+      The record's filter condition in query string format.
+      For more information on query formats refer to the following document:
+      [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)
+      There are restrictions on the conditions that can be specified:
+      [Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)
+      [Additional Restrictions for Each API](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#additional-restrictions-for-each-api)
+      Required when specifying the **notifications** parameter.
+  title:
+    maxLength: 100
+    type: string
+    description: |-
+      The notification subject saved under "Summary".
+      If ignored, the notification subject will be an empty string.
+  targets:
+    items:
+      $ref: ./PreviewAppNotificationsPerRecordPutTarget.yaml
+    type: array
+    description: |-
+      An array of objects containing the recipients of the Per Record Notification.
+      If the array is empty, the Per Record Notification will not have a recipient.
+      Required when specifying the **notifications** parameter.
+required:
+  - filterCond
+  - targets
+type: object

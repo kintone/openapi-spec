@@ -1,0 +1,17 @@
+properties:
+  code:
+    type: string
+    description: The field code of the field used as the title of the record. Required, if `MANUAL` is set for the `titleField.selectionMode` parameter.
+  selectionMode:
+    enum:
+      - AUTO
+      - MANUAL
+    type: string
+    description: |-
+      The option of **The field to be used as the record title** settings.
+      - `AUTO`: The **Set automatically** option.
+      - `MANUAL`: The **Set manually** option.
+      Required if `titleField` is specified.
+required:
+  - selectionMode
+type: object

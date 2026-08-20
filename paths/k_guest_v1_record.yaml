@@ -1,0 +1,169 @@
+/k/guest/{guestSpaceId}/v1/record.json:
+  get:
+    operationId: getRecordForGuestSpace
+    summary: Get record (guest space)
+    tags:
+      - RECORDS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_record:read
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID.
+      - name: id
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The Record ID.
+    responses:
+      '200':
+        description: success case of record/get
+        content:
+          application/json:
+            schema:
+              properties:
+                record:
+                  type: object
+                  additionalProperties:
+                    $ref: ../components/schemas/RecordObject.yaml
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Retrieves details of 1 record from an App by specifying the App ID and Record ID.
+  post:
+    operationId: postRecordForGuestSpace
+    summary: Post record (guest space)
+    tags:
+      - RECORDS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_record:write
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              app:
+                format: int64
+                type: integer
+                description: The App ID.
+              record:
+                type: object
+                additionalProperties:
+                  $ref: ../components/schemas/RecordWritableObject.yaml
+                description: |-
+                  Field codes and values are specified in this object.
+                  The values that can be specified vary depending on the type of field.
+                  If ignored, the record will be added with default field values.
+                  If field codes that don't exist are specified, these will be ignored.
+                  For more information on field types, refer to the following article:
+                  [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)
+            required:
+              - app
+              - record
+            type: object
+    responses:
+      '200':
+        description: success case of record/post
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  format: int64
+                  type: integer
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Adds 1 record to an App.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+  put:
+    operationId: putRecordForGuestSpace
+    summary: Put record (guest space)
+    tags:
+      - RECORDS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_record:write
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              app:
+                format: int64
+                type: integer
+                description: The App ID.
+              updateKey:
+                $ref: ../components/schemas/RecordPutUpdateKey.yaml
+                description: The unique key of the record to be updated. Required, if _id_ will not be specified. To specify this field, the field must have the "Prohibit duplicate values" option turned on.
+              record:
+                type: object
+                additionalProperties:
+                  $ref: ../components/schemas/RecordWritableObject.yaml
+                description: |-
+                  Field codes and values are specified in this object. If ignored, the record will not be updated. For more information on field types, refer to the following article:
+                  [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)
+              id:
+                format: int64
+                type: integer
+                description: The Record ID of the record to be updated. Required, if _updateKey_ will not be specified.
+              revision:
+                format: int64
+                type: integer
+                description: The expected revision number. If the value does not match, an error will occur and the record will not be updated. If the value is not specified or is -1, the revision number will not be checked.
+            required:
+              - app
+            type: object
+    responses:
+      '200':
+        description: success case of record/put
+        content:
+          application/json:
+            schema:
+              properties:
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Updates details of 1 record in an App by specifying its record number, or a different unique key.
+    parameters:
+      - name: guestSpaceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).

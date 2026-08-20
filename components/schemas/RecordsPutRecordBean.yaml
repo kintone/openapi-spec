@@ -1,0 +1,7 @@
+properties:
+  id:
+    format: int64
+    type: integer
+  revision:
+    type: string
+type: object

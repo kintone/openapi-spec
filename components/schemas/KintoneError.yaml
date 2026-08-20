@@ -1,0 +1,16 @@
+type: object
+description: Common error response of the kintone REST API (shared body across all APIs).
+properties:
+  id:
+    type: string
+    description: Error ID. Provide this when contacting support.
+  code:
+    type: string
+    description: A code that represents the type of error (e.g. CB_IJ01, GAIA_IL26).
+  message:
+    type: string
+    description: Error message. The output language depends on the display-language setting of the user who executed the API.
+required:
+  - id
+  - code
+  - message

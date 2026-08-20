@@ -1,0 +1,65 @@
+/k/v1/space/thread/comment.json:
+  post:
+    operationId: postSpaceThreadComment
+    summary: Post space thread comment
+    tags:
+      - SPACES
+    security:
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              comment:
+                properties:
+                  mentions:
+                    items:
+                      $ref: ../components/schemas/SpaceThreadCommentPostMentionForm.yaml
+                    type: array
+                    description: An array including mentions, that notify other Kintone users.
+                  files:
+                    items:
+                      $ref: ../components/schemas/SpaceThreadCommentPostFileForm.yaml
+                    type: array
+                    description: |-
+                      An array including data of attachment files.
+                      The maximum number of the files is 5.
+                      Required, if comment.text is not set.
+                  text:
+                    maxLength: 65535
+                    type: string
+                    description: |-
+                      The comment contents.
+                      A line break can be specified by LF.
+                      The maximum characters of the comment is 65535. Required, if comment.files is not set.
+                type: object
+                description: An object including comment details.
+              thread:
+                format: int64
+                type: integer
+                description: The Thread ID.
+              space:
+                format: int64
+                type: integer
+                description: The Space ID.
+            required:
+              - comment
+              - thread
+              - space
+            type: object
+    responses:
+      '200':
+        description: success case of space/thread/comment/post
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  format: int64
+                  type: integer
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Adds a comment to a Thread of a Space.

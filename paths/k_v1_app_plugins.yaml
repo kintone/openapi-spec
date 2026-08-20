@@ -1,0 +1,50 @@
+/k/v1/app/plugins.json:
+  get:
+    operationId: getAppPlugins
+    summary: Get app plugins
+    tags:
+      - APPS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+    parameters:
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID.
+      - name: lang
+        in: query
+        schema:
+          enum:
+            - JA
+            - EN
+            - ZH
+            - ES
+          type: string
+        description: |-
+          The localized language to retrieve the data in:
+          - `en`: retrieves the localized English names
+          - `zh`: retrieves the localized Chinese names
+          - `ja`: retrieves the localized Japanese names
+          - `es`: retrieves the localized Spanish names
+          If ignored, the default names will be retrieved.
+    responses:
+      '200':
+        description: success case of app/plugins/get
+        content:
+          application/json:
+            schema:
+              properties:
+                plugins:
+                  items:
+                    $ref: ../components/schemas/AppPluginsGetPluginForm.yaml
+                  type: array
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the list of Plug-ins added to an App.

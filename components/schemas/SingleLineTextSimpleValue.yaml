@@ -1,0 +1,14 @@
+properties:
+  type:
+    type: string
+    enum:
+      - SINGLE_LINE_TEXT
+  value:
+    type: string
+type: object
+required:
+  - type
+description: Text
+example:
+  type: SINGLE_LINE_TEXT
+  value: Hello Kintone

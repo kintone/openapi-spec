@@ -1,0 +1,71 @@
+/k/v1/app/customize.json:
+  get:
+    operationId: getAppCustomize
+    summary: Get app customize
+    tags:
+      - APPS
+    security:
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: app
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The app ID.
+    responses:
+      '200':
+        description: success case of app/customize/get
+        content:
+          application/json:
+            schema:
+              properties:
+                desktop:
+                  properties:
+                    css:
+                      items:
+                        anyOf:
+                          - $ref: ../components/schemas/AppCustomizeGetUrlContentForm.yaml
+                          - $ref: ../components/schemas/AppCustomizeGetFileContentForm.yaml
+                        type: object
+                      type: array
+                    js:
+                      items:
+                        anyOf:
+                          - $ref: ../components/schemas/AppCustomizeGetUrlContentForm.yaml
+                          - $ref: ../components/schemas/AppCustomizeGetFileContentForm.yaml
+                        type: object
+                      type: array
+                  type: object
+                scope:
+                  enum:
+                    - ALL
+                    - ADMIN
+                    - NONE
+                  type: string
+                mobile:
+                  properties:
+                    css:
+                      items:
+                        anyOf:
+                          - $ref: ../components/schemas/AppCustomizeGetUrlContentForm.yaml
+                          - $ref: ../components/schemas/AppCustomizeGetFileContentForm.yaml
+                        type: object
+                      type: array
+                    js:
+                      items:
+                        anyOf:
+                          - $ref: ../components/schemas/AppCustomizeGetUrlContentForm.yaml
+                          - $ref: ../components/schemas/AppCustomizeGetFileContentForm.yaml
+                        type: object
+                      type: array
+                  type: object
+                revision:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets the JavaScript and CSS Customization settings of an App.

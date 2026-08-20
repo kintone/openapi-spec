@@ -1,0 +1,21 @@
+properties:
+  type:
+    type: string
+    enum:
+      - USER_SELECT
+  value:
+    items:
+      $ref: ./UserEntitySimpleValue.yaml
+    type: array
+required:
+  - value
+  - type
+type: object
+description: User selection
+example:
+  type: USER_SELECT
+  value:
+    - code: john-d
+      name: John Doe
+    - code: jane-r
+      name: Jane Roe

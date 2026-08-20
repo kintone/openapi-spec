@@ -1,0 +1,105 @@
+/k/v1/record/comment.json:
+  delete:
+    operationId: deleteRecordComment
+    summary: Delete record comment
+    tags:
+      - RECORDS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_record:write
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              app:
+                format: int64
+                type: integer
+                description: The App ID.
+              record:
+                format: int64
+                type: integer
+                description: The Record ID.
+              comment:
+                format: int64
+                type: integer
+                description: The Comment ID.
+            required:
+              - app
+              - record
+              - comment
+            type: object
+    responses:
+      '200':
+        description: success case of record/comment/delete
+        content:
+          application/json:
+            schema:
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Delete a comment in a record in an app.
+  post:
+    operationId: postRecordComment
+    summary: Post record comment
+    tags:
+      - RECORDS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_record:write
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              app:
+                format: int64
+                type: integer
+                description: The App ID.
+              record:
+                format: int64
+                type: integer
+                description: The Record ID.
+              comment:
+                properties:
+                  mentions:
+                    items:
+                      $ref: ../components/schemas/RecordCommentPostMentionForm.yaml
+                    type: array
+                    description: An array including information to mention other users.
+                  text:
+                    maxLength: 65535
+                    minLength: 1
+                    type: string
+                    description: |-
+                      The comment text.
+                      The maximum length is 65,535 characters.
+                required:
+                  - text
+                type: object
+                description: An object including comment details.
+            required:
+              - app
+              - record
+              - comment
+            type: object
+    responses:
+      '200':
+        description: success case of record/comment/post
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  format: int64
+                  type: integer
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Add a comment to a record in an App.

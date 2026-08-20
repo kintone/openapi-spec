@@ -1,0 +1,53 @@
+properties:
+  name:
+    maxLength: 64
+    minLength: 1
+    type: string
+    description: |-
+      The Action name.
+      The maximum length is 64 characters.
+      Required, if setting the `actions` parameter.
+  executableUser:
+    properties:
+      entities:
+        items:
+          $ref: ./PreviewAppStatusPutExecutableUserEntityForm.yaml
+        type: array
+    required:
+      - entities
+    type: object
+  from:
+    maxLength: 64
+    minLength: 1
+    type: string
+    description: |-
+      The Status name before taking action.
+      If a Status name that you want to specify has been changed, place the changed value for this parameter.
+      Required, if setting the `actions` parameter.
+  to:
+    maxLength: 64
+    minLength: 1
+    type: string
+    description: |-
+      The Status name after taking action.
+      If a Status name that you want to specify has been changed, place the changed value for this parameter.
+      Required, if setting the `actions` parameter.
+  filterCond:
+    type: string
+    description: |-
+      The branch criteria of the action, specified as a query.
+      For more information on query formats refer to the following document:
+      [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)
+      There are restrictions on the conditions that can be specified:
+      [Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)
+      [Additional Restrictions for Each API](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#additional-restrictions-for-each-api)
+  type:
+    enum:
+      - PRIMARY
+      - SECONDARY
+    type: string
+required:
+  - name
+  - from
+  - to
+type: object

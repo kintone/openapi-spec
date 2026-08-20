@@ -1,0 +1,30 @@
+properties:
+  period:
+    anyOf:
+      - $ref: ./PreviewAppReportsPutPeriodYear.yaml
+      - $ref: ./PreviewAppReportsPutPeriodQuarter.yaml
+      - $ref: ./PreviewAppReportsPutPeriodMonth.yaml
+      - $ref: ./PreviewAppReportsPutPeriodWeek.yaml
+      - $ref: ./PreviewAppReportsPutPeriodDay.yaml
+      - $ref: ./PreviewAppReportsPutPeriodHour.yaml
+    type: object
+    description: |-
+      An object containing the "Period" options.
+      When updating the Periodic Report, either ignore this parameter or keep the parameters the same. Otherwise, an error will be returned.
+      Required when adding a new graph.
+  active:
+    type: boolean
+    description: |-
+      The activation status of the "Periodic Reports" option.
+      - `true`: Active
+      - `false`: Inactive
+      If this parameter is ignored when creating a new Periodic Report, this value is set to true.
+      If this parameter is ignored when updating an existing Periodic Report, this value is not updated.
+type: object
+description: |-
+  An object containing the "Periodic Reports" options.
+  If the "Periodic Reports" option is active, no graph settings can be updated except for the following:
+  - **reports.{graphname}.name**
+  - **reports.{graphname}.index**
+  - **reports.{graphname}.periodicReport.active**
+  If this parameter is ignored, no changes will be made to the "Periodic Reports" options.

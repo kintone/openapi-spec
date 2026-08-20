@@ -1,0 +1,33 @@
+properties:
+  threadId:
+    type: string
+    nullable: true
+  createdAt:
+    format: date-time
+    type: string
+  creator:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+    type: object
+  code:
+    type: string
+  modifiedAt:
+    format: date-time
+    type: string
+  appId:
+    type: string
+  modifier:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+    type: object
+  name:
+    type: string
+  description:
+    type: string
+type: object

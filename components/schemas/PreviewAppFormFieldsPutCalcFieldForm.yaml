@@ -1,0 +1,136 @@
+properties:
+  noLabel:
+    type: boolean
+    description: |-
+      The **Hide field name** option.
+      - `true`: The field's name will be hidden.
+      - `false`: The field's name will be displayed.
+  unit:
+    maxLength: 128
+    type: string
+    description: The Currency settings of the field.
+  expression:
+    type: string
+    description: The formula expression used in the field.
+  code:
+    maxLength: 128
+    minLength: 1
+    type: string
+    description: |-
+      The field code of the field.
+      Field codes have the following limitations:
+      - The maximum character limit is 128.
+      - Duplicate field codes cannot exist.
+      - `_` is the only symbol that can be used.
+      - Numbers cannot be used to start a field code.
+  format:
+    enum:
+      - NUMBER
+      - NUMBER_DIGIT
+      - DATETIME
+      - DATE
+      - TIME
+      - HOUR_MINUTE
+      - DAY_HOUR_MINUTE
+    type: string
+    description: |-
+      The display format for fields with calculations:
+      - `NUMBER`: Number (1000)
+      - `NUMBER_DIGIT`: Number with thousands separator (1,000)
+      - `DATETIME`: Date & time (Aug 06, 2012 2:03 PM)
+      - `DATE`: Date (Aug 06, 2012)
+      - `TIME`: Time (2:03 PM)
+      - `HOUR_MINUTE`: Hours & minutes (29 hours 47 minutes)
+      - `DAY_HOUR_MINUTE`: Days & hours & minutes (1 day 5 hours 47 minutes)
+  unitPosition:
+    enum:
+      - BEFORE
+      - AFTER
+    type: string
+    description: |-
+      The display position of the Currency.
+      - `BEFORE`: The currency will be displayed before the field value.
+      - `AFTER`: The currency will be displayed after the field value.
+  label:
+    maxLength: 128
+    minLength: 1
+    type: string
+    description: The field name.
+  type:
+    enum:
+      - CALC
+      - CATEGORY
+      - CHECK_BOX
+      - CREATED_TIME
+      - CREATOR
+      - DATE
+      - DATETIME
+      - DROP_DOWN
+      - FILE
+      - GROUP
+      - GROUP_SELECT
+      - LINK
+      - MODIFIER
+      - MULTI_LINE_TEXT
+      - MULTI_SELECT
+      - NUMBER
+      - ORGANIZATION_SELECT
+      - RADIO_BUTTON
+      - RECORD_NUMBER
+      - REFERENCE_TABLE
+      - RICH_TEXT
+      - SINGLE_LINE_TEXT
+      - STATUS
+      - STATUS_ASSIGNEE
+      - SUBTABLE
+      - TIME
+      - UPDATED_TIME
+      - USER_SELECT
+    type: string
+    description: |-
+      The field type.
+      - `GROUP`: Group
+      - `GROUP_SELECT`: Group selection
+      - `CALC`: Calculated
+      - `CHECK_BOX`: Check box
+      - `CREATED_TIME`: Created datetime
+      - `CREATOR`: Created by
+      - `DATE`: Date
+      - `DATETIME`: Date and time
+      - `DROP_DOWN`: Drop-down
+      - `FILE`: Attachment
+      - `LINK`: Link
+      - `MODIFIER`: Updated by
+      - `MULTI_LINE_TEXT`: Text Area
+      - `MULTI_SELECT`: Multi-choice
+      - `NUMBER`: Number
+      - `ORGANIZATION_SELECT`: Department selection
+      - `RADIO_BUTTON`: Radio button
+      - `RECORD_NUMBER`: Record number
+      - `REFERENCE_TABLE`: Related Records
+      - `RICH_TEXT`: Rich text
+      - `SINGLE_LINE_TEXT`: Text
+      - `SUBTABLE`: Table
+      - `TIME`: Time
+      - `UPDATED_TIME`: Updated datetime
+      - `USER_SELECT`: User selection
+      For Lookup fields, specify depending on the Key field type it's looking up.
+  displayScale:
+    format: int64
+    type: integer
+    description: The number of decimal places to display for the field.
+  hideExpression:
+    type: boolean
+    description: |-
+      The **Hide formula** settings for the field.
+      - `true`: The formula will be hidden.
+      - `false`: The formula will be displayed.
+  required:
+    type: boolean
+    description: |-
+      The **Required field** option.
+      - `true`: The field will be a required field.
+      - `false`: The field will not be a required field.
+required:
+  - type
+type: object

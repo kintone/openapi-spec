@@ -1,0 +1,12 @@
+properties:
+  id:
+    format: int64
+    type: integer
+  operation:
+    enum:
+      - INSERT
+      - UPDATE
+    type: string
+  revision:
+    type: string
+type: object

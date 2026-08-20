@@ -1,0 +1,35 @@
+/k/v1/record/async/token.json:
+  post:
+    operationId: postRecordAsyncToken
+    summary: Post record async token
+    tags:
+      - RECORDS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              app:
+                type: string
+            required:
+              - app
+            type: object
+    responses:
+      '200':
+        description: success case of record/async/token/post
+        content:
+          application/json:
+            schema:
+              properties:
+                expiresIn:
+                  format: int64
+                  type: integer
+                token:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml

@@ -1,0 +1,64 @@
+/k/v1/app.json:
+  get:
+    operationId: getApp
+    summary: Get app
+    tags:
+      - APPS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:read
+    parameters:
+      - name: id
+        in: query
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: The App ID.
+    responses:
+      '200':
+        description: success case of app/get
+        content:
+          application/json:
+            schema:
+              properties:
+                threadId:
+                  type: string
+                  nullable: true
+                spaceId:
+                  type: string
+                  nullable: true
+                createdAt:
+                  format: date-time
+                  type: string
+                creator:
+                  properties:
+                    code:
+                      type: string
+                    name:
+                      type: string
+                  type: object
+                code:
+                  type: string
+                modifiedAt:
+                  format: date-time
+                  type: string
+                appId:
+                  type: string
+                modifier:
+                  properties:
+                    code:
+                      type: string
+                    name:
+                      type: string
+                  type: object
+                name:
+                  type: string
+                description:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml
+    description: Gets general information of an App, including the name, description, related Space, creator and updater information.

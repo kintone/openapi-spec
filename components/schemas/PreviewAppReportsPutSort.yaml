@@ -1,0 +1,29 @@
+properties:
+  by:
+    enum:
+      - TOTAL
+      - GROUP1
+      - GROUP2
+      - GROUP3
+    type: string
+    description: |-
+      How the graph is sorted.
+      - **TOTAL**: Total
+      - **GROUP1**: Level 1
+      - **GROUP2**: Level 2
+      - **GROUP3**: Level 3
+      Required when specifying the **reports.{graphname}.sorts** parameter.
+  order:
+    enum:
+      - ASC
+      - DESC
+    type: string
+    description: |-
+      The order of sorting.
+      - **ASC**: Ascending order
+      - **DESC**: Descending order
+      Required when specifying the **reports.{graphname}.sorts** parameter.
+required:
+  - by
+  - order
+type: object

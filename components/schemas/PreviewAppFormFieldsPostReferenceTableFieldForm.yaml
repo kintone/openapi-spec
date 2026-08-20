@@ -1,0 +1,161 @@
+properties:
+  noLabel:
+    type: boolean
+    description: |-
+      The **Hide field name** option.
+      - `true`: The field's name will be hidden.
+      - `false`: The field's name will be displayed.
+      If ignored, `false` will be set.
+  code:
+    maxLength: 128
+    minLength: 1
+    type: string
+    description: |-
+      The field code of the field.
+      Field codes have the following limitations:
+      - The maximum character limit is 128
+      - Duplicate field codes cannot exist
+      - _ is the only symbol that can be used
+      - Numbers cannot be used to start a field code
+  label:
+    maxLength: 128
+    minLength: 1
+    type: string
+    description: The field name.
+  type:
+    enum:
+      - CALC
+      - CATEGORY
+      - CHECK_BOX
+      - CREATED_TIME
+      - CREATOR
+      - DATE
+      - DATETIME
+      - DROP_DOWN
+      - FILE
+      - GROUP
+      - GROUP_SELECT
+      - LINK
+      - MODIFIER
+      - MULTI_LINE_TEXT
+      - MULTI_SELECT
+      - NUMBER
+      - ORGANIZATION_SELECT
+      - RADIO_BUTTON
+      - RECORD_NUMBER
+      - REFERENCE_TABLE
+      - RICH_TEXT
+      - SINGLE_LINE_TEXT
+      - STATUS
+      - STATUS_ASSIGNEE
+      - SUBTABLE
+      - TIME
+      - UPDATED_TIME
+      - USER_SELECT
+    type: string
+    description: |-
+      The field type.
+      - `GROUP`: Group
+      - `GROUP_SELECT`: Group selection
+      - `CALC`: Calculated
+      - `CHECK_BOX`: Check box
+      - `DATE`: Date
+      - `DATETIME`: Date and time
+      - `DROP_DOWN`: Drop-down
+      - `FILE`: Attachment
+      - `LINK`: Link
+      - `MULTI_LINE_TEXT`: Text Area
+      - `MULTI_SELECT`: Multi-choice
+      - `NUMBER`: Number
+      - `ORGANIZATION_SELECT`: Department selection
+      - `RADIO_BUTTON`: Radio button
+      - `RECORD_NUMBER`: Record number
+      - `REFERENCE_TABLE`: Related Records
+      - `RICH_TEXT`: Rich text
+      - `SINGLE_LINE_TEXT`: Text
+      - `SUBTABLE`: Table
+      - `TIME`: Time
+      - `USER_SELECT`: User selection
+      For Lookup fields, specify depending on the Key field type it's looking up.
+  referenceTable:
+    properties:
+      condition:
+        properties:
+          relatedField:
+            type: string
+            description: |-
+              The field code of the field selected for **Field in datasource app**.
+              Required if setting the `referenceTable` parameter.
+          field:
+            type: string
+            description: |-
+              The field code of the field selected for **Field in this app**.
+              Required if setting the `referenceTable` parameter.
+        type: object
+        description: |-
+          An object containing data of the **Fetch Criteria** setting.
+          Required if setting the `referenceTable` parameter.
+      size:
+        format: int64
+        type: integer
+        description: |-
+          The **Max Records to Display at a Time** setting.
+          Specify one of the following:
+          - `1`
+          - `3`
+          - `5`
+          - `10`
+          - `20`
+          - `30`
+          - `40`
+          - `50`
+          If ignored, `5` will be set.
+      relatedApp:
+        properties:
+          app:
+            format: int64
+            type: integer
+            description: |-
+              The App ID of the **Datasource App**.
+              If the `relatedApp` parameter is specified, either this parameter or `properties.{fieldcode}.referenceTable.relatedApp.code` will be required.
+              If both parameters are set, `properties.{fieldcode}.referenceTable.relatedApp.code` will take priority.
+          code:
+            type: string
+            description: |-
+              The App Code of the **Datasource App**.
+              If the `relatedApp` parameter is specified, either this parameter or `properties.{fieldcode}.referenceTable.relatedApp.app` will be required.
+              If both parameters are set, `properties.{fieldcode}.referenceTable.relatedApp.code` will take priority.
+        type: object
+        description: |-
+          An object containing data of the **Datasource App** setting.
+          If this parameter is specified, all settings for this Related Records field except for the **Datasource App** setting will return to the default settings.
+          Required if setting the `referenceTable` parameter.
+      sort:
+        type: string
+        description: |-
+          The **Display Order** setting, in a query format.
+          For more data on query formats refer to the following document:
+          [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)
+      filterCond:
+        type: string
+        description: |-
+          The **Filter** setting, in a query format.
+          For more data on query formats refer to the following document:
+          [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)
+          There are restrictions on the conditions that can be specified:
+          [Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)
+          [Additional Restrictions for Each API](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#additional-restrictions-for-each-api)
+      displayFields:
+        items:
+          type: string
+        type: array
+        description: |-
+          A list of field codes of fields specified in the **Datasource App Fields to Display** setting.
+          Required if setting the `referenceTable` parameter.
+    type: object
+    description: |-
+      An object containing the settings of the Related Records field.
+      Required when adding a Related Records field.
+required:
+  - type
+type: object

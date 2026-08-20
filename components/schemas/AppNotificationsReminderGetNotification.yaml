@@ -1,0 +1,16 @@
+properties:
+  timing:
+    anyOf:
+      - $ref: ./AppNotificationsReminderGetTimingRelative.yaml
+      - $ref: ./AppNotificationsReminderGetTimingAbsolute.yaml
+    type: object
+  filterCond:
+    format: query
+    type: string
+  title:
+    type: string
+  targets:
+    items:
+      $ref: ./AppNotificationsReminderGetTarget.yaml
+    type: array
+type: object

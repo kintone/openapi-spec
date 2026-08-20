@@ -1,0 +1,10 @@
+properties:
+  records:
+    oneOf:
+      - type: array
+        items:
+          $ref: ./BulkRequestPostRecordBean.yaml
+      - type: array
+        items:
+          $ref: ./BulkRequestPostUpsertRecordBean.yaml
+type: object
