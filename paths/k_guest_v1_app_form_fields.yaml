@@ -84,6 +84,9 @@
                 revision:
                   type: string
               type: object
+              required:
+                - properties
+                - revision
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Gets the list of fields and field settings of an App.

@@ -67,8 +67,7 @@
             schema:
               properties:
                 id:
-                  format: int64
-                  type: integer
+                  type: string
               type: object
       4XX:
         $ref: ../components/responses/Error.yaml

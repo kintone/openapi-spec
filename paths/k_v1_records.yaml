@@ -188,6 +188,8 @@
                   type: string
                   nullable: true
               type: object
+              required:
+                - records
       4XX:
         $ref: ../components/responses/Error.yaml
     x-kintone-method-override: true
@@ -238,15 +240,16 @@
               properties:
                 ids:
                   items:
-                    format: int64
-                    type: integer
+                    type: string
                   type: array
                 revisions:
                   items:
-                    format: int64
-                    type: integer
+                    type: string
                   type: array
               type: object
+              required:
+                - ids
+                - revisions
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Adds multiple records to an App.
@@ -298,6 +301,8 @@
                       items:
                         $ref: ../components/schemas/RecordsPutUpsertRecordBean.yaml
               type: object
+              required:
+                - records
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Updates details of multiple records in an App, by specifying their record numbers, or their unique keys.

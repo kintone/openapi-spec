@@ -42,6 +42,8 @@
                 revision:
                   type: string
               type: object
+              required:
+                - layout
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Gets the field layout info of a form in an App.

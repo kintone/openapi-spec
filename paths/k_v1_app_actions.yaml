@@ -49,6 +49,8 @@
                 revision:
                   type: string
               type: object
+              required:
+                - actions
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Gets the Action settings of the App.

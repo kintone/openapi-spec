@@ -59,6 +59,8 @@
                 fileKey:
                   type: string
               type: object
+              required:
+                - fileKey
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Uploads a file to Kintone.

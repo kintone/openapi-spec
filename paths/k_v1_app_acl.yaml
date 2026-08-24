@@ -31,6 +31,8 @@
                 revision:
                   type: string
               type: object
+              required:
+                - rights
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Gets the App permissions of an App.

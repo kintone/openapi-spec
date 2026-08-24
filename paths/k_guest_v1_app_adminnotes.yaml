@@ -35,6 +35,8 @@
                 revision:
                   type: string
               type: object
+              required:
+                - content
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Gets notes for app administrator and their settings.
