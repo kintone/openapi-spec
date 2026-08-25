@@ -17,7 +17,6 @@
                 type: integer
                 description: The Space ID.
               body:
-                maxLength: 65535
                 type: string
                 description: |-
                   The contents of the body as an HTML string.

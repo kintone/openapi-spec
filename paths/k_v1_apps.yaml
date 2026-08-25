@@ -84,6 +84,8 @@
                     $ref: ../components/schemas/AppsGetAppWithSpaceIdForm.yaml
                   type: array
               type: object
+              required:
+                - apps
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Gets general information of multiple Apps, including the name, description, related Space, creator and updater information.

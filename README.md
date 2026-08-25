@@ -64,4 +64,6 @@ the day this description last moved. The commit history is the record of what ch
 
 ## License
 
-MIT. See [`LICENSE`](LICENSE).
+MIT No Attribution (`MIT-0`). See [`LICENSE`](LICENSE). It is the MIT license without the
+attribution clause, so you can copy, modify, and redistribute this description — in your own
+repository, in a generated client, or in fragments — without carrying the copyright notice along.

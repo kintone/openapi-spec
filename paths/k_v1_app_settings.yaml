@@ -86,6 +86,20 @@
                 firstMonthOfFiscalYear:
                   type: string
               type: object
+              required:
+                - description
+                - enableBulkDeletion
+                - enableComments
+                - enableDuplicateRecord
+                - enableInlineRecordEditing
+                - enableThumbnails
+                - firstMonthOfFiscalYear
+                - icon
+                - name
+                - numberPrecision
+                - revision
+                - theme
+                - titleField
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Gets the description, name, icon, revision and color theme of an App.

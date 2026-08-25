@@ -40,8 +40,7 @@
             schema:
               properties:
                 app:
-                  format: int64
-                  type: integer
+                  type: string
                 revision:
                   type: string
               type: object

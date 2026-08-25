@@ -60,6 +60,9 @@
                       $ref: ../components/schemas/RecordObject.yaml
                   type: array
               type: object
+              required:
+                - next
+                - records
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Retrieves multiple records from an App by specifying the cursor ID.
@@ -124,6 +127,9 @@
                   type: string
                   nullable: true
               type: object
+              required:
+                - id
+                - totalCount
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Adds a cursor so that large amount of records can be obtained from an App.

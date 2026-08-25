@@ -42,6 +42,8 @@
                     type: object
                   type: array
               type: object
+              required:
+                - results
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Runs multiple API requests sequentially to multiple Apps.

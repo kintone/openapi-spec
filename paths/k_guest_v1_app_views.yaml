@@ -61,6 +61,8 @@
                 revision:
                   type: string
               type: object
+              required:
+                - views
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Gets the View settings of an App.

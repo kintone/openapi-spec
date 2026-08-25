@@ -82,6 +82,8 @@
                 revision:
                   type: string
               type: object
+              required:
+                - revision
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Updates the Field permission settings of an App.

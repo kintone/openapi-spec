@@ -123,6 +123,8 @@
                 revision:
                   type: string
               type: object
+              required:
+                - revision
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Updates the View settings of an App.

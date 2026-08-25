@@ -47,6 +47,8 @@
                 revision:
                   type: string
               type: object
+              required:
+                - revision
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Deletes fields from a form of an App.
@@ -225,6 +227,8 @@
                 revision:
                   type: string
               type: object
+              required:
+                - revision
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Adds fields to a form of an App.
@@ -313,6 +317,8 @@
                 revision:
                   type: string
               type: object
+              required:
+                - revision
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Updates the field settings of fields in a form of an App.

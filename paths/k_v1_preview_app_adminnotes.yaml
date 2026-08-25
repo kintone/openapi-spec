@@ -83,6 +83,8 @@
                 revision:
                   type: string
               type: object
+              required:
+                - revision
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Update the notes for App administrators and their settings.

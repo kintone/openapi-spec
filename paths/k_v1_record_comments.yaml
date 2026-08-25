@@ -66,6 +66,10 @@
                 older:
                   type: boolean
               type: object
+              required:
+                - comments
+                - newer
+                - older
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Retrieves multiple comments from a record in an app.

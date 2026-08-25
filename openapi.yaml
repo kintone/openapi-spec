@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: kintone REST API
-  version: 2026.8.21
+  version: 2026.8.25
   description: |-
     OpenAPI specification for the kintone REST API.
 
@@ -15,13 +15,13 @@ info:
     - **When a GET query is long**, you can avoid URL-length limits by sending `POST` with the `X-HTTP-Method-Override: GET` header and putting parameters in the body (the server processes it as GET). Such GET operations are marked with `x-kintone-method-override: true`. No duplicate operation is defined; the GET definition is authoritative.
     - **Authentication differs per endpoint.** Which methods (API token / password / OAuth2) each API accepts is taken directly from the "Authentication" row of the official documentation pages (cybozu.dev) via harvest and reflected in `security`. Management APIs that do not support tokens (space/guest administration, app move, plugins, statistics, etc.) end up as password authentication only. Only the OAuth2 scope each operation needs is a best-effort estimate derived from the path family, because no machine-readable scope mapping is published.
 
-    Copyright (c) 2026 Cybozu, Inc. Licensed under the MIT License.
+    Copyright (c) 2026 Cybozu, Inc. Licensed under MIT No Attribution (SPDX: MIT-0), which does not require attribution.
   contact:
     name: Kintone Developer Program
     url: https://kintone.dev/en/
   license:
-    name: MIT License
-    url: https://opensource.org/license/mit
+    name: MIT No Attribution
+    url: https://opensource.org/license/MIT-0
 x-kintone-additional-auth:
   description: Authentication-related notes that OpenAPI `security` cannot express. Basic auth and secure access are additional gates layered on top of each security method; session auth is out of scope for this spec (intended for in-browser customizations).
   basic:
@@ -115,6 +115,17 @@ paths:
                   description:
                     type: string
                 type: object
+                required:
+                  - appId
+                  - code
+                  - createdAt
+                  - creator
+                  - description
+                  - modifiedAt
+                  - modifier
+                  - name
+                  - spaceId
+                  - threadId
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets general information of an App, including the name, description, related Space, creator and updater information.
@@ -158,6 +169,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - rights
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the App permissions of an App.
@@ -278,6 +291,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - actions
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the Action settings of the App.
@@ -318,6 +333,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - content
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets notes for app administrator and their settings.
@@ -396,6 +413,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the JavaScript and CSS Customization settings of an App.
@@ -485,6 +504,9 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - properties
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the list of fields and field settings of an App.
@@ -532,6 +554,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - layout
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the field layout info of a form in an App.
@@ -622,6 +646,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - notifications
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the General Notification settings of the App.
@@ -685,6 +711,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - notifications
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the Per Record Notification settings of the App.
@@ -751,6 +779,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - notifications
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the Reminder Notification settings of the App.
@@ -872,6 +902,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - reports
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the Graph settings of the App.
@@ -970,6 +1002,20 @@ paths:
                   firstMonthOfFiscalYear:
                     type: string
                 type: object
+                required:
+                  - description
+                  - enableBulkDeletion
+                  - enableComments
+                  - enableDuplicateRecord
+                  - enableInlineRecordEditing
+                  - enableThumbnails
+                  - firstMonthOfFiscalYear
+                  - icon
+                  - name
+                  - numberPrecision
+                  - revision
+                  - theme
+                  - titleField
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the description, name, icon, revision and color theme of an App.
@@ -1103,6 +1149,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - views
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the View settings of an App.
@@ -1199,6 +1247,8 @@ paths:
                       $ref: '#/components/schemas/AppsGetAppWithSpaceIdForm'
                     type: array
                 type: object
+                required:
+                  - apps
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets general information of multiple Apps, including the name, description, related Space, creator and updater information.
@@ -1284,6 +1334,8 @@ paths:
                       type: object
                     type: array
                 type: object
+                required:
+                  - results
         4XX:
           $ref: '#/components/responses/Error'
       description: Runs multiple API requests sequentially to multiple Apps.
@@ -1335,6 +1387,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - rights
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the Field permission settings of an App.
@@ -1465,6 +1519,8 @@ paths:
                   fileKey:
                     type: string
                 type: object
+                required:
+                  - fileKey
         4XX:
           $ref: '#/components/responses/Error'
       description: Uploads a file to Kintone.
@@ -1947,8 +2003,7 @@ paths:
               schema:
                 properties:
                   app:
-                    format: int64
-                    type: integer
+                    type: string
                   revision:
                     type: string
                 type: object
@@ -2054,6 +2109,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the App permissions of an App.
@@ -2179,6 +2236,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the Action settings of the App.
@@ -2282,6 +2341,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Update the notes for App administrators and their settings.
@@ -2461,6 +2522,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the JavaScript and CSS Customization settings of an App.
@@ -2514,6 +2577,8 @@ paths:
                       $ref: '#/components/schemas/PreviewAppDeployGetAppForm'
                     type: array
                 type: object
+                required:
+                  - apps
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the deployment status of the App settings for multiple Apps.
@@ -2613,6 +2678,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Deletes fields from a form of an App.
@@ -2791,6 +2858,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Adds fields to a form of an App.
@@ -2879,6 +2948,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the field settings of fields in a form of an App.
@@ -2987,6 +3058,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the field layout info of a form in an App.
@@ -3098,6 +3171,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the General Notification settings of the App.
@@ -3221,6 +3296,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the Per Record Notification settings of the App.
@@ -3352,6 +3429,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the Reminder Notification settings of the App.
@@ -3599,6 +3678,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the Graph settings of the App.
@@ -3814,6 +3895,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the description, name, icon, revision and color theme of an App.
@@ -4094,6 +4177,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the View settings of an App.
@@ -4196,6 +4281,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the Field permission settings of an App.
@@ -4380,6 +4467,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the Record permission settings of an App.
@@ -4436,6 +4525,8 @@ paths:
                     additionalProperties:
                       $ref: '#/components/schemas/RecordObject'
                 type: object
+                required:
+                  - record
         4XX:
           $ref: '#/components/responses/Error'
       description: Retrieves details of 1 record from an App by specifying the App ID and Record ID.
@@ -4482,11 +4573,13 @@ paths:
               schema:
                 properties:
                   id:
-                    format: int64
-                    type: integer
+                    type: string
                   revision:
                     type: string
                 type: object
+                required:
+                  - id
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Adds 1 record to an App.
@@ -4550,6 +4643,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates details of 1 record in an App by specifying its record number, or a different unique key.
@@ -4619,6 +4714,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - rights
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the Record permission settings of an App.
@@ -4848,9 +4945,10 @@ paths:
               schema:
                 properties:
                   id:
-                    format: int64
-                    type: integer
+                    type: string
                 type: object
+                required:
+                  - id
         4XX:
           $ref: '#/components/responses/Error'
       description: Add a comment to a record in an App.
@@ -4937,6 +5035,10 @@ paths:
                   older:
                     type: boolean
                 type: object
+                required:
+                  - comments
+                  - newer
+                  - older
         4XX:
           $ref: '#/components/responses/Error'
       description: Retrieves multiple comments from a record in an app.
@@ -5216,6 +5318,8 @@ paths:
                     type: string
                     nullable: true
                 type: object
+                required:
+                  - records
         4XX:
           $ref: '#/components/responses/Error'
       x-kintone-method-override: true
@@ -5266,15 +5370,16 @@ paths:
                 properties:
                   ids:
                     items:
-                      format: int64
-                      type: integer
+                      type: string
                     type: array
                   revisions:
                     items:
-                      format: int64
-                      type: integer
+                      type: string
                     type: array
                 type: object
+                required:
+                  - ids
+                  - revisions
         4XX:
           $ref: '#/components/responses/Error'
       description: Adds multiple records to an App.
@@ -5334,6 +5439,8 @@ paths:
                         items:
                           $ref: '#/components/schemas/RecordsPutUpsertRecordBean'
                 type: object
+                required:
+                  - records
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates details of multiple records in an App, by specifying their record numbers, or their unique keys.
@@ -5471,6 +5578,9 @@ paths:
                         $ref: '#/components/schemas/RecordObject'
                     type: array
                 type: object
+                required:
+                  - next
+                  - records
         4XX:
           $ref: '#/components/responses/Error'
       description: Retrieves multiple records from an App by specifying the cursor ID.
@@ -5535,6 +5645,9 @@ paths:
                     type: string
                     nullable: true
                 type: object
+                required:
+                  - id
+                  - totalCount
         4XX:
           $ref: '#/components/responses/Error'
       description: Adds a cursor so that large amount of records can be obtained from an App.
@@ -5691,8 +5804,7 @@ paths:
                         type: string
                     type: object
                   memberCount:
-                    format: int64
-                    type: integer
+                    type: string
                   attachedApps:
                     items:
                       $ref: '#/components/schemas/SpaceGetAttachedApp'
@@ -5729,15 +5841,13 @@ paths:
                   showRelatedLinkList:
                     type: boolean
                   id:
-                    format: int64
-                    type: integer
+                    type: string
                   showAnnouncement:
                     type: boolean
                   showThreadList:
                     type: boolean
                   defaultThread:
-                    format: int64
-                    type: integer
+                    type: string
                 type: object
         4XX:
           $ref: '#/components/responses/Error'
@@ -5865,7 +5975,6 @@ paths:
                   type: integer
                   description: The Space ID.
                 body:
-                  maxLength: 65535
                   type: string
                   description: |-
                     The contents of the body as an HTML string.
@@ -6062,8 +6171,7 @@ paths:
               schema:
                 properties:
                   id:
-                    format: int64
-                    type: integer
+                    type: string
                 type: object
         4XX:
           $ref: '#/components/responses/Error'
@@ -6106,7 +6214,6 @@ paths:
                     The Thread ID can be found in the URL of the Thread.
                     A Space with the URL of `https://{subdomain}.kintone.com/k/#/space/111/thread/222` has a Space ID of 111 and a Thread ID of 222.
                 body:
-                  maxLength: 65535
                   type: string
                   description: |-
                     The contents of the Thread body.
@@ -6166,7 +6273,6 @@ paths:
                         The maximum number of the files is 5.
                         Required, if comment.text is not set.
                     text:
-                      maxLength: 65535
                       type: string
                       description: |-
                         The comment contents.
@@ -6195,8 +6301,7 @@ paths:
               schema:
                 properties:
                   id:
-                    format: int64
-                    type: integer
+                    type: string
                 type: object
         4XX:
           $ref: '#/components/responses/Error'
@@ -6316,8 +6421,7 @@ paths:
               schema:
                 properties:
                   id:
-                    format: int64
-                    type: integer
+                    type: string
                 type: object
         4XX:
           $ref: '#/components/responses/Error'
@@ -6391,6 +6495,17 @@ paths:
                   description:
                     type: string
                 type: object
+                required:
+                  - appId
+                  - code
+                  - createdAt
+                  - creator
+                  - description
+                  - modifiedAt
+                  - modifier
+                  - name
+                  - spaceId
+                  - threadId
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets general information of an App, including the name, description, related Space, creator and updater information.
@@ -6427,6 +6542,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - rights
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the App permissions of an App.
@@ -6532,6 +6649,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - actions
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the Action settings of the App.
@@ -6565,6 +6684,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - content
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets notes for app administrator and their settings.
@@ -6636,6 +6757,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the JavaScript and CSS Customization settings of an App.
@@ -6718,6 +6841,9 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - properties
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the list of fields and field settings of an App.
@@ -6758,6 +6884,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - layout
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the field layout info of a form in an App.
@@ -6833,6 +6961,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - notifications
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the General Notification settings of the App.
@@ -6889,6 +7019,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - notifications
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the Per Record Notification settings of the App.
@@ -6948,6 +7080,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - notifications
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the Reminder Notification settings of the App.
@@ -7055,6 +7189,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - reports
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the Graph settings of the App.
@@ -7146,6 +7282,20 @@ paths:
                   firstMonthOfFiscalYear:
                     type: string
                 type: object
+                required:
+                  - description
+                  - enableBulkDeletion
+                  - enableComments
+                  - enableDuplicateRecord
+                  - enableInlineRecordEditing
+                  - enableThumbnails
+                  - firstMonthOfFiscalYear
+                  - icon
+                  - name
+                  - numberPrecision
+                  - revision
+                  - theme
+                  - titleField
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the description, name, icon, revision and color theme of an App.
@@ -7265,6 +7415,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - views
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the View settings of an App.
@@ -7354,6 +7506,8 @@ paths:
                       $ref: '#/components/schemas/AppsGetAppWithSpaceIdForm'
                     type: array
                 type: object
+                required:
+                  - apps
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets general information of multiple Apps, including the name, description, related Space, creator and updater information.
@@ -7432,6 +7586,8 @@ paths:
                       type: object
                     type: array
                 type: object
+                required:
+                  - results
         4XX:
           $ref: '#/components/responses/Error'
       description: Runs multiple API requests sequentially to multiple Apps.
@@ -7468,6 +7624,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - rights
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the Field permission settings of an App.
@@ -7583,6 +7741,8 @@ paths:
                   fileKey:
                     type: string
                 type: object
+                required:
+                  - fileKey
         4XX:
           $ref: '#/components/responses/Error'
       description: Uploads a file to Kintone.
@@ -7989,8 +8149,7 @@ paths:
               schema:
                 properties:
                   app:
-                    format: int64
-                    type: integer
+                    type: string
                   revision:
                     type: string
                 type: object
@@ -8081,6 +8240,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the App permissions of an App.
@@ -8191,6 +8352,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the Action settings of the App.
@@ -8279,6 +8442,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Update the notes for App administrators and their settings.
@@ -8443,6 +8608,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the JavaScript and CSS Customization settings of an App.
@@ -8481,6 +8648,8 @@ paths:
                       $ref: '#/components/schemas/PreviewAppDeployGetAppForm'
                     type: array
                 type: object
+                required:
+                  - apps
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the deployment status of the App settings for multiple Apps.
@@ -8572,6 +8741,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Deletes fields from a form of an App.
@@ -8735,6 +8906,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Adds fields to a form of an App.
@@ -8815,6 +8988,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the field settings of fields in a form of an App.
@@ -8908,6 +9083,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the field layout info of a form in an App.
@@ -9004,6 +9181,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the General Notification settings of the App.
@@ -9112,6 +9291,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the Per Record Notification settings of the App.
@@ -9228,6 +9409,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the Reminder Notification settings of the App.
@@ -9445,6 +9628,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the Graph settings of the App.
@@ -9645,6 +9830,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the description, name, icon, revision and color theme of an App.
@@ -9895,6 +10082,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the View settings of an App.
@@ -9982,6 +10171,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the Field permission settings of an App.
@@ -10144,6 +10335,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the Record permission settings of an App.
@@ -10185,6 +10378,8 @@ paths:
                     additionalProperties:
                       $ref: '#/components/schemas/RecordObject'
                 type: object
+                required:
+                  - record
         4XX:
           $ref: '#/components/responses/Error'
       description: Retrieves details of 1 record from an App by specifying the App ID and Record ID.
@@ -10231,11 +10426,13 @@ paths:
               schema:
                 properties:
                   id:
-                    format: int64
-                    type: integer
+                    type: string
                   revision:
                     type: string
                 type: object
+                required:
+                  - id
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Adds 1 record to an App.
@@ -10291,6 +10488,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - revision
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates details of 1 record in an App by specifying its record number, or a different unique key.
@@ -10345,6 +10544,8 @@ paths:
                   revision:
                     type: string
                 type: object
+                required:
+                  - rights
         4XX:
           $ref: '#/components/responses/Error'
       description: Gets the Record permission settings of an App.
@@ -10585,9 +10786,10 @@ paths:
               schema:
                 properties:
                   id:
-                    format: int64
-                    type: integer
+                    type: string
                 type: object
+                required:
+                  - id
         4XX:
           $ref: '#/components/responses/Error'
       description: Add a comment to a record in an App.
@@ -10659,6 +10861,10 @@ paths:
                   older:
                     type: boolean
                 type: object
+                required:
+                  - comments
+                  - newer
+                  - older
         4XX:
           $ref: '#/components/responses/Error'
       description: Retrieves multiple comments from a record in an app.
@@ -10915,6 +11121,8 @@ paths:
                     type: string
                     nullable: true
                 type: object
+                required:
+                  - records
         4XX:
           $ref: '#/components/responses/Error'
       x-kintone-method-override: true
@@ -10965,15 +11173,16 @@ paths:
                 properties:
                   ids:
                     items:
-                      format: int64
-                      type: integer
+                      type: string
                     type: array
                   revisions:
                     items:
-                      format: int64
-                      type: integer
+                      type: string
                     type: array
                 type: object
+                required:
+                  - ids
+                  - revisions
         4XX:
           $ref: '#/components/responses/Error'
       description: Adds multiple records to an App.
@@ -11025,6 +11234,8 @@ paths:
                         items:
                           $ref: '#/components/schemas/RecordsPutUpsertRecordBean'
                 type: object
+                required:
+                  - records
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates details of multiple records in an App, by specifying their record numbers, or their unique keys.
@@ -11132,6 +11343,9 @@ paths:
                         $ref: '#/components/schemas/RecordObject'
                     type: array
                 type: object
+                required:
+                  - next
+                  - records
         4XX:
           $ref: '#/components/responses/Error'
       description: Retrieves multiple records from an App by specifying the cursor ID.
@@ -11196,6 +11410,9 @@ paths:
                     type: string
                     nullable: true
                 type: object
+                required:
+                  - id
+                  - totalCount
         4XX:
           $ref: '#/components/responses/Error'
       description: Adds a cursor so that large amount of records can be obtained from an App.
@@ -11321,8 +11538,7 @@ paths:
                         type: string
                     type: object
                   memberCount:
-                    format: int64
-                    type: integer
+                    type: string
                   attachedApps:
                     items:
                       $ref: '#/components/schemas/SpaceGetAttachedApp'
@@ -11359,15 +11575,13 @@ paths:
                   showRelatedLinkList:
                     type: boolean
                   id:
-                    format: int64
-                    type: integer
+                    type: string
                   showAnnouncement:
                     type: boolean
                   showThreadList:
                     type: boolean
                   defaultThread:
-                    format: int64
-                    type: integer
+                    type: string
                 type: object
         4XX:
           $ref: '#/components/responses/Error'
@@ -11487,7 +11701,6 @@ paths:
                   type: integer
                   description: The Space ID.
                 body:
-                  maxLength: 65535
                   type: string
                   description: |-
                     The contents of the body as an HTML string.
@@ -11618,8 +11831,7 @@ paths:
               schema:
                 properties:
                   id:
-                    format: int64
-                    type: integer
+                    type: string
                 type: object
         4XX:
           $ref: '#/components/responses/Error'
@@ -11654,7 +11866,6 @@ paths:
                     The Thread ID can be found in the URL of the Thread.
                     A Space with the URL of `https://{subdomain}.kintone.com/k/#/space/111/thread/222` has a Space ID of 111 and a Thread ID of 222.
                 body:
-                  maxLength: 65535
                   type: string
                   description: |-
                     The contents of the Thread body.
@@ -11706,7 +11917,6 @@ paths:
                         The maximum number of the files is 5.
                         Required, if comment.text is not set.
                     text:
-                      maxLength: 65535
                       type: string
                       description: |-
                         The comment contents.
@@ -11735,8 +11945,7 @@ paths:
               schema:
                 properties:
                   id:
-                    format: int64
-                    type: integer
+                    type: string
                 type: object
         4XX:
           $ref: '#/components/responses/Error'
@@ -11841,8 +12050,7 @@ paths:
               schema:
                 properties:
                   id:
-                    format: int64
-                    type: integer
+                    type: string
                 type: object
         4XX:
           $ref: '#/components/responses/Error'

@@ -103,6 +103,8 @@
                 revision:
                   type: string
               type: object
+              required:
+                - revision
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Updates the Per Record Notification settings of the App.

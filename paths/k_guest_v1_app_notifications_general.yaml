@@ -40,6 +40,8 @@
                 revision:
                   type: string
               type: object
+              required:
+                - notifications
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Gets the General Notification settings of the App.

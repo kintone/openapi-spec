@@ -66,6 +66,17 @@
                 description:
                   type: string
               type: object
+              required:
+                - appId
+                - code
+                - createdAt
+                - creator
+                - description
+                - modifiedAt
+                - modifier
+                - name
+                - spaceId
+                - threadId
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Gets general information of an App, including the name, description, related Space, creator and updater information.

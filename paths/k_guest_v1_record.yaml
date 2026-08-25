@@ -43,6 +43,8 @@
                   additionalProperties:
                     $ref: ../components/schemas/RecordObject.yaml
               type: object
+              required:
+                - record
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Retrieves details of 1 record from an App by specifying the App ID and Record ID.
@@ -89,11 +91,13 @@
             schema:
               properties:
                 id:
-                  format: int64
-                  type: integer
+                  type: string
                 revision:
                   type: string
               type: object
+              required:
+                - id
+                - revision
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Adds 1 record to an App.
@@ -157,6 +161,8 @@
                 revision:
                   type: string
               type: object
+              required:
+                - revision
       4XX:
         $ref: ../components/responses/Error.yaml
     description: Updates details of 1 record in an App by specifying its record number, or a different unique key.

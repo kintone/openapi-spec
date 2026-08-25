@@ -35,8 +35,7 @@
             schema:
               properties:
                 id:
-                  format: int64
-                  type: integer
+                  type: string
               type: object
       4XX:
         $ref: ../components/responses/Error.yaml
@@ -71,7 +70,6 @@
                   The Thread ID can be found in the URL of the Thread.
                   A Space with the URL of `https://{subdomain}.kintone.com/k/#/space/111/thread/222` has a Space ID of 111 and a Thread ID of 222.
               body:
-                maxLength: 65535
                 type: string
                 description: |-
                   The contents of the Thread body.
