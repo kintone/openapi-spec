@@ -74,6 +74,7 @@
                 description: |-
                   The contents of the Thread body.
                   Write the contents as an HTML string, within 65535 characters.
+                  If the [Frontend Framework Revamp](https://kintone.dev/en/id/bbfaa03dedc276890f5db503/#frontend-revamp) is enabled on the Space and Thread pages, the maximum limit is 100,000 characters.
                   The Thread body will not be updated if this parameter is ignored.
                   HTML tags that cannot be used will be automatically removed.
                   HTML can be used to attach Apps, files and Emoji.

@@ -8,6 +8,7 @@ OpenAPI description for the kintone REST API.
 - [Concept](#concept)
 - [Usage](#usage)
 - [Versions](#versions)
+- [Releases](#releases)
 - [Limitations](#limitations)
 - [Coming from kintone/rest-api-spec](#coming-from-kintonerest-api-spec)
 - [License](#license)
@@ -44,6 +45,16 @@ Studio, among others, cannot resolve references between files and need the bundl
 `info.version` is **the date the content last changed** (JST, `YYYY.M.D`), not the date of the run
 that produced the file. A run that finds nothing changed commits nothing, so the version you see is
 the day this description last moved. The commit history is the record of what changed and when.
+
+## Releases
+
+The default branch always carries the current description. Once a month a tag is added, named after
+the year and month in JST (`YYYY.MM`), and the [release](../../releases) for it attaches the bundled
+files as they stood at that point.
+
+Pin a tag when you need the description to stop moving under you: a tagged raw URL, with the tag in
+place of the branch name, keeps serving the same bytes. A tag is added only when the description
+changed since the previous one, so no two tags carry the same content.
 
 ## Limitations
 

@@ -32,7 +32,9 @@
                     description: |-
                       The comment contents.
                       A line break can be specified by LF.
-                      The maximum characters of the comment is 65535. Required, if comment.files is not set.
+                      The maximum characters of the comment is 65535.
+                      If the [Frontend Framework Revamp](https://kintone.dev/en/id/bbfaa03dedc276890f5db503/#frontend-revamp) is enabled on the Space and Thread pages, the maximum limit is 100,000 characters.
+                      Required, if comment.files is not set.
                 type: object
                 description: An object including comment details.
               thread:
