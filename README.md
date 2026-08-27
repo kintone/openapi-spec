@@ -40,6 +40,10 @@ Reading and writing are kept apart where they differ: `RecordObject` describes w
 Point your tool at `openapi.yaml` unless you have a reason not to. Postman and Microsoft Copilot
 Studio, among others, cannot resolve references between files and need the bundled version.
 
+These files are OpenAPI 3.0.3. The server URL carries a `subdomain` variable whose
+default, `example`, is a placeholder: replace it with your own subdomain, or a tool that imports
+the file as it stands will call `https://example.cybozu.com`.
+
 ## Versions
 
 `info.version` is **the date the content last changed** (JST, `YYYY.M.D`), not the date of the run
