@@ -10,7 +10,7 @@ OpenAPI description for the kintone REST API.
 - [Versions](#versions)
 - [Releases](#releases)
 - [Limitations](#limitations)
-- [Coming from kintone/rest-api-spec](#coming-from-kintonerest-api-spec)
+- [Feedback](#feedback)
 - [License](#license)
 
 ## Concept
@@ -72,11 +72,17 @@ changed since the previous one, so no two tags carry the same content.
 - Session authentication is out of scope. It is meant for customizations running inside a browser,
   not for the clients this description is aimed at.
 
-## Coming from `kintone/rest-api-spec`
+## Feedback
 
-- The bundled description is at the repository root (`openapi.yaml`). There is no `bundled/` directory, and no directory per publication date — the commit history is how you look at an older state.
-- `paths/` and `components/schemas/` keep the same file names, so a file you used to open is where you expect it.
-- Field-value schemas are shared instead of copied per operation: `RecordGetCalcSimpleValue`, `BulkRequestPostCalcSimpleValue` and the rest are now a single `CalcSimpleValue`. Update any `$ref` that pointed at a per-operation name.
+If something here is wrong — an endpoint that does not match the API, a field described the wrong way
+round, a description that contradicts the reference — write to
+[developer@cybozu.com](mailto:developer@cybozu.com). Include the operation or schema name; a link to
+the file at a commit is ideal.
+
+Issues are not enabled on this repository. Nothing here is edited by hand, so a fix has to go into the
+generator that produces these files, which is why reports come to us by mail rather than as pull
+requests. For questions about using the API itself, start from the
+[API reference](https://kintone.dev/en/docs/kintone/rest-api/).
 
 ## License
 

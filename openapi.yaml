@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: kintone REST API
-  version: 2026.8.26
+  version: 2026.8.27
   description: |-
     OpenAPI specification for the kintone REST API.
 
@@ -19,6 +19,7 @@ info:
   contact:
     name: Kintone Developer Program
     url: https://kintone.dev/en/
+    email: developer@cybozu.com
   license:
     name: MIT No Attribution
     url: https://opensource.org/license/MIT-0
