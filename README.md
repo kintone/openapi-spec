@@ -1,9 +1,10 @@
-# kintone OpenAPI spec
+# Kintone's OpenAPI Specification
 
-OpenAPI description for the kintone REST API.
+This repository contains the OpenAPI specification for Kintone's REST API.
 
 > [!NOTE]
-> Generated once a day. Do not edit these files by hand — the next run replaces them.
+> Regenerated every day, and committed only when the content changed. Do not edit these files by
+> hand — the next run replaces them.
 
 - [Concept](#concept)
 - [Usage](#usage)
@@ -15,16 +16,15 @@ OpenAPI description for the kintone REST API.
 
 ## Concept
 
-OpenAPI is a specification for describing REST API interfaces. It is both human- and machine-readable,
-and it is widely supported by API tooling, so a description like this one lets you inspect requests in
-Postman, generate a client library, or have an AI agent call the API correctly.
+OpenAPI is a specification format for describing REST API interfaces. What it produces is both human-
+and machine-readable, and it is widely supported by API tooling, so a file like this one lets you
+inspect requests in Postman, generate a client library, or have an AI agent call the API correctly.
 
-This repository holds that description for the kintone REST API. The text attached to each operation,
-parameter and field is the wording from the official
-[API reference](https://kintone.dev/en/docs/kintone/rest-api/), so a tool reading these files sees
+The text attached to each operation, parameter and field is the wording from the official
+[API reference](https://kintone.dev/en/docs/kintone/rest-api/), so a tool reading these files shows
 what a developer would read.
 
-Every endpoint kintone's own metadata API reports is described, including the guest-space form
+Every endpoint Kintone's own metadata API reports is described, including the guest-space form
 (`/k/guest/{guestSpaceId}/v1/...`) of each one, together with the authentication each endpoint accepts.
 Reading and writing are kept apart where they differ: `RecordObject` describes what comes back,
 `RecordWritableObject` what you send.
@@ -33,12 +33,13 @@ Reading and writing are kept apart where they differ: `RecordObject` describes w
 
 | File | Description |
 | --- | --- |
-| **`openapi.yaml`** | A bundled, single-file version of the API description, for tools that do not support the `$ref` keyword. **Start here.** |
-| `openapi.json` | The same bundled description, serialized as JSON. |
-| `paths/` , `components/` | A multi-file version of the same description, one file per endpoint and per schema, linked with the `$ref` keyword. Read a single type here, or use it to see what changed between commits. |
+| `openapi.yaml` | The whole specification bundled into a single file. |
+| `openapi.json` | The same bundle, serialized as JSON. |
+| `paths/` , `components/` | The same specification split up, one file per endpoint and per schema, linked with the `$ref` keyword. Read a single type here, or use it to see what changed between commits. |
 
-Point your tool at `openapi.yaml` unless you have a reason not to. Postman and Microsoft Copilot
-Studio, among others, cannot resolve references between files and need the bundled version.
+YAML and JSON carry the same document, so take whichever your tool prefers. Reach for a bundled file
+rather than the split-up version unless you need the parts: Postman and Microsoft Copilot Studio, among
+others, cannot resolve references between files.
 
 These files are OpenAPI 3.0.3. The server URL carries a `subdomain` variable whose
 default, `example`, is a placeholder: replace it with your own subdomain, or a tool that imports
@@ -48,29 +49,33 @@ the file as it stands will call `https://example.cybozu.com`.
 
 `info.version` is **the date the content last changed** (JST, `YYYY.M.D`), not the date of the run
 that produced the file. A run that finds nothing changed commits nothing, so the version you see is
-the day this description last moved. The commit history is the record of what changed and when.
+the day this specification last moved. The commit history is the record of what changed and when.
 
 ## Releases
 
-The default branch always carries the current description. About once a month a tag is added, named
-after the date the description was taken (JST, `YYYY.MM.DD`) — the same date `info.version` reports,
-written with leading zeros so the tags sort. The [release](../../releases) for it attaches the
+The `main` branch always carries the current specification. About once a month a tag is added,
+named after the date the specification was taken (JST, `YYYY.MM.DD`) — the same date `info.version`
+reports, written with leading zeros so the tags sort. The [release](../../releases) for it attaches the
 bundled files as they stood on that date.
 
-Pin a tag when you need the description to stop moving under you: a tagged raw URL, with the tag in
-place of the branch name, keeps serving the same bytes. A tag is added only when the description
+Pin a tag when you need the specification to stop moving under you: a tagged raw URL, with the tag in
+place of the branch name, keeps serving the same bytes. A tag is added only when the specification
 changed since the previous one, so no two tags carry the same content.
 
 ## Limitations
 
-- The API interface is based on the kintone REST API in the **Current Channel**, with all **Update
+- The API interface is based on the Kintone REST API in the **Current Channel**, with all **Update
   Options** checkboxes left unchecked. Endpoints that need a preview feature switched on are not
   described.
 - English only.
-- The OAuth2 scope on each operation is a best-effort estimate: kintone publishes no
+- The OAuth2 scope on each operation is a best-effort estimate: Kintone publishes no
   machine-readable mapping from endpoint to scope.
 - Session authentication is out of scope. It is meant for customizations running inside a browser,
-  not for the clients this description is aimed at.
+  not for the clients this specification is aimed at.
+- These files come from an in-house generator that is not published, and they are not written against
+  any particular client generator. Every build has to pass Redocly's linter and a set of further
+  checks of our own, and is verified to load with `openapi-typescript`; other toolchains,
+  `openapi-generator` among them, are not tested.
 
 ## Feedback
 
@@ -87,5 +92,5 @@ requests. For questions about using the API itself, start from the
 ## License
 
 MIT No Attribution (`MIT-0`). See [`LICENSE`](LICENSE). It is the MIT license without the
-attribution clause, so you can copy, modify, and redistribute this description — in your own
+attribution clause, so you can copy, modify, and redistribute this specification — in your own
 repository, in a generated client, or in fragments — without carrying the copyright notice along.

@@ -1,5 +1,5 @@
 type: object
-description: Common error response of the kintone REST API (shared body across all APIs).
+description: Common error response of the Kintone REST API (shared body across all APIs).
 properties:
   id:
     type: string
