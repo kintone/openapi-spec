@@ -1,16 +1,16 @@
 openapi: 3.0.3
 info:
-  title: kintone REST API
-  version: 2026.8.27
+  title: Kintone REST API
+  version: 2026.8.31
   description: |-
-    OpenAPI specification for the kintone REST API.
+    OpenAPI specification for Kintone's REST API.
 
     ## Authentication
     Each operation can be executed with either **API token authentication (recommended)** or **password authentication** (see `security`). Because API tokens are scoped per app, some APIs—such as user/organization/group management (User API) and space administration—cannot be run with a token and require **password authentication**.
 
     If **Basic authentication (access restriction)** or **secure access (client certificate)** is enabled on your environment, you must additionally provide an extra gate (`Authorization: Basic ...` header / client certificate) on top of the above. **Session authentication** (browser cookie + CSRF token) is available on virtually all APIs, but this spec targets server-to-server integration and therefore does not include it in `security`. Details of these methods that `security` cannot express are described in a structured form under `x-kintone-additional-auth` at the document root.
 
-    ## Limitations (kintone-specific)
+    ## Limitations (Kintone-specific)
     - **Record schemas are dynamic per app.** Field codes are arbitrary keys (`additionalProperties`) and values are represented as a union per field type (`oneOf`/`anyOf` with a `type` discriminator). The exact types of an individual app cannot be fully expressed, so supplement real app types with examples / fixtures.
     - **When a GET query is long**, you can avoid URL-length limits by sending `POST` with the `X-HTTP-Method-Override: GET` header and putting parameters in the body (the server processes it as GET). Such GET operations are marked with `x-kintone-method-override: true`. No duplicate operation is defined; the GET definition is authoritative.
     - **Authentication differs per endpoint.** Which methods (API token / password / OAuth2) each API accepts is taken directly from the "Authentication" row of the official documentation pages (cybozu.dev) via harvest and reflected in `security`. Management APIs that do not support tokens (space/guest administration, app move, plugins, statistics, etc.) end up as password authentication only. Only the OAuth2 scope each operation needs is a best-effort estimate derived from the path family, because no machine-readable scope mapping is published.
@@ -46,7 +46,7 @@ servers:
     variables:
       subdomain:
         default: example
-        description: The kintone subdomain — the `<subdomain>` part of `https://<subdomain>.cybozu.com`. The default `example` is a placeholder; replace it with your own.
+        description: The Kintone subdomain — the `<subdomain>` part of `https://<subdomain>.cybozu.com`. The default `example` is a placeholder; replace it with your own.
 paths:
   /k/guest/{guestSpaceId}/v1/app.json:
     get:
@@ -5206,7 +5206,7 @@ paths:
             format: query
             type: string
           description: |-
-            The search condition, written in kintone's own query syntax. This is **not** SQL and **not** OData.
+            The search condition, written in Kintone's own query syntax. This is **not** SQL and **not** OData.
             Ignoring this parameter returns all records that the credential can access.
 
             The authoritative reference is [Query Strings](https://kintone.dev/en/docs/kintone/overview/query-string/). Its rules are reproduced below so that a correct query can be built without leaving this document.
@@ -5616,7 +5616,7 @@ paths:
                   format: query
                   type: string
                   description: |-
-                    The search condition for the records the cursor will walk over, written in kintone's own query syntax.
+                    The search condition for the records the cursor will walk over, written in Kintone's own query syntax.
                     The operators and functions are the same as for the `query` parameter of `GET /k/v1/records.json` — see that parameter for the table of operators each field type allows.
 
                     **`order by`, `limit` and `offset` cannot be used here.** The cursor manages paging itself: set the batch size with the `size` parameter, then call `GET /k/v1/records/cursor.json` repeatedly until it reports `next: false`.
@@ -11012,7 +11012,7 @@ paths:
             format: query
             type: string
           description: |-
-            The search condition, written in kintone's own query syntax. This is **not** SQL and **not** OData.
+            The search condition, written in Kintone's own query syntax. This is **not** SQL and **not** OData.
             Ignoring this parameter returns all records that the credential can access.
 
             The authoritative reference is [Query Strings](https://kintone.dev/en/docs/kintone/overview/query-string/). Its rules are reproduced below so that a correct query can be built without leaving this document.
@@ -11384,7 +11384,7 @@ paths:
                   format: query
                   type: string
                   description: |-
-                    The search condition for the records the cursor will walk over, written in kintone's own query syntax.
+                    The search condition for the records the cursor will walk over, written in Kintone's own query syntax.
                     The operators and functions are the same as for the `query` parameter of `GET /k/v1/records.json` — see that parameter for the table of operators each field type allows.
 
                     **`order by`, `limit` and `offset` cannot be used here.** The cursor manages paging itself: set the batch size with the `size` parameter, then call `GET /k/v1/records/cursor.json` repeatedly until it reports `next: false`.
@@ -17707,7 +17707,7 @@ components:
       type: object
     KintoneError:
       type: object
-      description: Common error response of the kintone REST API (shared body across all APIs).
+      description: Common error response of the Kintone REST API (shared body across all APIs).
       properties:
         id:
           type: string

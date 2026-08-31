@@ -90,7 +90,7 @@
           format: query
           type: string
         description: |-
-          The search condition, written in kintone's own query syntax. This is **not** SQL and **not** OData.
+          The search condition, written in Kintone's own query syntax. This is **not** SQL and **not** OData.
           Ignoring this parameter returns all records that the credential can access.
 
           The authoritative reference is [Query Strings](https://kintone.dev/en/docs/kintone/overview/query-string/). Its rules are reproduced below so that a correct query can be built without leaving this document.

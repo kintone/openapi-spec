@@ -112,7 +112,7 @@
                 format: query
                 type: string
                 description: |-
-                  The search condition for the records the cursor will walk over, written in kintone's own query syntax.
+                  The search condition for the records the cursor will walk over, written in Kintone's own query syntax.
                   The operators and functions are the same as for the `query` parameter of `GET /k/v1/records.json` — see that parameter for the table of operators each field type allows.
 
                   **`order by`, `limit` and `offset` cannot be used here.** The cursor manages paging itself: set the batch size with the `size` parameter, then call `GET /k/v1/records/cursor.json` repeatedly until it reports `next: false`.
