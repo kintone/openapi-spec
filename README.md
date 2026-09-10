@@ -53,8 +53,8 @@ the day this specification last moved. The commit history is the record of what 
 
 ## Releases
 
-The `main` branch always carries the current specification. Approximately once a month, a new
-tag is created in sequence (`v1`, `v2`, …).
+The `main` branch always carries the current specification. New tags are created in sequence
+(`v1`, `v2`, …).
 
 Each [release](../../releases) includes the bundled specification files as they existed at the time of
 the release. The date the files were generated is recorded in their `info.version` field.
