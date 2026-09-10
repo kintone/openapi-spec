@@ -53,14 +53,18 @@ the day this specification last moved. The commit history is the record of what 
 
 ## Releases
 
-The `main` branch always carries the current specification. About once a month a tag is added,
-named after the date the specification was taken (JST, `YYYY.MM.DD`) — the same date `info.version`
-reports, written with leading zeros so the tags sort. The [release](../../releases) for it attaches the
-bundled files as they stood on that date.
+The `main` branch always carries the current specification. Approximately once a month, a new
+tag is created in sequence (`v1`, `v2`, …).
 
-Pin a tag when you need the specification to stop moving under you: a tagged raw URL, with the tag in
-place of the branch name, keeps serving the same bytes. A tag is added only when the specification
-changed since the previous one, so no two tags carry the same content.
+Each [release](../../releases) includes the bundled specification files as they existed at the time of
+the release. The date the files were generated is recorded in their `info.version` field.
+
+If you need to use a fixed version of the specification, pin your integration to a tag. For example, use
+a raw URL with the tag name in place of the branch name. Because tags are never moved to newer commits,
+a URL pinned to `v1` will continue to serve the same content in the future.
+
+A new tag is created only when the specification has changed since the previous release, so each tag
+represents a distinct version of the specification.
 
 ## Limitations
 
