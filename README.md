@@ -11,6 +11,7 @@ This repository contains the OpenAPI specification for Kintone's REST API.
 - [Versions](#versions)
 - [Releases](#releases)
 - [Limitations](#limitations)
+- [Coming from kintone/rest-api-spec](#coming-from-kintonerest-api-spec)
 - [Feedback](#feedback)
 - [License](#license)
 
@@ -80,6 +81,22 @@ represents a distinct version of the specification.
   any particular client generator. Every build has to pass Redocly's linter and a set of further
   checks of our own, and is verified to load with `openapi-typescript`; other toolchains,
   `openapi-generator` among them, are not tested.
+
+## Coming from kintone/rest-api-spec
+
+This repository replaces the previous OpenAPI description in
+[kintone/rest-api-spec](https://github.com/kintone/rest-api-spec), which is no longer maintained.
+
+Operation IDs and path parameter names remain the same. If you generated a client from the previous
+description, its method and argument names should therefore remain unchanged.
+
+Some field value schema names have changed. Schemas that were previously defined separately for each
+operation are now shared. For example, `RecordGetCalcSimpleValue` and
+`BulkRequestPostCalcSimpleValue` have been replaced by `CalcSimpleValue`. If you reference these
+schema names directly, you will need to update them.
+
+The `*GroupSimpleValue` and `*ReferenceTableSimpleValue` schemas have also been removed, since field
+groups and related records fields do not have record values.
 
 ## Feedback
 
