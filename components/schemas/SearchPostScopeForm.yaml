@@ -1,0 +1,20 @@
+properties:
+  codes:
+    items:
+      type: string
+    type: array
+  scope:
+    enum:
+      - SPACE
+      - APP
+      - PEOPLE
+      - MESSAGE
+    type: string
+  ids:
+    items:
+      format: int64
+      type: integer
+    type: array
+required:
+  - scope
+type: object

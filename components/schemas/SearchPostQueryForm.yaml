@@ -1,0 +1,15 @@
+properties:
+  keywords:
+    items:
+      type: string
+    type: array
+  operator:
+    enum:
+      - AND
+      - OR
+      - NOT
+    type: string
+required:
+  - keywords
+  - operator
+type: object

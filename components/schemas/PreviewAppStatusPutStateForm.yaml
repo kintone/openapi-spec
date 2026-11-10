@@ -1,4 +1,7 @@
 properties:
+  instructions:
+    maxLength: 10000
+    type: string
   name:
     maxLength: 64
     minLength: 1
