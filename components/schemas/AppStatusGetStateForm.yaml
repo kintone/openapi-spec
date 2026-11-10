@@ -1,4 +1,6 @@
 properties:
+  instructions:
+    type: string
   name:
     type: string
   index:

@@ -1,0 +1,91 @@
+/k/v1/search.json:
+  post:
+    operationId: postSearch
+    summary: Post search
+    tags:
+      - SEARCHS
+    security:
+      - apiToken: []
+      - passwordAuth: []
+      - oauth2:
+          - k:app_settings:write
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              types:
+                items:
+                  enum:
+                    - RECORD
+                    - RECORD_COMMENT
+                    - SPACE
+                    - THREAD
+                    - THREAD_COMMENT
+                    - PEOPLE_COMMENT
+                    - MESSAGE_COMMENT
+                    - ATTACHMENT
+                  type: string
+                type: array
+              excludeScopes:
+                items:
+                  $ref: ../components/schemas/SearchPostScopeForm.yaml
+                type: array
+              creators:
+                items:
+                  type: string
+                type: array
+              includeSynonyms:
+                type: boolean
+              query:
+                items:
+                  $ref: ../components/schemas/SearchPostQueryForm.yaml
+                type: array
+              limit:
+                format: int64
+                type: integer
+              scopes:
+                items:
+                  $ref: ../components/schemas/SearchPostScopeForm.yaml
+                type: array
+              createdBefore:
+                format: date-time
+                type: string
+              sort:
+                properties:
+                  by:
+                    enum:
+                      - RELEVANCE
+                      - CREATED_AT
+                    type: string
+                  order:
+                    enum:
+                      - ASC
+                      - DESC
+                    type: string
+                type: object
+              pageToken:
+                type: string
+              createdAfter:
+                format: date-time
+                type: string
+            required:
+              - query
+            type: object
+    responses:
+      '200':
+        description: success case of search/post
+        content:
+          application/json:
+            schema:
+              properties:
+                hits:
+                  items:
+                    $ref: ../components/schemas/SearchPostHit.yaml
+                  type: array
+                nextPageToken:
+                  type: string
+              type: object
+      4XX:
+        $ref: ../components/responses/Error.yaml

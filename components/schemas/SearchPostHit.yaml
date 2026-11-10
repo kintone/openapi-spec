@@ -1,0 +1,225 @@
+properties:
+  messageComment:
+    properties:
+      createdAt:
+        format: date-time
+        type: string
+      creator:
+        properties:
+          code:
+            type: string
+          name:
+            type: string
+        type: object
+      recipient:
+        properties:
+          code:
+            type: string
+          name:
+            type: string
+        type: object
+      commentId:
+        format: int64
+        type: integer
+    type: object
+  attachment:
+    properties:
+      createdAt:
+        format: date-time
+        type: string
+      creator:
+        properties:
+          code:
+            type: string
+          name:
+            type: string
+        type: object
+      name:
+        type: string
+      fileKey:
+        type: string
+      attachedTo:
+        enum:
+          - RECORD
+          - SPACE
+          - THREAD
+          - THREAD_COMMENT
+          - PEOPLE_COMMENT
+          - MESSAGE_COMMENT
+        type: string
+    type: object
+  snippets:
+    items:
+      type: string
+    type: array
+  record:
+    properties:
+      recordId:
+        format: int64
+        type: integer
+      spaceName:
+        type: string
+      recordTitle:
+        type: string
+      createdAt:
+        format: date-time
+        type: string
+      spaceId:
+        type: string
+        nullable: true
+      creator:
+        properties:
+          code:
+            type: string
+          name:
+            type: string
+        type: object
+      matchedFields:
+        items:
+          $ref: ./SearchPostField.yaml
+        type: array
+      appName:
+        type: string
+      appId:
+        type: string
+    type: object
+  threadComment:
+    properties:
+      spaceName:
+        type: string
+      threadId:
+        type: string
+        nullable: true
+      spaceId:
+        type: string
+        nullable: true
+      createdAt:
+        format: date-time
+        type: string
+      creator:
+        properties:
+          code:
+            type: string
+          name:
+            type: string
+        type: object
+      replyId:
+        format: int64
+        type: integer
+      commentId:
+        format: int64
+        type: integer
+      threadName:
+        type: string
+    type: object
+  peopleComment:
+    properties:
+      owner:
+        properties:
+          code:
+            type: string
+          name:
+            type: string
+        type: object
+      createdAt:
+        format: date-time
+        type: string
+      creator:
+        properties:
+          code:
+            type: string
+          name:
+            type: string
+        type: object
+      replyId:
+        format: int64
+        type: integer
+      commentId:
+        format: int64
+        type: integer
+    type: object
+  recordComment:
+    properties:
+      recordId:
+        format: int64
+        type: integer
+      spaceName:
+        type: string
+      recordTitle:
+        type: string
+      createdAt:
+        format: date-time
+        type: string
+      spaceId:
+        type: string
+        nullable: true
+      creator:
+        properties:
+          code:
+            type: string
+          name:
+            type: string
+        type: object
+      appName:
+        type: string
+      appId:
+        type: string
+      commentId:
+        format: int64
+        type: integer
+    type: object
+  thread:
+    properties:
+      spaceName:
+        type: string
+      threadId:
+        type: string
+        nullable: true
+      spaceId:
+        type: string
+        nullable: true
+      createdAt:
+        format: date-time
+        type: string
+      creator:
+        properties:
+          code:
+            type: string
+          name:
+            type: string
+        type: object
+      threadName:
+        type: string
+    type: object
+  type:
+    enum:
+      - RECORD
+      - RECORD_COMMENT
+      - SPACE
+      - THREAD
+      - THREAD_COMMENT
+      - PEOPLE_COMMENT
+      - MESSAGE_COMMENT
+      - ATTACHMENT
+    type: string
+  url:
+    type: string
+  space:
+    properties:
+      spaceName:
+        type: string
+      spaceId:
+        type: string
+        nullable: true
+      createdAt:
+        format: date-time
+        type: string
+      creator:
+        properties:
+          code:
+            type: string
+          name:
+            type: string
+        type: object
+    type: object
+type: object

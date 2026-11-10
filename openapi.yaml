@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Kintone REST API
-  version: 2026.8.31
+  version: 2026.11.11
   description: |-
     OpenAPI specification for Kintone's REST API.
 
@@ -5707,6 +5707,105 @@ paths:
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the Statuses of Multiple records of an App, that were set with the Process Management feature.
+      parameters:
+        - name: guestSpaceId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser).
+  /k/guest/{guestSpaceId}/v1/search.json:
+    post:
+      operationId: postSearchForGuestSpace
+      summary: Post search (guest space)
+      tags:
+        - SEARCHS
+      security:
+        - apiToken: []
+        - passwordAuth: []
+        - oauth2:
+            - k:app_settings:write
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                types:
+                  items:
+                    enum:
+                      - RECORD
+                      - RECORD_COMMENT
+                      - SPACE
+                      - THREAD
+                      - THREAD_COMMENT
+                      - PEOPLE_COMMENT
+                      - MESSAGE_COMMENT
+                      - ATTACHMENT
+                    type: string
+                  type: array
+                excludeScopes:
+                  items:
+                    $ref: '#/components/schemas/SearchPostScopeForm'
+                  type: array
+                creators:
+                  items:
+                    type: string
+                  type: array
+                includeSynonyms:
+                  type: boolean
+                query:
+                  items:
+                    $ref: '#/components/schemas/SearchPostQueryForm'
+                  type: array
+                limit:
+                  format: int64
+                  type: integer
+                scopes:
+                  items:
+                    $ref: '#/components/schemas/SearchPostScopeForm'
+                  type: array
+                createdBefore:
+                  format: date-time
+                  type: string
+                sort:
+                  properties:
+                    by:
+                      enum:
+                        - RELEVANCE
+                        - CREATED_AT
+                      type: string
+                    order:
+                      enum:
+                        - ASC
+                        - DESC
+                      type: string
+                  type: object
+                pageToken:
+                  type: string
+                createdAfter:
+                  format: date-time
+                  type: string
+              required:
+                - query
+              type: object
+      responses:
+        '200':
+          description: success case of search/post
+          content:
+            application/json:
+              schema:
+                properties:
+                  hits:
+                    items:
+                      $ref: '#/components/schemas/SearchPostHit'
+                    type: array
+                  nextPageToken:
+                    type: string
+                type: object
+        4XX:
+          $ref: '#/components/responses/Error'
       parameters:
         - name: guestSpaceId
           in: path
@@ -11467,6 +11566,97 @@ paths:
         4XX:
           $ref: '#/components/responses/Error'
       description: Updates the Statuses of Multiple records of an App, that were set with the Process Management feature.
+  /k/v1/search.json:
+    post:
+      operationId: postSearch
+      summary: Post search
+      tags:
+        - SEARCHS
+      security:
+        - apiToken: []
+        - passwordAuth: []
+        - oauth2:
+            - k:app_settings:write
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                types:
+                  items:
+                    enum:
+                      - RECORD
+                      - RECORD_COMMENT
+                      - SPACE
+                      - THREAD
+                      - THREAD_COMMENT
+                      - PEOPLE_COMMENT
+                      - MESSAGE_COMMENT
+                      - ATTACHMENT
+                    type: string
+                  type: array
+                excludeScopes:
+                  items:
+                    $ref: '#/components/schemas/SearchPostScopeForm'
+                  type: array
+                creators:
+                  items:
+                    type: string
+                  type: array
+                includeSynonyms:
+                  type: boolean
+                query:
+                  items:
+                    $ref: '#/components/schemas/SearchPostQueryForm'
+                  type: array
+                limit:
+                  format: int64
+                  type: integer
+                scopes:
+                  items:
+                    $ref: '#/components/schemas/SearchPostScopeForm'
+                  type: array
+                createdBefore:
+                  format: date-time
+                  type: string
+                sort:
+                  properties:
+                    by:
+                      enum:
+                        - RELEVANCE
+                        - CREATED_AT
+                      type: string
+                    order:
+                      enum:
+                        - ASC
+                        - DESC
+                      type: string
+                  type: object
+                pageToken:
+                  type: string
+                createdAfter:
+                  format: date-time
+                  type: string
+              required:
+                - query
+              type: object
+      responses:
+        '200':
+          description: success case of search/post
+          content:
+            application/json:
+              schema:
+                properties:
+                  hits:
+                    items:
+                      $ref: '#/components/schemas/SearchPostHit'
+                    type: array
+                  nextPageToken:
+                    type: string
+                type: object
+        4XX:
+          $ref: '#/components/responses/Error'
   /k/v1/space.json:
     delete:
       operationId: deleteSpace
@@ -15873,6 +16063,8 @@ components:
       type: object
     AppStatusGetStateForm:
       properties:
+        instructions:
+          type: string
         name:
           type: string
         index:
@@ -31536,6 +31728,8 @@ components:
       type: object
     PreviewAppStatusGetStateForm:
       properties:
+        instructions:
+          type: string
         name:
           type: string
         index:
@@ -31688,6 +31882,9 @@ components:
       type: object
     PreviewAppStatusPutStateForm:
       properties:
+        instructions:
+          maxLength: 10000
+          type: string
         name:
           maxLength: 64
           minLength: 1
@@ -33942,6 +34139,276 @@ components:
       example:
         type: __REVISION__
         value: '9'
+    SearchPostField:
+      properties:
+        code:
+          type: string
+        label:
+          type: string
+      type: object
+    SearchPostHit:
+      properties:
+        messageComment:
+          properties:
+            createdAt:
+              format: date-time
+              type: string
+            creator:
+              properties:
+                code:
+                  type: string
+                name:
+                  type: string
+              type: object
+            recipient:
+              properties:
+                code:
+                  type: string
+                name:
+                  type: string
+              type: object
+            commentId:
+              format: int64
+              type: integer
+          type: object
+        attachment:
+          properties:
+            createdAt:
+              format: date-time
+              type: string
+            creator:
+              properties:
+                code:
+                  type: string
+                name:
+                  type: string
+              type: object
+            name:
+              type: string
+            fileKey:
+              type: string
+            attachedTo:
+              enum:
+                - RECORD
+                - SPACE
+                - THREAD
+                - THREAD_COMMENT
+                - PEOPLE_COMMENT
+                - MESSAGE_COMMENT
+              type: string
+          type: object
+        snippets:
+          items:
+            type: string
+          type: array
+        record:
+          properties:
+            recordId:
+              format: int64
+              type: integer
+            spaceName:
+              type: string
+            recordTitle:
+              type: string
+            createdAt:
+              format: date-time
+              type: string
+            spaceId:
+              type: string
+              nullable: true
+            creator:
+              properties:
+                code:
+                  type: string
+                name:
+                  type: string
+              type: object
+            matchedFields:
+              items:
+                $ref: '#/components/schemas/SearchPostField'
+              type: array
+            appName:
+              type: string
+            appId:
+              type: string
+          type: object
+        threadComment:
+          properties:
+            spaceName:
+              type: string
+            threadId:
+              type: string
+              nullable: true
+            spaceId:
+              type: string
+              nullable: true
+            createdAt:
+              format: date-time
+              type: string
+            creator:
+              properties:
+                code:
+                  type: string
+                name:
+                  type: string
+              type: object
+            replyId:
+              format: int64
+              type: integer
+            commentId:
+              format: int64
+              type: integer
+            threadName:
+              type: string
+          type: object
+        peopleComment:
+          properties:
+            owner:
+              properties:
+                code:
+                  type: string
+                name:
+                  type: string
+              type: object
+            createdAt:
+              format: date-time
+              type: string
+            creator:
+              properties:
+                code:
+                  type: string
+                name:
+                  type: string
+              type: object
+            replyId:
+              format: int64
+              type: integer
+            commentId:
+              format: int64
+              type: integer
+          type: object
+        recordComment:
+          properties:
+            recordId:
+              format: int64
+              type: integer
+            spaceName:
+              type: string
+            recordTitle:
+              type: string
+            createdAt:
+              format: date-time
+              type: string
+            spaceId:
+              type: string
+              nullable: true
+            creator:
+              properties:
+                code:
+                  type: string
+                name:
+                  type: string
+              type: object
+            appName:
+              type: string
+            appId:
+              type: string
+            commentId:
+              format: int64
+              type: integer
+          type: object
+        thread:
+          properties:
+            spaceName:
+              type: string
+            threadId:
+              type: string
+              nullable: true
+            spaceId:
+              type: string
+              nullable: true
+            createdAt:
+              format: date-time
+              type: string
+            creator:
+              properties:
+                code:
+                  type: string
+                name:
+                  type: string
+              type: object
+            threadName:
+              type: string
+          type: object
+        type:
+          enum:
+            - RECORD
+            - RECORD_COMMENT
+            - SPACE
+            - THREAD
+            - THREAD_COMMENT
+            - PEOPLE_COMMENT
+            - MESSAGE_COMMENT
+            - ATTACHMENT
+          type: string
+        url:
+          type: string
+        space:
+          properties:
+            spaceName:
+              type: string
+            spaceId:
+              type: string
+              nullable: true
+            createdAt:
+              format: date-time
+              type: string
+            creator:
+              properties:
+                code:
+                  type: string
+                name:
+                  type: string
+              type: object
+          type: object
+      type: object
+    SearchPostQueryForm:
+      properties:
+        keywords:
+          items:
+            type: string
+          type: array
+        operator:
+          enum:
+            - AND
+            - OR
+            - NOT
+          type: string
+      required:
+        - keywords
+        - operator
+      type: object
+    SearchPostScopeForm:
+      properties:
+        codes:
+          items:
+            type: string
+          type: array
+        scope:
+          enum:
+            - SPACE
+            - APP
+            - PEOPLE
+            - MESSAGE
+          type: string
+        ids:
+          items:
+            format: int64
+            type: integer
+          type: array
+      required:
+        - scope
+      type: object
     SimpleRowValue:
       properties:
         id:
