@@ -19,14 +19,14 @@ properties:
             type: string
         type: object
       commentId:
-        format: int64
-        type: integer
+        type: string
     type: object
   attachment:
     properties:
       createdAt:
         format: date-time
         type: string
+        nullable: true
       creator:
         properties:
           code:
@@ -34,6 +34,7 @@ properties:
           name:
             type: string
         type: object
+        nullable: true
       name:
         type: string
       fileKey:
@@ -55,15 +56,16 @@ properties:
   record:
     properties:
       recordId:
-        format: int64
-        type: integer
+        type: string
       spaceName:
         type: string
+        nullable: true
       recordTitle:
         type: string
       createdAt:
         format: date-time
         type: string
+        nullable: true
       spaceId:
         type: string
         nullable: true
@@ -74,6 +76,7 @@ properties:
           name:
             type: string
         type: object
+        nullable: true
       matchedFields:
         items:
           $ref: ./SearchPostField.yaml
@@ -104,11 +107,10 @@ properties:
             type: string
         type: object
       replyId:
-        format: int64
-        type: integer
+        type: string
+        nullable: true
       commentId:
-        format: int64
-        type: integer
+        type: string
       threadName:
         type: string
     type: object
@@ -132,19 +134,18 @@ properties:
             type: string
         type: object
       replyId:
-        format: int64
-        type: integer
+        type: string
+        nullable: true
       commentId:
-        format: int64
-        type: integer
+        type: string
     type: object
   recordComment:
     properties:
       recordId:
-        format: int64
-        type: integer
+        type: string
       spaceName:
         type: string
+        nullable: true
       recordTitle:
         type: string
       createdAt:
@@ -165,8 +166,7 @@ properties:
       appId:
         type: string
       commentId:
-        format: int64
-        type: integer
+        type: string
     type: object
   thread:
     properties:

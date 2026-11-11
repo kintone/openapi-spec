@@ -8603,15 +8603,7 @@
         ],
         "security": [
           {
-            "apiToken": []
-          },
-          {
             "passwordAuth": []
-          },
-          {
-            "oauth2": [
-              "k:app_settings:write"
-            ]
           }
         ],
         "requestBody": {
@@ -8720,7 +8712,8 @@
                       "type": "array"
                     },
                     "nextPageToken": {
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     }
                   },
                   "type": "object"
@@ -9736,6 +9729,139 @@
             "description": "Guest space ID (the number that appears in the space URL /k/#/space/<ID> when the space is open in a browser)."
           }
         ]
+      }
+    },
+    "/k/guest/v1/search.json": {
+      "post": {
+        "operationId": "postSearchForGuest",
+        "summary": "Post search (all participating guest spaces)",
+        "tags": [
+          "SEARCHS"
+        ],
+        "security": [
+          {
+            "passwordAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "types": {
+                    "items": {
+                      "enum": [
+                        "RECORD",
+                        "RECORD_COMMENT",
+                        "SPACE",
+                        "THREAD",
+                        "THREAD_COMMENT",
+                        "PEOPLE_COMMENT",
+                        "MESSAGE_COMMENT",
+                        "ATTACHMENT"
+                      ],
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "excludeScopes": {
+                    "items": {
+                      "$ref": "#/components/schemas/SearchPostScopeForm"
+                    },
+                    "type": "array"
+                  },
+                  "creators": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "includeSynonyms": {
+                    "type": "boolean"
+                  },
+                  "query": {
+                    "items": {
+                      "$ref": "#/components/schemas/SearchPostQueryForm"
+                    },
+                    "type": "array"
+                  },
+                  "limit": {
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "scopes": {
+                    "items": {
+                      "$ref": "#/components/schemas/SearchPostScopeForm"
+                    },
+                    "type": "array"
+                  },
+                  "createdBefore": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "sort": {
+                    "properties": {
+                      "by": {
+                        "enum": [
+                          "RELEVANCE",
+                          "CREATED_AT"
+                        ],
+                        "type": "string"
+                      },
+                      "order": {
+                        "enum": [
+                          "ASC",
+                          "DESC"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "pageToken": {
+                    "type": "string"
+                  },
+                  "createdAfter": {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "query"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success case of search/post",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "hits": {
+                      "items": {
+                        "$ref": "#/components/schemas/SearchPostHit"
+                      },
+                      "type": "array"
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
       }
     },
     "/k/v1/app.json": {
@@ -17366,15 +17492,7 @@
         ],
         "security": [
           {
-            "apiToken": []
-          },
-          {
             "passwordAuth": []
-          },
-          {
-            "oauth2": [
-              "k:app_settings:write"
-            ]
           }
         ],
         "requestBody": {
@@ -17483,7 +17601,8 @@
                       "type": "array"
                     },
                     "nextPageToken": {
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     }
                   },
                   "type": "object"
@@ -40811,8 +40930,7 @@
                 "type": "object"
               },
               "commentId": {
-                "format": "int64",
-                "type": "integer"
+                "type": "string"
               }
             },
             "type": "object"
@@ -40821,7 +40939,8 @@
             "properties": {
               "createdAt": {
                 "format": "date-time",
-                "type": "string"
+                "type": "string",
+                "nullable": true
               },
               "creator": {
                 "properties": {
@@ -40832,7 +40951,8 @@
                     "type": "string"
                   }
                 },
-                "type": "object"
+                "type": "object",
+                "nullable": true
               },
               "name": {
                 "type": "string"
@@ -40863,18 +40983,19 @@
           "record": {
             "properties": {
               "recordId": {
-                "format": "int64",
-                "type": "integer"
+                "type": "string"
               },
               "spaceName": {
-                "type": "string"
+                "type": "string",
+                "nullable": true
               },
               "recordTitle": {
                 "type": "string"
               },
               "createdAt": {
                 "format": "date-time",
-                "type": "string"
+                "type": "string",
+                "nullable": true
               },
               "spaceId": {
                 "type": "string",
@@ -40889,7 +41010,8 @@
                     "type": "string"
                   }
                 },
-                "type": "object"
+                "type": "object",
+                "nullable": true
               },
               "matchedFields": {
                 "items": {
@@ -40935,12 +41057,11 @@
                 "type": "object"
               },
               "replyId": {
-                "format": "int64",
-                "type": "integer"
+                "type": "string",
+                "nullable": true
               },
               "commentId": {
-                "format": "int64",
-                "type": "integer"
+                "type": "string"
               },
               "threadName": {
                 "type": "string"
@@ -40977,12 +41098,11 @@
                 "type": "object"
               },
               "replyId": {
-                "format": "int64",
-                "type": "integer"
+                "type": "string",
+                "nullable": true
               },
               "commentId": {
-                "format": "int64",
-                "type": "integer"
+                "type": "string"
               }
             },
             "type": "object"
@@ -40990,11 +41110,11 @@
           "recordComment": {
             "properties": {
               "recordId": {
-                "format": "int64",
-                "type": "integer"
+                "type": "string"
               },
               "spaceName": {
-                "type": "string"
+                "type": "string",
+                "nullable": true
               },
               "recordTitle": {
                 "type": "string"
@@ -41025,8 +41145,7 @@
                 "type": "string"
               },
               "commentId": {
-                "format": "int64",
-                "type": "integer"
+                "type": "string"
               }
             },
             "type": "object"

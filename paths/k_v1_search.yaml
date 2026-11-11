@@ -5,10 +5,7 @@
     tags:
       - SEARCHS
     security:
-      - apiToken: []
       - passwordAuth: []
-      - oauth2:
-          - k:app_settings:write
     requestBody:
       required: true
       content:
@@ -86,6 +83,7 @@
                   type: array
                 nextPageToken:
                   type: string
+                  nullable: true
               type: object
       4XX:
         $ref: ../components/responses/Error.yaml
