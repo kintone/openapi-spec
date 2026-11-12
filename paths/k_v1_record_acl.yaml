@@ -8,7 +8,7 @@
       - apiToken: []
       - passwordAuth: []
       - oauth2:
-          - k:app_record:read
+          - k:app_settings:read
     parameters:
       - name: app
         in: query
@@ -63,7 +63,7 @@
       - apiToken: []
       - passwordAuth: []
       - oauth2:
-          - k:app_record:write
+          - k:app_settings:write
     requestBody:
       required: true
       content:
