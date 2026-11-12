@@ -73,8 +73,9 @@ represents a distinct version of the specification.
   Options** checkboxes left unchecked. Endpoints that need a preview feature switched on are not
   described.
 - English only.
-- The OAuth2 scope on each operation is a best-effort estimate: Kintone publishes no
-  machine-readable mapping from endpoint to scope.
+- OAuth2 appears on an operation only once the official list of OAuth scopes covers that API. A
+  newly added API may accept OAuth before the list is updated; until then, the specification does
+  not mention OAuth for it.
 - Session authentication is out of scope. It is meant for customizations running inside a browser,
   not for the clients this specification is aimed at.
 - These files come from an in-house generator that is not published, and they are not written against

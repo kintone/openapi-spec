@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Kintone REST API
-  version: 2026.11.11
+  version: 2026.11.13
   description: |-
     OpenAPI specification for Kintone's REST API.
 
@@ -13,7 +13,7 @@ info:
     ## Limitations (Kintone-specific)
     - **Record schemas are dynamic per app.** Field codes are arbitrary keys (`additionalProperties`) and values are represented as a union per field type (`oneOf`/`anyOf` with a `type` discriminator). The exact types of an individual app cannot be fully expressed, so supplement real app types with examples / fixtures.
     - **When a GET query is long**, you can avoid URL-length limits by sending `POST` with the `X-HTTP-Method-Override: GET` header and putting parameters in the body (the server processes it as GET). Such GET operations are marked with `x-kintone-method-override: true`. No duplicate operation is defined; the GET definition is authoritative.
-    - **Authentication differs per endpoint.** Which methods (API token / password / OAuth2) each API accepts is taken directly from the "Authentication" row of the official documentation pages (cybozu.dev) via harvest and reflected in `security`. Management APIs that do not support tokens (space/guest administration, app move, plugins, statistics, etc.) end up as password authentication only. Only the OAuth2 scope each operation needs is a best-effort estimate derived from the path family, because no machine-readable scope mapping is published.
+    - **Authentication differs per endpoint.** Which methods (API token / password / OAuth2) each API accepts is taken directly from the "Authentication" row of the official documentation pages (cybozu.dev) via harvest and reflected in `security`. Management APIs that do not support tokens (space/guest administration, app move, plugins, statistics, etc.) end up as password authentication only. The OAuth2 scope each operation needs is taken the same way from the scope list in the official documentation; an API that the list does not cover yet has no OAuth2 entry.
 
     Copyright (c) 2026 Cybozu, Inc. Licensed under MIT No Attribution (SPDX: MIT-0), which does not require attribution.
   contact:
@@ -4667,7 +4667,7 @@ paths:
         - apiToken: []
         - passwordAuth: []
         - oauth2:
-            - k:app_record:read
+            - k:app_settings:read
       parameters:
         - name: guestSpaceId
           in: path
@@ -4729,7 +4729,7 @@ paths:
         - apiToken: []
         - passwordAuth: []
         - oauth2:
-            - k:app_record:write
+            - k:app_settings:write
       requestBody:
         required: true
         content:
@@ -10693,7 +10693,7 @@ paths:
         - apiToken: []
         - passwordAuth: []
         - oauth2:
-            - k:app_record:read
+            - k:app_settings:read
       parameters:
         - name: app
           in: query
@@ -10748,7 +10748,7 @@ paths:
         - apiToken: []
         - passwordAuth: []
         - oauth2:
-            - k:app_record:write
+            - k:app_settings:write
       requestBody:
         required: true
         content:
