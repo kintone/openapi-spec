@@ -6,8 +6,10 @@ properties:
   maxValue:
     format: int64
     type: integer
+    nullable: true
   defaultValue:
     type: string
+    nullable: true
   unitPosition:
     type: string
   label:
@@ -47,13 +49,16 @@ properties:
   minValue:
     format: int64
     type: integer
+    nullable: true
   unit:
     type: string
+    nullable: true
   unique:
     type: boolean
   displayScale:
     format: int64
     type: integer
+    nullable: true
   digit:
     type: boolean
 type: object

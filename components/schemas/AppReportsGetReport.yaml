@@ -13,6 +13,7 @@ properties:
       active:
         type: boolean
     type: object
+    nullable: true
   chartType:
     enum:
       - PIE

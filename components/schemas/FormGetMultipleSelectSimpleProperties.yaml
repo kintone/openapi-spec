@@ -7,6 +7,7 @@ properties:
     items:
       type: string
     type: array
+    nullable: true
   options:
     items:
       type: string

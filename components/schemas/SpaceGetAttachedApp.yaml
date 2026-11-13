@@ -1,7 +1,6 @@
 properties:
   threadId:
     type: string
-    nullable: true
   createdAt:
     format: date-time
     type: string

@@ -5,6 +5,7 @@ properties:
     type: string
   defaultValue:
     type: string
+    nullable: true
   label:
     type: string
   type:

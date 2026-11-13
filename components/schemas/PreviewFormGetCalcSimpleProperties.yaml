@@ -3,6 +3,7 @@ properties:
     type: boolean
   unit:
     type: string
+    nullable: true
   expression:
     type: string
   code:
@@ -54,6 +55,7 @@ properties:
   displayScale:
     format: int64
     type: integer
+    nullable: true
   hideExpression:
     type: boolean
   required:

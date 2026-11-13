@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Kintone REST API
-  version: 2026.11.13
+  version: 2026.11.14
   description: |-
     OpenAPI specification for Kintone's REST API.
 
@@ -773,6 +773,7 @@ paths:
                   timezone:
                     format: timezone
                     type: string
+                    nullable: true
                   notifications:
                     items:
                       $ref: '#/components/schemas/AppNotificationsReminderGetNotification'
@@ -1077,10 +1078,12 @@ paths:
                     items:
                       $ref: '#/components/schemas/AppStatusGetActionForm'
                     type: array
+                    nullable: true
                   states:
                     type: object
                     additionalProperties:
                       $ref: '#/components/schemas/AppStatusGetStateForm'
+                    nullable: true
                   revision:
                     type: string
                 type: object
@@ -3366,6 +3369,7 @@ paths:
                   timezone:
                     format: timezone
                     type: string
+                    nullable: true
                   notifications:
                     items:
                       $ref: '#/components/schemas/PreviewAppNotificationsReminderGetNotification'
@@ -3966,10 +3970,12 @@ paths:
                     items:
                       $ref: '#/components/schemas/PreviewAppStatusGetActionForm'
                     type: array
+                    nullable: true
                   states:
                     type: object
                     additionalProperties:
                       $ref: '#/components/schemas/PreviewAppStatusGetStateForm'
+                    nullable: true
                   revision:
                     type: string
                 type: object
@@ -5644,7 +5650,6 @@ paths:
                     type: string
                   totalCount:
                     type: string
-                    nullable: true
                 type: object
                 required:
                   - id
@@ -5911,8 +5916,10 @@ paths:
                     type: boolean
                   body:
                     type: string
+                    nullable: true
                   showAppList:
                     type: boolean
+                    nullable: true
                   coverUrl:
                     type: string
                   coverType:
@@ -5936,14 +5943,18 @@ paths:
                     type: boolean
                   showMemberList:
                     type: boolean
+                    nullable: true
                   showRelatedLinkList:
                     type: boolean
+                    nullable: true
                   id:
                     type: string
                   showAnnouncement:
                     type: boolean
+                    nullable: true
                   showThreadList:
                     type: boolean
+                    nullable: true
                   defaultThread:
                     type: string
                 type: object
@@ -7263,6 +7274,7 @@ paths:
                   timezone:
                     format: timezone
                     type: string
+                    nullable: true
                   notifications:
                     items:
                       $ref: '#/components/schemas/AppNotificationsReminderGetNotification'
@@ -7539,10 +7551,12 @@ paths:
                     items:
                       $ref: '#/components/schemas/AppStatusGetActionForm'
                     type: array
+                    nullable: true
                   states:
                     type: object
                     additionalProperties:
                       $ref: '#/components/schemas/AppStatusGetStateForm'
+                    nullable: true
                   revision:
                     type: string
                 type: object
@@ -9535,6 +9549,7 @@ paths:
                   timezone:
                     format: timezone
                     type: string
+                    nullable: true
                   notifications:
                     items:
                       $ref: '#/components/schemas/PreviewAppNotificationsReminderGetNotification'
@@ -10075,10 +10090,12 @@ paths:
                     items:
                       $ref: '#/components/schemas/PreviewAppStatusGetActionForm'
                     type: array
+                    nullable: true
                   states:
                     type: object
                     additionalProperties:
                       $ref: '#/components/schemas/PreviewAppStatusGetStateForm'
+                    nullable: true
                   revision:
                     type: string
                 type: object
@@ -11598,7 +11615,6 @@ paths:
                     type: string
                   totalCount:
                     type: string
-                    nullable: true
                 type: object
                 required:
                   - id
@@ -11826,8 +11842,10 @@ paths:
                     type: boolean
                   body:
                     type: string
+                    nullable: true
                   showAppList:
                     type: boolean
+                    nullable: true
                   coverUrl:
                     type: string
                   coverType:
@@ -11851,14 +11869,18 @@ paths:
                     type: boolean
                   showMemberList:
                     type: boolean
+                    nullable: true
                   showRelatedLinkList:
                     type: boolean
+                    nullable: true
                   id:
                     type: string
                   showAnnouncement:
                     type: boolean
+                    nullable: true
                   showThreadList:
                     type: boolean
+                    nullable: true
                   defaultThread:
                     type: string
                 type: object
@@ -12397,6 +12419,7 @@ components:
           properties:
             code:
               type: string
+              nullable: true
             type:
               enum:
                 - USER
@@ -13243,6 +13266,7 @@ components:
             filterCond:
               type: string
           type: object
+          nullable: true
         code:
           maxLength: 128
           minLength: 1
@@ -13745,6 +13769,7 @@ components:
                 type: string
               type: array
           type: object
+          nullable: true
       required:
         - type
       type: object
@@ -15708,6 +15733,7 @@ components:
             active:
               type: boolean
           type: object
+          nullable: true
         chartType:
           enum:
             - PIE
@@ -15768,6 +15794,7 @@ components:
             active:
               type: boolean
           type: object
+          nullable: true
         chartType:
           enum:
             - PIE
@@ -16118,6 +16145,7 @@ components:
           properties:
             code:
               type: string
+              nullable: true
             type:
               enum:
                 - USER
@@ -16913,6 +16941,7 @@ components:
           type: boolean
         unit:
           type: string
+          nullable: true
         expression:
           type: string
         code:
@@ -16964,6 +16993,7 @@ components:
         displayScale:
           format: int64
           type: integer
+          nullable: true
         hideExpression:
           type: boolean
         required:
@@ -16977,8 +17007,10 @@ components:
           type: string
         defaultValue:
           type: string
+          nullable: true
         defaultExpression:
           type: string
+          nullable: true
         unique:
           type: boolean
         label:
@@ -17024,8 +17056,10 @@ components:
           type: string
         defaultValue:
           type: string
+          nullable: true
         defaultExpression:
           type: string
+          nullable: true
         unique:
           type: boolean
         label:
@@ -17072,8 +17106,10 @@ components:
         maxValue:
           format: int64
           type: integer
+          nullable: true
         defaultValue:
           type: string
+          nullable: true
         unitPosition:
           type: string
         label:
@@ -17113,13 +17149,16 @@ components:
         minValue:
           format: int64
           type: integer
+          nullable: true
         unit:
           type: string
+          nullable: true
         unique:
           type: boolean
         displayScale:
           format: int64
           type: integer
+          nullable: true
         digit:
           type: boolean
       type: object
@@ -17131,6 +17170,7 @@ components:
           type: string
         defaultValue:
           type: string
+          nullable: true
         label:
           type: string
         type:
@@ -17330,9 +17370,11 @@ components:
           type: string
         defaultValue:
           type: string
+          nullable: true
         minLength:
           format: int64
           type: integer
+          nullable: true
         unique:
           type: boolean
         label:
@@ -17370,6 +17412,7 @@ components:
         maxLength:
           format: int64
           type: integer
+          nullable: true
         required:
           type: boolean
       type: object
@@ -17382,6 +17425,7 @@ components:
         relatedApp:
           format: int64
           type: integer
+          nullable: true
         label:
           type: string
         type:
@@ -17425,6 +17469,7 @@ components:
           type: string
         defaultValue:
           type: string
+          nullable: true
         label:
           type: string
         type:
@@ -17470,6 +17515,7 @@ components:
           items:
             type: string
           type: array
+          nullable: true
         options:
           items:
             type: string
@@ -17559,6 +17605,7 @@ components:
         relatedApp:
           format: int64
           type: integer
+          nullable: true
         label:
           type: string
         type:
@@ -17602,9 +17649,11 @@ components:
           type: string
         defaultValue:
           type: string
+          nullable: true
         minLength:
           format: int64
           type: integer
+          nullable: true
         unique:
           type: boolean
         label:
@@ -17642,6 +17691,7 @@ components:
         maxLength:
           format: int64
           type: integer
+          nullable: true
         hideExpression:
           type: boolean
         required:
@@ -17655,6 +17705,7 @@ components:
           type: string
         defaultValue:
           type: string
+          nullable: true
         options:
           items:
             type: string
@@ -17803,8 +17854,10 @@ components:
           type: string
         defaultValue:
           type: string
+          nullable: true
         defaultExpression:
           type: string
+          nullable: true
         label:
           type: string
         type:
@@ -18172,6 +18225,7 @@ components:
           properties:
             code:
               type: string
+              nullable: true
             type:
               enum:
                 - USER
@@ -19256,6 +19310,7 @@ components:
             filterCond:
               type: string
           type: object
+          nullable: true
         code:
           maxLength: 128
           minLength: 1
@@ -19758,6 +19813,7 @@ components:
                 type: string
               type: array
           type: object
+          nullable: true
       required:
         - type
       type: object
@@ -30666,6 +30722,7 @@ components:
             active:
               type: boolean
           type: object
+          nullable: true
         chartType:
           enum:
             - PIE
@@ -30726,6 +30783,7 @@ components:
             active:
               type: boolean
           type: object
+          nullable: true
         chartType:
           enum:
             - PIE
@@ -31783,6 +31841,7 @@ components:
           properties:
             code:
               type: string
+              nullable: true
             type:
               enum:
                 - USER
@@ -32493,6 +32552,7 @@ components:
           type: boolean
         unit:
           type: string
+          nullable: true
         expression:
           type: string
         code:
@@ -32544,6 +32604,7 @@ components:
         displayScale:
           format: int64
           type: integer
+          nullable: true
         hideExpression:
           type: boolean
         required:
@@ -32557,8 +32618,10 @@ components:
           type: string
         defaultValue:
           type: string
+          nullable: true
         defaultExpression:
           type: string
+          nullable: true
         unique:
           type: boolean
         label:
@@ -32604,8 +32667,10 @@ components:
           type: string
         defaultValue:
           type: string
+          nullable: true
         defaultExpression:
           type: string
+          nullable: true
         unique:
           type: boolean
         label:
@@ -32652,8 +32717,10 @@ components:
         maxValue:
           format: int64
           type: integer
+          nullable: true
         defaultValue:
           type: string
+          nullable: true
         unitPosition:
           type: string
         label:
@@ -32693,13 +32760,16 @@ components:
         minValue:
           format: int64
           type: integer
+          nullable: true
         unit:
           type: string
+          nullable: true
         unique:
           type: boolean
         displayScale:
           format: int64
           type: integer
+          nullable: true
         digit:
           type: boolean
       type: object
@@ -32711,6 +32781,7 @@ components:
           type: string
         defaultValue:
           type: string
+          nullable: true
         label:
           type: string
         type:
@@ -32910,9 +32981,11 @@ components:
           type: string
         defaultValue:
           type: string
+          nullable: true
         minLength:
           format: int64
           type: integer
+          nullable: true
         unique:
           type: boolean
         label:
@@ -32950,6 +33023,7 @@ components:
         maxLength:
           format: int64
           type: integer
+          nullable: true
         required:
           type: boolean
       type: object
@@ -32962,6 +33036,7 @@ components:
         relatedApp:
           format: int64
           type: integer
+          nullable: true
         label:
           type: string
         type:
@@ -33005,6 +33080,7 @@ components:
           type: string
         defaultValue:
           type: string
+          nullable: true
         label:
           type: string
         type:
@@ -33050,6 +33126,7 @@ components:
           items:
             type: string
           type: array
+          nullable: true
         options:
           items:
             type: string
@@ -33139,6 +33216,7 @@ components:
         relatedApp:
           format: int64
           type: integer
+          nullable: true
         label:
           type: string
         type:
@@ -33182,9 +33260,11 @@ components:
           type: string
         defaultValue:
           type: string
+          nullable: true
         minLength:
           format: int64
           type: integer
+          nullable: true
         unique:
           type: boolean
         label:
@@ -33222,6 +33302,7 @@ components:
         maxLength:
           format: int64
           type: integer
+          nullable: true
         hideExpression:
           type: boolean
         required:
@@ -33235,6 +33316,7 @@ components:
           type: string
         defaultValue:
           type: string
+          nullable: true
         options:
           items:
             type: string
@@ -33383,8 +33465,10 @@ components:
           type: string
         defaultValue:
           type: string
+          nullable: true
         defaultExpression:
           type: string
+          nullable: true
         label:
           type: string
         type:
@@ -34326,10 +34410,8 @@ components:
               type: string
             threadId:
               type: string
-              nullable: true
             spaceId:
               type: string
-              nullable: true
             createdAt:
               format: date-time
               type: string
@@ -34408,10 +34490,8 @@ components:
               type: string
             threadId:
               type: string
-              nullable: true
             spaceId:
               type: string
-              nullable: true
             createdAt:
               format: date-time
               type: string
@@ -34444,7 +34524,6 @@ components:
               type: string
             spaceId:
               type: string
-              nullable: true
             createdAt:
               format: date-time
               type: string
@@ -34607,7 +34686,6 @@ components:
       properties:
         threadId:
           type: string
-          nullable: true
         createdAt:
           format: date-time
           type: string

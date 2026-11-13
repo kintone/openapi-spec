@@ -5,6 +5,7 @@ properties:
     type: string
   defaultValue:
     type: string
+    nullable: true
   options:
     items:
       type: string
