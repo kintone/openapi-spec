@@ -19,6 +19,7 @@ properties:
     properties:
       code:
         type: string
+        nullable: true
       type:
         enum:
           - USER

@@ -73,6 +73,9 @@ represents a distinct version of the specification.
   Options** checkboxes left unchecked. Endpoints that need a preview feature switched on are not
   described.
 - English only.
+- A newly added API appears here only after its English documentation is published (and, if it
+  accepts OAuth, after the list of OAuth scopes covers it), so it can show up a few days after the
+  API itself is released.
 - OAuth2 appears on an operation only once the official list of OAuth scopes covers that API. A
   newly added API may accept OAuth before the list is updated; until then, the specification does
   not mention OAuth for it.

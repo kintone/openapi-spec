@@ -55,10 +55,12 @@
                   items:
                     $ref: ../components/schemas/PreviewAppStatusGetActionForm.yaml
                   type: array
+                  nullable: true
                 states:
                   type: object
                   additionalProperties:
                     $ref: ../components/schemas/PreviewAppStatusGetStateForm.yaml
+                  nullable: true
                 revision:
                   type: string
               type: object

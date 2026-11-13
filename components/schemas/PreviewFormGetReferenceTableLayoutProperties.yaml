@@ -6,6 +6,7 @@ properties:
   relatedApp:
     format: int64
     type: integer
+    nullable: true
   label:
     type: string
   type:

@@ -97,8 +97,10 @@
                   type: boolean
                 body:
                   type: string
+                  nullable: true
                 showAppList:
                   type: boolean
+                  nullable: true
                 coverUrl:
                   type: string
                 coverType:
@@ -122,14 +124,18 @@
                   type: boolean
                 showMemberList:
                   type: boolean
+                  nullable: true
                 showRelatedLinkList:
                   type: boolean
+                  nullable: true
                 id:
                   type: string
                 showAnnouncement:
                   type: boolean
+                  nullable: true
                 showThreadList:
                   type: boolean
+                  nullable: true
                 defaultThread:
                   type: string
               type: object

@@ -54,6 +54,7 @@
                 timezone:
                   format: timezone
                   type: string
+                  nullable: true
                 notifications:
                   items:
                     $ref: ../components/schemas/PreviewAppNotificationsReminderGetNotification.yaml

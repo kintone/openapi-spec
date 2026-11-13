@@ -7,9 +7,11 @@ properties:
     type: string
   defaultValue:
     type: string
+    nullable: true
   minLength:
     format: int64
     type: integer
+    nullable: true
   unique:
     type: boolean
   label:
@@ -47,6 +49,7 @@ properties:
   maxLength:
     format: int64
     type: integer
+    nullable: true
   hideExpression:
     type: boolean
   required:

@@ -92,10 +92,8 @@ properties:
         type: string
       threadId:
         type: string
-        nullable: true
       spaceId:
         type: string
-        nullable: true
       createdAt:
         format: date-time
         type: string
@@ -174,10 +172,8 @@ properties:
         type: string
       threadId:
         type: string
-        nullable: true
       spaceId:
         type: string
-        nullable: true
       createdAt:
         format: date-time
         type: string
@@ -210,7 +206,6 @@ properties:
         type: string
       spaceId:
         type: string
-        nullable: true
       createdAt:
         format: date-time
         type: string

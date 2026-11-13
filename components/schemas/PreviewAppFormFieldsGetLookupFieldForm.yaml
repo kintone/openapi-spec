@@ -27,6 +27,7 @@ properties:
       filterCond:
         type: string
     type: object
+    nullable: true
   code:
     maxLength: 128
     minLength: 1

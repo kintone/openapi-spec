@@ -48,10 +48,12 @@
                   items:
                     $ref: ../components/schemas/AppStatusGetActionForm.yaml
                   type: array
+                  nullable: true
                 states:
                   type: object
                   additionalProperties:
                     $ref: ../components/schemas/AppStatusGetStateForm.yaml
+                  nullable: true
                 revision:
                   type: string
               type: object
