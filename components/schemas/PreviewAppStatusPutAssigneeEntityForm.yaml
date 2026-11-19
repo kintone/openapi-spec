@@ -5,7 +5,7 @@ properties:
       The **Include affiliated departments** settings of the department.
       - `true`: Affiliated departments are included as Assignees
       - `false`: Affiliated departments are not included as Assignees
-      If ignored, this value is false.
+      If omitted, this value is false.
   entity:
     properties:
       code:

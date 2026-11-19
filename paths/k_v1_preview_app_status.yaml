@@ -28,13 +28,13 @@
             - zh
           type: string
         description: |-
-          The localized language to retrieve the data in:
+          The language of the names to retrieve. Specify this when localized names are set for status names, action names, and similar items.
           - `default`: retrieves the default names
           - `en`: retrieves the localized English names
           - `zh`: retrieves the localized Chinese names
           - `ja`: retrieves the localized Japanese names
-          - `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.
-          If ignored, the default names will be retrieved.
+          - `user`: retrieves the localized names in the display language set by the user running the API*
+          If omitted, the default names are retrieved.
     responses:
       '200':
         description: success case of preview/app/status/get
@@ -83,9 +83,9 @@
               enable:
                 type: boolean
                 description: |-
-                  The on/off settings of the process management settings.
-                  - `true`: Process management settings is enabled.
-                  - `false`: Process management settings is disabled.
+                  Whether process management is enabled.
+                  - `true`: Process management is enabled.
+                  - `false`: Process management is disabled.
               actions:
                 items:
                   $ref: ../components/schemas/PreviewAppStatusPutActionForm.yaml
@@ -95,9 +95,9 @@
                 format: int64
                 type: integer
                 description: |-
-                  Specify the revision number of the settings that will be deployed.
-                  The request will fail if the revision number is not the latest revision.
-                  The revision will not be checked if this parameter is ignored, or `-1` is specified.
+                  The expected revision number of the App settings.
+                  If it does not match the actual revision number, the request fails and the settings are not changed.
+                  The revision number is not checked if this parameter is omitted or `-1` is specified.
               states:
                 type: object
                 additionalProperties:

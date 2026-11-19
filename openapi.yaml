@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Kintone REST API
-  version: 2026.11.14
+  version: 2026.11.20
   description: |-
     OpenAPI specification for Kintone's REST API.
 
@@ -1058,13 +1058,13 @@ paths:
               - zh
             type: string
           description: |-
-            The localized language to retrieve the data in:
+            The language of the names to retrieve. Specify this when localized names are set for status names, action names, and similar items.
             - `default`: retrieves the default names
             - `en`: retrieves the localized English names
             - `zh`: retrieves the localized Chinese names
             - `ja`: retrieves the localized Japanese names
-            - `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.
-            If ignored, the default names will be retrieved.
+            - `user`: retrieves the localized names in the display language set by the user running the API*
+            If omitted, the default names are retrieved.
       responses:
         '200':
           description: success case of app/status/get
@@ -3950,13 +3950,13 @@ paths:
               - zh
             type: string
           description: |-
-            The localized language to retrieve the data in:
+            The language of the names to retrieve. Specify this when localized names are set for status names, action names, and similar items.
             - `default`: retrieves the default names
             - `en`: retrieves the localized English names
             - `zh`: retrieves the localized Chinese names
             - `ja`: retrieves the localized Japanese names
-            - `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.
-            If ignored, the default names will be retrieved.
+            - `user`: retrieves the localized names in the display language set by the user running the API*
+            If omitted, the default names are retrieved.
       responses:
         '200':
           description: success case of preview/app/status/get
@@ -4005,9 +4005,9 @@ paths:
                 enable:
                   type: boolean
                   description: |-
-                    The on/off settings of the process management settings.
-                    - `true`: Process management settings is enabled.
-                    - `false`: Process management settings is disabled.
+                    Whether process management is enabled.
+                    - `true`: Process management is enabled.
+                    - `false`: Process management is disabled.
                 actions:
                   items:
                     $ref: '#/components/schemas/PreviewAppStatusPutActionForm'
@@ -4017,9 +4017,9 @@ paths:
                   format: int64
                   type: integer
                   description: |-
-                    Specify the revision number of the settings that will be deployed.
-                    The request will fail if the revision number is not the latest revision.
-                    The revision will not be checked if this parameter is ignored, or `-1` is specified.
+                    The expected revision number of the App settings.
+                    If it does not match the actual revision number, the request fails and the settings are not changed.
+                    The revision number is not checked if this parameter is omitted or `-1` is specified.
                 states:
                   type: object
                   additionalProperties:
@@ -5747,30 +5747,70 @@ paths:
                       - ATTACHMENT
                     type: string
                   type: array
+                  description: |-
+                    The types of data to search.
+                    Specify any of the following values:
+                    - `RECORD`: Records
+                    - `RECORD_COMMENT`: Record comments
+                    - `SPACE`: Spaces
+                    - `THREAD`: Threads
+                    - `THREAD_COMMENT`: Thread comments
+                    - `PEOPLE_COMMENT`: People comments
+                    - `MESSAGE_COMMENT`: Message comments
+                    - `ATTACHMENT`: Attachments
+                    If ignored, all data types are searched.
                 excludeScopes:
                   items:
                     $ref: '#/components/schemas/SearchPostScopeForm'
                   type: array
+                  description: |-
+                    The scopes to exclude from the search.
+                    The maximum limit is 20 scopes.
+                    If multiple scopes are specified, data that meets all conditions is returned.
+                    If both `scopes` and `excludeScopes` are specified, data that meets both conditions is returned. Therefore, `excludeScopes` takes priority where the two scopes overlap.
                 creators:
                   items:
                     type: string
                   type: array
+                  description: |-
+                    The log in names of the creators.
+                    The maximum limit is 20 log in names.
                 includeSynonyms:
                   type: boolean
+                  description: |-
+                    Whether to include spelling variations, abbreviations, and synonyms of the keywords in the search.
+                    If ignored, this value is `false`.
                 query:
                   items:
                     $ref: '#/components/schemas/SearchPostQueryForm'
                   type: array
+                  description: |-
+                    The search conditions.
+                    Specify between 1 and 20 conditions.
+                    If multiple conditions are specified, data that meets all conditions is returned.
                 limit:
                   format: int64
                   type: integer
+                  description: |-
+                    The maximum number of results to retrieve.
+                    Specify a value between 1 and 20.
+                    If ignored, this value is `20`.
+                    The response may contain fewer results than the limit, even if more matching data remains. Use the `nextPageToken` property in the response to check whether more matching data remains.
                 scopes:
                   items:
                     $ref: '#/components/schemas/SearchPostScopeForm'
                   type: array
+                  description: |-
+                    The search scopes.
+                    The maximum limit is 20 scopes.
+                    If multiple scopes are specified, data that meets any of the scopes is returned.
                 createdBefore:
                   format: date-time
                   type: string
+                  description: |-
+                    The latest created datetime.
+                    Returns data created on or before the specified datetime. This value cannot be earlier than `createdAfter`.
+                    For more information on the datetime format, refer to the [Kintone REST API Overview](https://kintone.dev/en/id/d509b956c8f84c45e1e129ae/#date-and-time-for-requests) article.
                 sort:
                   properties:
                     by:
@@ -5778,17 +5818,39 @@ paths:
                         - RELEVANCE
                         - CREATED_AT
                       type: string
+                      description: |-
+                        The sort criteria.
+                        Specify one of the following values:
+                        - `RELEVANCE`: Relevance to the keywords
+                        - `CREATED_AT`: Created datetime
+                        If ignored, this value is `RELEVANCE`.
                     order:
                       enum:
                         - ASC
                         - DESC
                       type: string
+                      description: |-
+                        The sort direction.
+                        Specify one of the following values:
+                        - `ASC`: Ascending order
+                        - `DESC`: Descending order
+                        If ignored, this value is `DESC`.
+                        `ASC` cannot be specified if `sort.by` is `RELEVANCE`.
                   type: object
+                  description: The sort conditions.
                 pageToken:
                   type: string
+                  description: |-
+                    The token used to retrieve the next page of search results.
+                    Ignore this parameter in the first request. To retrieve the next page, specify the `nextPageToken` value from the previous response.
+                    The token expires 30 minutes after it is issued. The request will fail if an expired token is specified.
                 createdAfter:
                   format: date-time
                   type: string
+                  description: |-
+                    The earliest created datetime.
+                    Returns data created on or after the specified datetime. This value cannot be later than `createdBefore`.
+                    For more information on the datetime format, refer to the [Kintone REST API Overview](https://kintone.dev/en/id/d509b956c8f84c45e1e129ae/#date-and-time-for-requests) article.
               required:
                 - query
               type: object
@@ -5809,6 +5871,7 @@ paths:
                 type: object
         4XX:
           $ref: '#/components/responses/Error'
+      description: Searches across Kintone, including App records and Thread posts.
       parameters:
         - name: guestSpaceId
           in: path
@@ -6573,30 +6636,70 @@ paths:
                       - ATTACHMENT
                     type: string
                   type: array
+                  description: |-
+                    The types of data to search.
+                    Specify any of the following values:
+                    - `RECORD`: Records
+                    - `RECORD_COMMENT`: Record comments
+                    - `SPACE`: Spaces
+                    - `THREAD`: Threads
+                    - `THREAD_COMMENT`: Thread comments
+                    - `PEOPLE_COMMENT`: People comments
+                    - `MESSAGE_COMMENT`: Message comments
+                    - `ATTACHMENT`: Attachments
+                    If ignored, all data types are searched.
                 excludeScopes:
                   items:
                     $ref: '#/components/schemas/SearchPostScopeForm'
                   type: array
+                  description: |-
+                    The scopes to exclude from the search.
+                    The maximum limit is 20 scopes.
+                    If multiple scopes are specified, data that meets all conditions is returned.
+                    If both `scopes` and `excludeScopes` are specified, data that meets both conditions is returned. Therefore, `excludeScopes` takes priority where the two scopes overlap.
                 creators:
                   items:
                     type: string
                   type: array
+                  description: |-
+                    The log in names of the creators.
+                    The maximum limit is 20 log in names.
                 includeSynonyms:
                   type: boolean
+                  description: |-
+                    Whether to include spelling variations, abbreviations, and synonyms of the keywords in the search.
+                    If ignored, this value is `false`.
                 query:
                   items:
                     $ref: '#/components/schemas/SearchPostQueryForm'
                   type: array
+                  description: |-
+                    The search conditions.
+                    Specify between 1 and 20 conditions.
+                    If multiple conditions are specified, data that meets all conditions is returned.
                 limit:
                   format: int64
                   type: integer
+                  description: |-
+                    The maximum number of results to retrieve.
+                    Specify a value between 1 and 20.
+                    If ignored, this value is `20`.
+                    The response may contain fewer results than the limit, even if more matching data remains. Use the `nextPageToken` property in the response to check whether more matching data remains.
                 scopes:
                   items:
                     $ref: '#/components/schemas/SearchPostScopeForm'
                   type: array
+                  description: |-
+                    The search scopes.
+                    The maximum limit is 20 scopes.
+                    If multiple scopes are specified, data that meets any of the scopes is returned.
                 createdBefore:
                   format: date-time
                   type: string
+                  description: |-
+                    The latest created datetime.
+                    Returns data created on or before the specified datetime. This value cannot be earlier than `createdAfter`.
+                    For more information on the datetime format, refer to the [Kintone REST API Overview](https://kintone.dev/en/id/d509b956c8f84c45e1e129ae/#date-and-time-for-requests) article.
                 sort:
                   properties:
                     by:
@@ -6604,17 +6707,39 @@ paths:
                         - RELEVANCE
                         - CREATED_AT
                       type: string
+                      description: |-
+                        The sort criteria.
+                        Specify one of the following values:
+                        - `RELEVANCE`: Relevance to the keywords
+                        - `CREATED_AT`: Created datetime
+                        If ignored, this value is `RELEVANCE`.
                     order:
                       enum:
                         - ASC
                         - DESC
                       type: string
+                      description: |-
+                        The sort direction.
+                        Specify one of the following values:
+                        - `ASC`: Ascending order
+                        - `DESC`: Descending order
+                        If ignored, this value is `DESC`.
+                        `ASC` cannot be specified if `sort.by` is `RELEVANCE`.
                   type: object
+                  description: The sort conditions.
                 pageToken:
                   type: string
+                  description: |-
+                    The token used to retrieve the next page of search results.
+                    Ignore this parameter in the first request. To retrieve the next page, specify the `nextPageToken` value from the previous response.
+                    The token expires 30 minutes after it is issued. The request will fail if an expired token is specified.
                 createdAfter:
                   format: date-time
                   type: string
+                  description: |-
+                    The earliest created datetime.
+                    Returns data created on or after the specified datetime. This value cannot be later than `createdBefore`.
+                    For more information on the datetime format, refer to the [Kintone REST API Overview](https://kintone.dev/en/id/d509b956c8f84c45e1e129ae/#date-and-time-for-requests) article.
               required:
                 - query
               type: object
@@ -6635,6 +6760,7 @@ paths:
                 type: object
         4XX:
           $ref: '#/components/responses/Error'
+      description: Searches across Kintone, including App records and Thread posts.
   /k/v1/app.json:
     get:
       operationId: getApp
@@ -7531,13 +7657,13 @@ paths:
               - zh
             type: string
           description: |-
-            The localized language to retrieve the data in:
+            The language of the names to retrieve. Specify this when localized names are set for status names, action names, and similar items.
             - `default`: retrieves the default names
             - `en`: retrieves the localized English names
             - `zh`: retrieves the localized Chinese names
             - `ja`: retrieves the localized Japanese names
-            - `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.
-            If ignored, the default names will be retrieved.
+            - `user`: retrieves the localized names in the display language set by the user running the API*
+            If omitted, the default names are retrieved.
       responses:
         '200':
           description: success case of app/status/get
@@ -10070,13 +10196,13 @@ paths:
               - zh
             type: string
           description: |-
-            The localized language to retrieve the data in:
+            The language of the names to retrieve. Specify this when localized names are set for status names, action names, and similar items.
             - `default`: retrieves the default names
             - `en`: retrieves the localized English names
             - `zh`: retrieves the localized Chinese names
             - `ja`: retrieves the localized Japanese names
-            - `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.
-            If ignored, the default names will be retrieved.
+            - `user`: retrieves the localized names in the display language set by the user running the API*
+            If omitted, the default names are retrieved.
       responses:
         '200':
           description: success case of preview/app/status/get
@@ -10125,9 +10251,9 @@ paths:
                 enable:
                   type: boolean
                   description: |-
-                    The on/off settings of the process management settings.
-                    - `true`: Process management settings is enabled.
-                    - `false`: Process management settings is disabled.
+                    Whether process management is enabled.
+                    - `true`: Process management is enabled.
+                    - `false`: Process management is disabled.
                 actions:
                   items:
                     $ref: '#/components/schemas/PreviewAppStatusPutActionForm'
@@ -10137,9 +10263,9 @@ paths:
                   format: int64
                   type: integer
                   description: |-
-                    Specify the revision number of the settings that will be deployed.
-                    The request will fail if the revision number is not the latest revision.
-                    The revision will not be checked if this parameter is ignored, or `-1` is specified.
+                    The expected revision number of the App settings.
+                    If it does not match the actual revision number, the request fails and the settings are not changed.
+                    The revision number is not checked if this parameter is omitted or `-1` is specified.
                 states:
                   type: object
                   additionalProperties:
@@ -11696,30 +11822,70 @@ paths:
                       - ATTACHMENT
                     type: string
                   type: array
+                  description: |-
+                    The types of data to search.
+                    Specify any of the following values:
+                    - `RECORD`: Records
+                    - `RECORD_COMMENT`: Record comments
+                    - `SPACE`: Spaces
+                    - `THREAD`: Threads
+                    - `THREAD_COMMENT`: Thread comments
+                    - `PEOPLE_COMMENT`: People comments
+                    - `MESSAGE_COMMENT`: Message comments
+                    - `ATTACHMENT`: Attachments
+                    If ignored, all data types are searched.
                 excludeScopes:
                   items:
                     $ref: '#/components/schemas/SearchPostScopeForm'
                   type: array
+                  description: |-
+                    The scopes to exclude from the search.
+                    The maximum limit is 20 scopes.
+                    If multiple scopes are specified, data that meets all conditions is returned.
+                    If both `scopes` and `excludeScopes` are specified, data that meets both conditions is returned. Therefore, `excludeScopes` takes priority where the two scopes overlap.
                 creators:
                   items:
                     type: string
                   type: array
+                  description: |-
+                    The log in names of the creators.
+                    The maximum limit is 20 log in names.
                 includeSynonyms:
                   type: boolean
+                  description: |-
+                    Whether to include spelling variations, abbreviations, and synonyms of the keywords in the search.
+                    If ignored, this value is `false`.
                 query:
                   items:
                     $ref: '#/components/schemas/SearchPostQueryForm'
                   type: array
+                  description: |-
+                    The search conditions.
+                    Specify between 1 and 20 conditions.
+                    If multiple conditions are specified, data that meets all conditions is returned.
                 limit:
                   format: int64
                   type: integer
+                  description: |-
+                    The maximum number of results to retrieve.
+                    Specify a value between 1 and 20.
+                    If ignored, this value is `20`.
+                    The response may contain fewer results than the limit, even if more matching data remains. Use the `nextPageToken` property in the response to check whether more matching data remains.
                 scopes:
                   items:
                     $ref: '#/components/schemas/SearchPostScopeForm'
                   type: array
+                  description: |-
+                    The search scopes.
+                    The maximum limit is 20 scopes.
+                    If multiple scopes are specified, data that meets any of the scopes is returned.
                 createdBefore:
                   format: date-time
                   type: string
+                  description: |-
+                    The latest created datetime.
+                    Returns data created on or before the specified datetime. This value cannot be earlier than `createdAfter`.
+                    For more information on the datetime format, refer to the [Kintone REST API Overview](https://kintone.dev/en/id/d509b956c8f84c45e1e129ae/#date-and-time-for-requests) article.
                 sort:
                   properties:
                     by:
@@ -11727,17 +11893,39 @@ paths:
                         - RELEVANCE
                         - CREATED_AT
                       type: string
+                      description: |-
+                        The sort criteria.
+                        Specify one of the following values:
+                        - `RELEVANCE`: Relevance to the keywords
+                        - `CREATED_AT`: Created datetime
+                        If ignored, this value is `RELEVANCE`.
                     order:
                       enum:
                         - ASC
                         - DESC
                       type: string
+                      description: |-
+                        The sort direction.
+                        Specify one of the following values:
+                        - `ASC`: Ascending order
+                        - `DESC`: Descending order
+                        If ignored, this value is `DESC`.
+                        `ASC` cannot be specified if `sort.by` is `RELEVANCE`.
                   type: object
+                  description: The sort conditions.
                 pageToken:
                   type: string
+                  description: |-
+                    The token used to retrieve the next page of search results.
+                    Ignore this parameter in the first request. To retrieve the next page, specify the `nextPageToken` value from the previous response.
+                    The token expires 30 minutes after it is issued. The request will fail if an expired token is specified.
                 createdAfter:
                   format: date-time
                   type: string
+                  description: |-
+                    The earliest created datetime.
+                    Returns data created on or after the specified datetime. This value cannot be later than `createdBefore`.
+                    For more information on the datetime format, refer to the [Kintone REST API Overview](https://kintone.dev/en/id/d509b956c8f84c45e1e129ae/#date-and-time-for-requests) article.
               required:
                 - query
               type: object
@@ -11758,6 +11946,7 @@ paths:
                 type: object
         4XX:
           $ref: '#/components/responses/Error'
+      description: Searches across Kintone, including App records and Thread posts.
   /k/v1/space.json:
     delete:
       operationId: deleteSpace
@@ -31918,7 +32107,7 @@ components:
           type: string
           description: |-
             The Status name before taking action.
-            If a Status name that you want to specify has been changed, place the changed value for this parameter.
+            If you are renaming the status, specify the new name.
             Required, if setting the `actions` parameter.
         to:
           maxLength: 64
@@ -31926,14 +32115,14 @@ components:
           type: string
           description: |-
             The Status name after taking action.
-            If a Status name that you want to specify has been changed, place the changed value for this parameter.
+            If you are renaming the status, specify the new name.
             Required, if setting the `actions` parameter.
         filterCond:
           type: string
           description: |-
             The branch criteria of the action, specified as a query.
             For more information on query formats refer to the following document:
-            [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)
+            [Query String](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/)
             There are restrictions on the conditions that can be specified:
             [Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)
             [Additional Restrictions for Each API](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#additional-restrictions-for-each-api)
@@ -31955,7 +32144,7 @@ components:
             The **Include affiliated departments** settings of the department.
             - `true`: Affiliated departments are included as Assignees
             - `false`: Affiliated departments are not included as Assignees
-            If ignored, this value is false.
+            If omitted, this value is false.
         entity:
           properties:
             code:
@@ -32029,6 +32218,12 @@ components:
         instructions:
           maxLength: 10000
           type: string
+          description: |-
+            The assignee instructions of the status.
+            The maximum limit is 10,000 characters.
+            If ignored, the following applies:
+            - Updating an existing status: The current instructions are not changed.
+            - Adding a new status: An empty string is set.
         name:
           maxLength: 64
           minLength: 1
@@ -32072,10 +32267,10 @@ components:
       type: object
       description: |-
         An object containing the settings of each status.
-        - Add a new status: Specify a status name that does not exist.
-        - Update a status: Specify the name of the status to be updated.
-        - Delete a status: Do not specify the status name for deletion.
-        The first status cannot be added. To change the first status, update the name of the existing first status.
+        - To add a new status, specify a status name that does not exist.
+        - To update a status, specify the name of the status to be updated.
+        - To delete a status, omit it from `states`.
+        A new status cannot be added as the first status. To change the first status, rename the existing one.
     PreviewAppViewsGetBuiltinCalendarViewOutputForm:
       properties:
         date:
@@ -34542,12 +34737,24 @@ components:
           items:
             type: string
           type: array
+          description: |-
+            An array of keywords.
+            Specify between 1 and 20 keywords.
+            Each keyword must be between 1 and 50 characters.
+            The maximum limit is 20 keywords across the entire `query`. The request will fail if this limit is exceeded.
         operator:
           enum:
             - AND
             - OR
             - NOT
           type: string
+          description: |-
+            How the search condition is evaluated.
+            Specify one of the following values:
+            - `AND`: Returns data that contains all keywords.
+            - `OR`: Returns data that contains any of the keywords.
+            - `NOT`: Returns data that does not contain the keywords.
+            The search result will be empty if `query` contains no conditions that use `AND` or `OR`.
       required:
         - keywords
         - operator
@@ -34558,6 +34765,11 @@ components:
           items:
             type: string
           type: array
+          description: |-
+            The log in names of users.
+            The maximum limit is 20 log in names.
+            If `scopes[].scope` is `PEOPLE` or `MESSAGE`, specify the log in names of People owners or Message partners. This limits the search scope to those People or Messages. If ignored, all People or all Messages are searched.
+            This parameter cannot be specified if `scopes[].scope` is `APP` or `SPACE`.
         scope:
           enum:
             - SPACE
@@ -34565,11 +34777,24 @@ components:
             - PEOPLE
             - MESSAGE
           type: string
+          description: |-
+            The type of search scope.
+            Specify one of the following values:
+            - `APP`: Apps
+            - `SPACE`: Spaces
+            - `PEOPLE`: People
+            - `MESSAGE`: Messages
+            Required if `scopes` is specified.
         ids:
           items:
             format: int64
             type: integer
           type: array
+          description: |-
+            The App IDs or Space IDs.
+            The maximum limit is 20 IDs.
+            If `scopes[].scope` is `APP` or `SPACE`, specify App IDs or Space IDs to limit the search scope to those Apps or Spaces. If ignored, all Apps or all Spaces are searched.
+            This parameter cannot be specified if `scopes[].scope` is `PEOPLE` or `MESSAGE`.
       required:
         - scope
       type: object
