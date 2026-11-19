@@ -25,30 +25,70 @@
                     - ATTACHMENT
                   type: string
                 type: array
+                description: |-
+                  The types of data to search.
+                  Specify any of the following values:
+                  - `RECORD`: Records
+                  - `RECORD_COMMENT`: Record comments
+                  - `SPACE`: Spaces
+                  - `THREAD`: Threads
+                  - `THREAD_COMMENT`: Thread comments
+                  - `PEOPLE_COMMENT`: People comments
+                  - `MESSAGE_COMMENT`: Message comments
+                  - `ATTACHMENT`: Attachments
+                  If ignored, all data types are searched.
               excludeScopes:
                 items:
                   $ref: ../components/schemas/SearchPostScopeForm.yaml
                 type: array
+                description: |-
+                  The scopes to exclude from the search.
+                  The maximum limit is 20 scopes.
+                  If multiple scopes are specified, data that meets all conditions is returned.
+                  If both `scopes` and `excludeScopes` are specified, data that meets both conditions is returned. Therefore, `excludeScopes` takes priority where the two scopes overlap.
               creators:
                 items:
                   type: string
                 type: array
+                description: |-
+                  The log in names of the creators.
+                  The maximum limit is 20 log in names.
               includeSynonyms:
                 type: boolean
+                description: |-
+                  Whether to include spelling variations, abbreviations, and synonyms of the keywords in the search.
+                  If ignored, this value is `false`.
               query:
                 items:
                   $ref: ../components/schemas/SearchPostQueryForm.yaml
                 type: array
+                description: |-
+                  The search conditions.
+                  Specify between 1 and 20 conditions.
+                  If multiple conditions are specified, data that meets all conditions is returned.
               limit:
                 format: int64
                 type: integer
+                description: |-
+                  The maximum number of results to retrieve.
+                  Specify a value between 1 and 20.
+                  If ignored, this value is `20`.
+                  The response may contain fewer results than the limit, even if more matching data remains. Use the `nextPageToken` property in the response to check whether more matching data remains.
               scopes:
                 items:
                   $ref: ../components/schemas/SearchPostScopeForm.yaml
                 type: array
+                description: |-
+                  The search scopes.
+                  The maximum limit is 20 scopes.
+                  If multiple scopes are specified, data that meets any of the scopes is returned.
               createdBefore:
                 format: date-time
                 type: string
+                description: |-
+                  The latest created datetime.
+                  Returns data created on or before the specified datetime. This value cannot be earlier than `createdAfter`.
+                  For more information on the datetime format, refer to the [Kintone REST API Overview](https://kintone.dev/en/id/d509b956c8f84c45e1e129ae/#date-and-time-for-requests) article.
               sort:
                 properties:
                   by:
@@ -56,17 +96,39 @@
                       - RELEVANCE
                       - CREATED_AT
                     type: string
+                    description: |-
+                      The sort criteria.
+                      Specify one of the following values:
+                      - `RELEVANCE`: Relevance to the keywords
+                      - `CREATED_AT`: Created datetime
+                      If ignored, this value is `RELEVANCE`.
                   order:
                     enum:
                       - ASC
                       - DESC
                     type: string
+                    description: |-
+                      The sort direction.
+                      Specify one of the following values:
+                      - `ASC`: Ascending order
+                      - `DESC`: Descending order
+                      If ignored, this value is `DESC`.
+                      `ASC` cannot be specified if `sort.by` is `RELEVANCE`.
                 type: object
+                description: The sort conditions.
               pageToken:
                 type: string
+                description: |-
+                  The token used to retrieve the next page of search results.
+                  Ignore this parameter in the first request. To retrieve the next page, specify the `nextPageToken` value from the previous response.
+                  The token expires 30 minutes after it is issued. The request will fail if an expired token is specified.
               createdAfter:
                 format: date-time
                 type: string
+                description: |-
+                  The earliest created datetime.
+                  Returns data created on or after the specified datetime. This value cannot be later than `createdBefore`.
+                  For more information on the datetime format, refer to the [Kintone REST API Overview](https://kintone.dev/en/id/d509b956c8f84c45e1e129ae/#date-and-time-for-requests) article.
             required:
               - query
             type: object
@@ -87,6 +149,7 @@
               type: object
       4XX:
         $ref: ../components/responses/Error.yaml
+    description: Searches across Kintone, including App records and Thread posts.
     parameters:
       - name: guestSpaceId
         in: path

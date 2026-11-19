@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Kintone REST API",
-    "version": "2026.11.14",
+    "version": "2026.11.20",
     "description": "OpenAPI specification for Kintone's REST API.\n\n## Authentication\nEach operation can be executed with either **API token authentication (recommended)** or **password authentication** (see `security`). Because API tokens are scoped per app, some APIs—such as user/organization/group management (User API) and space administration—cannot be run with a token and require **password authentication**.\n\nIf **Basic authentication (access restriction)** or **secure access (client certificate)** is enabled on your environment, you must additionally provide an extra gate (`Authorization: Basic ...` header / client certificate) on top of the above. **Session authentication** (browser cookie + CSRF token) is available on virtually all APIs, but this spec targets server-to-server integration and therefore does not include it in `security`. Details of these methods that `security` cannot express are described in a structured form under `x-kintone-additional-auth` at the document root.\n\n## Limitations (Kintone-specific)\n- **Record schemas are dynamic per app.** Field codes are arbitrary keys (`additionalProperties`) and values are represented as a union per field type (`oneOf`/`anyOf` with a `type` discriminator). The exact types of an individual app cannot be fully expressed, so supplement real app types with examples / fixtures.\n- **When a GET query is long**, you can avoid URL-length limits by sending `POST` with the `X-HTTP-Method-Override: GET` header and putting parameters in the body (the server processes it as GET). Such GET operations are marked with `x-kintone-method-override: true`. No duplicate operation is defined; the GET definition is authoritative.\n- **Authentication differs per endpoint.** Which methods (API token / password / OAuth2) each API accepts is taken directly from the \"Authentication\" row of the official documentation pages (cybozu.dev) via harvest and reflected in `security`. Management APIs that do not support tokens (space/guest administration, app move, plugins, statistics, etc.) end up as password authentication only. The OAuth2 scope each operation needs is taken the same way from the scope list in the official documentation; an API that the list does not cover yet has no OAuth2 entry.\n\nCopyright (c) 2026 Cybozu, Inc. Licensed under MIT No Attribution (SPDX: MIT-0), which does not require attribution.",
     "contact": {
       "name": "Kintone Developer Program",
@@ -1598,7 +1598,7 @@
               ],
               "type": "string"
             },
-            "description": "The localized language to retrieve the data in:\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
+            "description": "The language of the names to retrieve. Specify this when localized names are set for status names, action names, and similar items.\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names in the display language set by the user running the API*\nIf omitted, the default names are retrieved."
           }
         ],
         "responses": {
@@ -6054,7 +6054,7 @@
               ],
               "type": "string"
             },
-            "description": "The localized language to retrieve the data in:\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
+            "description": "The language of the names to retrieve. Specify this when localized names are set for status names, action names, and similar items.\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names in the display language set by the user running the API*\nIf omitted, the default names are retrieved."
           }
         ],
         "responses": {
@@ -6128,7 +6128,7 @@
                   },
                   "enable": {
                     "type": "boolean",
-                    "description": "The on/off settings of the process management settings.\n- `true`: Process management settings is enabled.\n- `false`: Process management settings is disabled."
+                    "description": "Whether process management is enabled.\n- `true`: Process management is enabled.\n- `false`: Process management is disabled."
                   },
                   "actions": {
                     "items": {
@@ -6140,7 +6140,7 @@
                   "revision": {
                     "format": "int64",
                     "type": "integer",
-                    "description": "Specify the revision number of the settings that will be deployed.\nThe request will fail if the revision number is not the latest revision.\nThe revision will not be checked if this parameter is ignored, or `-1` is specified."
+                    "description": "The expected revision number of the App settings.\nIf it does not match the actual revision number, the request fails and the settings are not changed.\nThe revision number is not checked if this parameter is omitted or `-1` is specified."
                   },
                   "states": {
                     "type": "object",
@@ -8631,42 +8631,50 @@
                       ],
                       "type": "string"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "description": "The types of data to search.\nSpecify any of the following values:\n- `RECORD`: Records\n- `RECORD_COMMENT`: Record comments\n- `SPACE`: Spaces\n- `THREAD`: Threads\n- `THREAD_COMMENT`: Thread comments\n- `PEOPLE_COMMENT`: People comments\n- `MESSAGE_COMMENT`: Message comments\n- `ATTACHMENT`: Attachments\nIf ignored, all data types are searched."
                   },
                   "excludeScopes": {
                     "items": {
                       "$ref": "#/components/schemas/SearchPostScopeForm"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "description": "The scopes to exclude from the search.\nThe maximum limit is 20 scopes.\nIf multiple scopes are specified, data that meets all conditions is returned.\nIf both `scopes` and `excludeScopes` are specified, data that meets both conditions is returned. Therefore, `excludeScopes` takes priority where the two scopes overlap."
                   },
                   "creators": {
                     "items": {
                       "type": "string"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "description": "The log in names of the creators.\nThe maximum limit is 20 log in names."
                   },
                   "includeSynonyms": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to include spelling variations, abbreviations, and synonyms of the keywords in the search.\nIf ignored, this value is `false`."
                   },
                   "query": {
                     "items": {
                       "$ref": "#/components/schemas/SearchPostQueryForm"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "description": "The search conditions.\nSpecify between 1 and 20 conditions.\nIf multiple conditions are specified, data that meets all conditions is returned."
                   },
                   "limit": {
                     "format": "int64",
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "The maximum number of results to retrieve.\nSpecify a value between 1 and 20.\nIf ignored, this value is `20`.\nThe response may contain fewer results than the limit, even if more matching data remains. Use the `nextPageToken` property in the response to check whether more matching data remains."
                   },
                   "scopes": {
                     "items": {
                       "$ref": "#/components/schemas/SearchPostScopeForm"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "description": "The search scopes.\nThe maximum limit is 20 scopes.\nIf multiple scopes are specified, data that meets any of the scopes is returned."
                   },
                   "createdBefore": {
                     "format": "date-time",
-                    "type": "string"
+                    "type": "string",
+                    "description": "The latest created datetime.\nReturns data created on or before the specified datetime. This value cannot be earlier than `createdAfter`.\nFor more information on the datetime format, refer to the [Kintone REST API Overview](https://kintone.dev/en/id/d509b956c8f84c45e1e129ae/#date-and-time-for-requests) article."
                   },
                   "sort": {
                     "properties": {
@@ -8675,24 +8683,29 @@
                           "RELEVANCE",
                           "CREATED_AT"
                         ],
-                        "type": "string"
+                        "type": "string",
+                        "description": "The sort criteria.\nSpecify one of the following values:\n- `RELEVANCE`: Relevance to the keywords\n- `CREATED_AT`: Created datetime\nIf ignored, this value is `RELEVANCE`."
                       },
                       "order": {
                         "enum": [
                           "ASC",
                           "DESC"
                         ],
-                        "type": "string"
+                        "type": "string",
+                        "description": "The sort direction.\nSpecify one of the following values:\n- `ASC`: Ascending order\n- `DESC`: Descending order\nIf ignored, this value is `DESC`.\n`ASC` cannot be specified if `sort.by` is `RELEVANCE`."
                       }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "description": "The sort conditions."
                   },
                   "pageToken": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The token used to retrieve the next page of search results.\nIgnore this parameter in the first request. To retrieve the next page, specify the `nextPageToken` value from the previous response.\nThe token expires 30 minutes after it is issued. The request will fail if an expired token is specified."
                   },
                   "createdAfter": {
                     "format": "date-time",
-                    "type": "string"
+                    "type": "string",
+                    "description": "The earliest created datetime.\nReturns data created on or after the specified datetime. This value cannot be later than `createdBefore`.\nFor more information on the datetime format, refer to the [Kintone REST API Overview](https://kintone.dev/en/id/d509b956c8f84c45e1e129ae/#date-and-time-for-requests) article."
                   }
                 },
                 "required": [
@@ -8730,6 +8743,7 @@
             "$ref": "#/components/responses/Error"
           }
         },
+        "description": "Searches across Kintone, including App records and Thread posts.",
         "parameters": [
           {
             "name": "guestSpaceId",
@@ -9774,42 +9788,50 @@
                       ],
                       "type": "string"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "description": "The types of data to search.\nSpecify any of the following values:\n- `RECORD`: Records\n- `RECORD_COMMENT`: Record comments\n- `SPACE`: Spaces\n- `THREAD`: Threads\n- `THREAD_COMMENT`: Thread comments\n- `PEOPLE_COMMENT`: People comments\n- `MESSAGE_COMMENT`: Message comments\n- `ATTACHMENT`: Attachments\nIf ignored, all data types are searched."
                   },
                   "excludeScopes": {
                     "items": {
                       "$ref": "#/components/schemas/SearchPostScopeForm"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "description": "The scopes to exclude from the search.\nThe maximum limit is 20 scopes.\nIf multiple scopes are specified, data that meets all conditions is returned.\nIf both `scopes` and `excludeScopes` are specified, data that meets both conditions is returned. Therefore, `excludeScopes` takes priority where the two scopes overlap."
                   },
                   "creators": {
                     "items": {
                       "type": "string"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "description": "The log in names of the creators.\nThe maximum limit is 20 log in names."
                   },
                   "includeSynonyms": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to include spelling variations, abbreviations, and synonyms of the keywords in the search.\nIf ignored, this value is `false`."
                   },
                   "query": {
                     "items": {
                       "$ref": "#/components/schemas/SearchPostQueryForm"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "description": "The search conditions.\nSpecify between 1 and 20 conditions.\nIf multiple conditions are specified, data that meets all conditions is returned."
                   },
                   "limit": {
                     "format": "int64",
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "The maximum number of results to retrieve.\nSpecify a value between 1 and 20.\nIf ignored, this value is `20`.\nThe response may contain fewer results than the limit, even if more matching data remains. Use the `nextPageToken` property in the response to check whether more matching data remains."
                   },
                   "scopes": {
                     "items": {
                       "$ref": "#/components/schemas/SearchPostScopeForm"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "description": "The search scopes.\nThe maximum limit is 20 scopes.\nIf multiple scopes are specified, data that meets any of the scopes is returned."
                   },
                   "createdBefore": {
                     "format": "date-time",
-                    "type": "string"
+                    "type": "string",
+                    "description": "The latest created datetime.\nReturns data created on or before the specified datetime. This value cannot be earlier than `createdAfter`.\nFor more information on the datetime format, refer to the [Kintone REST API Overview](https://kintone.dev/en/id/d509b956c8f84c45e1e129ae/#date-and-time-for-requests) article."
                   },
                   "sort": {
                     "properties": {
@@ -9818,24 +9840,29 @@
                           "RELEVANCE",
                           "CREATED_AT"
                         ],
-                        "type": "string"
+                        "type": "string",
+                        "description": "The sort criteria.\nSpecify one of the following values:\n- `RELEVANCE`: Relevance to the keywords\n- `CREATED_AT`: Created datetime\nIf ignored, this value is `RELEVANCE`."
                       },
                       "order": {
                         "enum": [
                           "ASC",
                           "DESC"
                         ],
-                        "type": "string"
+                        "type": "string",
+                        "description": "The sort direction.\nSpecify one of the following values:\n- `ASC`: Ascending order\n- `DESC`: Descending order\nIf ignored, this value is `DESC`.\n`ASC` cannot be specified if `sort.by` is `RELEVANCE`."
                       }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "description": "The sort conditions."
                   },
                   "pageToken": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The token used to retrieve the next page of search results.\nIgnore this parameter in the first request. To retrieve the next page, specify the `nextPageToken` value from the previous response.\nThe token expires 30 minutes after it is issued. The request will fail if an expired token is specified."
                   },
                   "createdAfter": {
                     "format": "date-time",
-                    "type": "string"
+                    "type": "string",
+                    "description": "The earliest created datetime.\nReturns data created on or after the specified datetime. This value cannot be later than `createdBefore`.\nFor more information on the datetime format, refer to the [Kintone REST API Overview](https://kintone.dev/en/id/d509b956c8f84c45e1e129ae/#date-and-time-for-requests) article."
                   }
                 },
                 "required": [
@@ -9872,7 +9899,8 @@
           "4XX": {
             "$ref": "#/components/responses/Error"
           }
-        }
+        },
+        "description": "Searches across Kintone, including App records and Thread posts."
       }
     },
     "/k/v1/app.json": {
@@ -11261,7 +11289,7 @@
               ],
               "type": "string"
             },
-            "description": "The localized language to retrieve the data in:\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
+            "description": "The language of the names to retrieve. Specify this when localized names are set for status names, action names, and similar items.\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names in the display language set by the user running the API*\nIf omitted, the default names are retrieved."
           }
         ],
         "responses": {
@@ -15199,7 +15227,7 @@
               ],
               "type": "string"
             },
-            "description": "The localized language to retrieve the data in:\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
+            "description": "The language of the names to retrieve. Specify this when localized names are set for status names, action names, and similar items.\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names in the display language set by the user running the API*\nIf omitted, the default names are retrieved."
           }
         ],
         "responses": {
@@ -15273,7 +15301,7 @@
                   },
                   "enable": {
                     "type": "boolean",
-                    "description": "The on/off settings of the process management settings.\n- `true`: Process management settings is enabled.\n- `false`: Process management settings is disabled."
+                    "description": "Whether process management is enabled.\n- `true`: Process management is enabled.\n- `false`: Process management is disabled."
                   },
                   "actions": {
                     "items": {
@@ -15285,7 +15313,7 @@
                   "revision": {
                     "format": "int64",
                     "type": "integer",
-                    "description": "Specify the revision number of the settings that will be deployed.\nThe request will fail if the revision number is not the latest revision.\nThe revision will not be checked if this parameter is ignored, or `-1` is specified."
+                    "description": "The expected revision number of the App settings.\nIf it does not match the actual revision number, the request fails and the settings are not changed.\nThe revision number is not checked if this parameter is omitted or `-1` is specified."
                   },
                   "states": {
                     "type": "object",
@@ -17531,42 +17559,50 @@
                       ],
                       "type": "string"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "description": "The types of data to search.\nSpecify any of the following values:\n- `RECORD`: Records\n- `RECORD_COMMENT`: Record comments\n- `SPACE`: Spaces\n- `THREAD`: Threads\n- `THREAD_COMMENT`: Thread comments\n- `PEOPLE_COMMENT`: People comments\n- `MESSAGE_COMMENT`: Message comments\n- `ATTACHMENT`: Attachments\nIf ignored, all data types are searched."
                   },
                   "excludeScopes": {
                     "items": {
                       "$ref": "#/components/schemas/SearchPostScopeForm"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "description": "The scopes to exclude from the search.\nThe maximum limit is 20 scopes.\nIf multiple scopes are specified, data that meets all conditions is returned.\nIf both `scopes` and `excludeScopes` are specified, data that meets both conditions is returned. Therefore, `excludeScopes` takes priority where the two scopes overlap."
                   },
                   "creators": {
                     "items": {
                       "type": "string"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "description": "The log in names of the creators.\nThe maximum limit is 20 log in names."
                   },
                   "includeSynonyms": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether to include spelling variations, abbreviations, and synonyms of the keywords in the search.\nIf ignored, this value is `false`."
                   },
                   "query": {
                     "items": {
                       "$ref": "#/components/schemas/SearchPostQueryForm"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "description": "The search conditions.\nSpecify between 1 and 20 conditions.\nIf multiple conditions are specified, data that meets all conditions is returned."
                   },
                   "limit": {
                     "format": "int64",
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "The maximum number of results to retrieve.\nSpecify a value between 1 and 20.\nIf ignored, this value is `20`.\nThe response may contain fewer results than the limit, even if more matching data remains. Use the `nextPageToken` property in the response to check whether more matching data remains."
                   },
                   "scopes": {
                     "items": {
                       "$ref": "#/components/schemas/SearchPostScopeForm"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "description": "The search scopes.\nThe maximum limit is 20 scopes.\nIf multiple scopes are specified, data that meets any of the scopes is returned."
                   },
                   "createdBefore": {
                     "format": "date-time",
-                    "type": "string"
+                    "type": "string",
+                    "description": "The latest created datetime.\nReturns data created on or before the specified datetime. This value cannot be earlier than `createdAfter`.\nFor more information on the datetime format, refer to the [Kintone REST API Overview](https://kintone.dev/en/id/d509b956c8f84c45e1e129ae/#date-and-time-for-requests) article."
                   },
                   "sort": {
                     "properties": {
@@ -17575,24 +17611,29 @@
                           "RELEVANCE",
                           "CREATED_AT"
                         ],
-                        "type": "string"
+                        "type": "string",
+                        "description": "The sort criteria.\nSpecify one of the following values:\n- `RELEVANCE`: Relevance to the keywords\n- `CREATED_AT`: Created datetime\nIf ignored, this value is `RELEVANCE`."
                       },
                       "order": {
                         "enum": [
                           "ASC",
                           "DESC"
                         ],
-                        "type": "string"
+                        "type": "string",
+                        "description": "The sort direction.\nSpecify one of the following values:\n- `ASC`: Ascending order\n- `DESC`: Descending order\nIf ignored, this value is `DESC`.\n`ASC` cannot be specified if `sort.by` is `RELEVANCE`."
                       }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "description": "The sort conditions."
                   },
                   "pageToken": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The token used to retrieve the next page of search results.\nIgnore this parameter in the first request. To retrieve the next page, specify the `nextPageToken` value from the previous response.\nThe token expires 30 minutes after it is issued. The request will fail if an expired token is specified."
                   },
                   "createdAfter": {
                     "format": "date-time",
-                    "type": "string"
+                    "type": "string",
+                    "description": "The earliest created datetime.\nReturns data created on or after the specified datetime. This value cannot be later than `createdBefore`.\nFor more information on the datetime format, refer to the [Kintone REST API Overview](https://kintone.dev/en/id/d509b956c8f84c45e1e129ae/#date-and-time-for-requests) article."
                   }
                 },
                 "required": [
@@ -17629,7 +17670,8 @@
           "4XX": {
             "$ref": "#/components/responses/Error"
           }
-        }
+        },
+        "description": "Searches across Kintone, including App records and Thread posts."
       }
     },
     "/k/v1/space.json": {
@@ -38072,17 +38114,17 @@
             "maxLength": 64,
             "minLength": 1,
             "type": "string",
-            "description": "The Status name before taking action.\nIf a Status name that you want to specify has been changed, place the changed value for this parameter.\nRequired, if setting the `actions` parameter."
+            "description": "The Status name before taking action.\nIf you are renaming the status, specify the new name.\nRequired, if setting the `actions` parameter."
           },
           "to": {
             "maxLength": 64,
             "minLength": 1,
             "type": "string",
-            "description": "The Status name after taking action.\nIf a Status name that you want to specify has been changed, place the changed value for this parameter.\nRequired, if setting the `actions` parameter."
+            "description": "The Status name after taking action.\nIf you are renaming the status, specify the new name.\nRequired, if setting the `actions` parameter."
           },
           "filterCond": {
             "type": "string",
-            "description": "The branch criteria of the action, specified as a query.\nFor more information on query formats refer to the following document:\n[Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)\nThere are restrictions on the conditions that can be specified:\n[Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)\n[Additional Restrictions for Each API](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#additional-restrictions-for-each-api)"
+            "description": "The branch criteria of the action, specified as a query.\nFor more information on query formats refer to the following document:\n[Query String](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/)\nThere are restrictions on the conditions that can be specified:\n[Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)\n[Additional Restrictions for Each API](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#additional-restrictions-for-each-api)"
           },
           "type": {
             "enum": [
@@ -38103,7 +38145,7 @@
         "properties": {
           "includeSubs": {
             "type": "boolean",
-            "description": "The **Include affiliated departments** settings of the department.\n- `true`: Affiliated departments are included as Assignees\n- `false`: Affiliated departments are not included as Assignees\nIf ignored, this value is false."
+            "description": "The **Include affiliated departments** settings of the department.\n- `true`: Affiliated departments are included as Assignees\n- `false`: Affiliated departments are not included as Assignees\nIf omitted, this value is false."
           },
           "entity": {
             "properties": {
@@ -38171,7 +38213,8 @@
         "properties": {
           "instructions": {
             "maxLength": 10000,
-            "type": "string"
+            "type": "string",
+            "description": "The assignee instructions of the status.\nThe maximum limit is 10,000 characters.\nIf ignored, the following applies:\n- Updating an existing status: The current instructions are not changed.\n- Adding a new status: An empty string is set."
           },
           "name": {
             "maxLength": 64,
@@ -38215,7 +38258,7 @@
           "index"
         ],
         "type": "object",
-        "description": "An object containing the settings of each status.\n- Add a new status: Specify a status name that does not exist.\n- Update a status: Specify the name of the status to be updated.\n- Delete a status: Do not specify the status name for deletion.\nThe first status cannot be added. To change the first status, update the name of the existing first status."
+        "description": "An object containing the settings of each status.\n- To add a new status, specify a status name that does not exist.\n- To update a status, specify the name of the status to be updated.\n- To delete a status, omit it from `states`.\nA new status cannot be added as the first status. To change the first status, rename the existing one."
       },
       "PreviewAppViewsGetBuiltinCalendarViewOutputForm": {
         "properties": {
@@ -41315,7 +41358,8 @@
             "items": {
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "description": "An array of keywords.\nSpecify between 1 and 20 keywords.\nEach keyword must be between 1 and 50 characters.\nThe maximum limit is 20 keywords across the entire `query`. The request will fail if this limit is exceeded."
           },
           "operator": {
             "enum": [
@@ -41323,7 +41367,8 @@
               "OR",
               "NOT"
             ],
-            "type": "string"
+            "type": "string",
+            "description": "How the search condition is evaluated.\nSpecify one of the following values:\n- `AND`: Returns data that contains all keywords.\n- `OR`: Returns data that contains any of the keywords.\n- `NOT`: Returns data that does not contain the keywords.\nThe search result will be empty if `query` contains no conditions that use `AND` or `OR`."
           }
         },
         "required": [
@@ -41338,7 +41383,8 @@
             "items": {
               "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "description": "The log in names of users.\nThe maximum limit is 20 log in names.\nIf `scopes[].scope` is `PEOPLE` or `MESSAGE`, specify the log in names of People owners or Message partners. This limits the search scope to those People or Messages. If ignored, all People or all Messages are searched.\nThis parameter cannot be specified if `scopes[].scope` is `APP` or `SPACE`."
           },
           "scope": {
             "enum": [
@@ -41347,14 +41393,16 @@
               "PEOPLE",
               "MESSAGE"
             ],
-            "type": "string"
+            "type": "string",
+            "description": "The type of search scope.\nSpecify one of the following values:\n- `APP`: Apps\n- `SPACE`: Spaces\n- `PEOPLE`: People\n- `MESSAGE`: Messages\nRequired if `scopes` is specified."
           },
           "ids": {
             "items": {
               "format": "int64",
               "type": "integer"
             },
-            "type": "array"
+            "type": "array",
+            "description": "The App IDs or Space IDs.\nThe maximum limit is 20 IDs.\nIf `scopes[].scope` is `APP` or `SPACE`, specify App IDs or Space IDs to limit the search scope to those Apps or Spaces. If ignored, all Apps or all Spaces are searched.\nThis parameter cannot be specified if `scopes[].scope` is `PEOPLE` or `MESSAGE`."
           }
         },
         "required": [

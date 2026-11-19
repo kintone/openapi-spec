@@ -2,6 +2,12 @@ properties:
   instructions:
     maxLength: 10000
     type: string
+    description: |-
+      The assignee instructions of the status.
+      The maximum limit is 10,000 characters.
+      If ignored, the following applies:
+      - Updating an existing status: The current instructions are not changed.
+      - Adding a new status: An empty string is set.
   name:
     maxLength: 64
     minLength: 1
@@ -45,7 +51,7 @@ required:
 type: object
 description: |-
   An object containing the settings of each status.
-  - Add a new status: Specify a status name that does not exist.
-  - Update a status: Specify the name of the status to be updated.
-  - Delete a status: Do not specify the status name for deletion.
-  The first status cannot be added. To change the first status, update the name of the existing first status.
+  - To add a new status, specify a status name that does not exist.
+  - To update a status, specify the name of the status to be updated.
+  - To delete a status, omit it from `states`.
+  A new status cannot be added as the first status. To change the first status, rename the existing one.

@@ -3,12 +3,24 @@ properties:
     items:
       type: string
     type: array
+    description: |-
+      An array of keywords.
+      Specify between 1 and 20 keywords.
+      Each keyword must be between 1 and 50 characters.
+      The maximum limit is 20 keywords across the entire `query`. The request will fail if this limit is exceeded.
   operator:
     enum:
       - AND
       - OR
       - NOT
     type: string
+    description: |-
+      How the search condition is evaluated.
+      Specify one of the following values:
+      - `AND`: Returns data that contains all keywords.
+      - `OR`: Returns data that contains any of the keywords.
+      - `NOT`: Returns data that does not contain the keywords.
+      The search result will be empty if `query` contains no conditions that use `AND` or `OR`.
 required:
   - keywords
   - operator

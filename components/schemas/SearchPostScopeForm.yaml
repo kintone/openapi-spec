@@ -3,6 +3,11 @@ properties:
     items:
       type: string
     type: array
+    description: |-
+      The log in names of users.
+      The maximum limit is 20 log in names.
+      If `scopes[].scope` is `PEOPLE` or `MESSAGE`, specify the log in names of People owners or Message partners. This limits the search scope to those People or Messages. If ignored, all People or all Messages are searched.
+      This parameter cannot be specified if `scopes[].scope` is `APP` or `SPACE`.
   scope:
     enum:
       - SPACE
@@ -10,11 +15,24 @@ properties:
       - PEOPLE
       - MESSAGE
     type: string
+    description: |-
+      The type of search scope.
+      Specify one of the following values:
+      - `APP`: Apps
+      - `SPACE`: Spaces
+      - `PEOPLE`: People
+      - `MESSAGE`: Messages
+      Required if `scopes` is specified.
   ids:
     items:
       format: int64
       type: integer
     type: array
+    description: |-
+      The App IDs or Space IDs.
+      The maximum limit is 20 IDs.
+      If `scopes[].scope` is `APP` or `SPACE`, specify App IDs or Space IDs to limit the search scope to those Apps or Spaces. If ignored, all Apps or all Spaces are searched.
+      This parameter cannot be specified if `scopes[].scope` is `PEOPLE` or `MESSAGE`.
 required:
   - scope
 type: object
