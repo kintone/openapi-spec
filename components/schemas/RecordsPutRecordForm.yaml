@@ -5,9 +5,7 @@ properties:
     type: object
     additionalProperties:
       $ref: ./RecordWritableObject.yaml
-    description: |-
-      Field codes and values are specified in this object. If ignored, the record will not be updated. For more information on field types, refer to the following article:
-      [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)
+    description: Field codes and values are specified in this object. If ignored, the record will not be updated. For more information on field types, refer to the [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/) article.
   id:
     format: int64
     type: integer

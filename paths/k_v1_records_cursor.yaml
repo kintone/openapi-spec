@@ -91,8 +91,7 @@
                   The maximum number of records the Get Cursor API can retrieve from this cursor with one request.
                   The maximum number is 500 records. If ignored, the default number of records to be retrieved is 100.
                   To retrieve all records, repeatedly call the Get Cursor API.
-                  For more information, refer to the following article:
-                  [Get Cursor](https://kintone.dev/en/docs/kintone/rest-api/records/get-cursor/)
+                  For more information, refer to the [Get Cursor](https://kintone.dev/en/docs/kintone/rest-api/records/get-cursor/) article.
               query:
                 format: query
                 type: string
