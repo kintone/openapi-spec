@@ -11,8 +11,7 @@ properties:
     type: string
     description: |-
       The filter condition in a query format.
-      For more information on query formats refer to the following article:
-      [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)
+      For more information on query formats refer to the [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/) article.
       For more information on the limitations regarding filter conditions, refer to the following section:
       Limitations
       If this parameter is ignored, the filter condition will be "All records".

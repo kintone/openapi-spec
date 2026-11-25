@@ -225,8 +225,7 @@
                   The values that can be specified vary depending on the type of field.
                   Fields that are not included in the objects are added with their default value.
                   Objects containing field codes that do not exist are ignored.
-                  For more information on field types, refer to the following article:
-                  [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)
+                  For more information on field types, refer to the [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/) article.
             required:
               - app
               - records

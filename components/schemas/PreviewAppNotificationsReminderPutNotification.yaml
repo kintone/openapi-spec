@@ -12,8 +12,7 @@ properties:
     type: string
     description: |-
       The record's filter condition in query string format.
-      For more information on query formats refer to the following article:
-      [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)
+      For more information on query formats refer to the [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/) article.
       There are restrictions on the conditions that can be specified:
       [Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)
       [Additional Restrictions for Each API](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#additional-restrictions-for-each-api)

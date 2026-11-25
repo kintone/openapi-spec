@@ -15,8 +15,7 @@ properties:
     type: string
     description: |-
       The profile image of the Guest user.
-      Specify a fileKey of an uploaded file. fileKeys can be found from the response of the Upload File API. For more information, refer to the following article:
-      [Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/)
+      Specify a fileKey of an uploaded file. fileKeys can be found from the response of the Upload File API. For more information, refer to the [Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/) article.
       If ignored, a default image will be set.
   password:
     maxLength: 64

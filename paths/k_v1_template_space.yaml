@@ -44,8 +44,7 @@
                 type: integer
                 description: |-
                   The Space Template ID.
-                  For instructions on creating Space Templates, refer to the following article:
-                  [Creating a Template from a Space](https://us.kintone.help/k/en/id/04075)
+                  For instructions on creating Space Templates, refer to the [Creating a Template from a Space](https://us.kintone.help/k/en/id/04075) article.
                   The Space Template ID is listed on the Space Templates list page, found under https://{domainname}.kintone.com/k/admin/system/spacetemplate/
               isPrivate:
                 type: boolean

@@ -20,8 +20,7 @@ properties:
           - Department selection
           - Group selection
           If `CUSTOM_FIELD` is specified for `entity.type`, state the field code of the Custom Field.
-          For more information, refer to the following article:
-          [Adding Fields in User Information (Custom Fields)](https://us.kintone.help/general/en/id/020219)
+          For more information, refer to the [Adding Fields in User Information (Custom Fields)](https://us.kintone.help/general/en/id/020219) article.
           If `CREATOR` is specified for `entity.type`, ignore this parameter.
       type:
         enum:
@@ -40,8 +39,7 @@ properties:
           - `FIELD_ENTITY`: User/Group/Department selection field
           - `CREATOR`: Created by field
           - `CUSTOM_FIELD`: A Custom Field
-          For more information, refer to the following article:
-          [Adding Fields in User Information (Custom Fields)](https://us.kintone.help/general/en/id/020219)
+          For more information, refer to the [Adding Fields in User Information (Custom Fields)](https://us.kintone.help/general/en/id/020219) article.
           Required, for each entity stated.
           Departments cannot be specified in guest space Apps.
     required:

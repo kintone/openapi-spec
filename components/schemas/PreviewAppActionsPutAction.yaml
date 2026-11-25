@@ -42,8 +42,7 @@ properties:
       The query string that App Action can be used.
       If ignored, the condition will not be changed.
       If an empty string is specified when creating or updating the `Action`, the condition will be set as `All records`.
-      For more information on query string, refer to the following article:
-      [Query string](https://kintone.dev/en/docs/kintone/overview/query-string/)
+      For more information on query string, refer to the [Query string](https://kintone.dev/en/docs/kintone/overview/query-string/) article.
       There are restrictions on the conditions that can be specified:
       [Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)
   destApp:

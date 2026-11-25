@@ -14,8 +14,7 @@ properties:
       - SPLINE_AREA
     type: string
     description: |-
-      The chart type of the graph. For more information, refer to the following article:
-      [Chart Types and Their Usage](https://us.kintone.help/k/en/id/040581)
+      The chart type of the graph. For more information, refer to the [Chart Types and Their Usage](https://us.kintone.help/k/en/id/040581) article.
       - **BAR**: Bar chart
       - **COLUMN**: Column chart
       - **PIE**: Pie chart

@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Kintone REST API
-  version: 2026.11.20
+  version: 2026.11.26
   description: |-
     OpenAPI specification for Kintone's REST API.
 
@@ -689,8 +689,7 @@ paths:
               - zh
             type: string
           description: |-
-            Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:
-            [Setting Localized Names](https://us.kintone.help/k/en/id/040557)
+            Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.
             The response parameter `notifications[].filterCond` will include the localized option names in the query string.
             - `default`: retrieves the default names
             - `en`: retrieves the localized English names
@@ -754,8 +753,7 @@ paths:
               - zh
             type: string
           description: |-
-            Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:
-            [Setting Localized Names](https://us.kintone.help/k/en/id/040557)
+            Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.
             The localized language to retrieve the data in:
             - `default`: retrieves the default names
             - `en`: retrieves the localized English names
@@ -3225,8 +3223,7 @@ paths:
               - zh
             type: string
           description: |-
-            Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:
-            [Setting Localized Names](https://us.kintone.help/k/en/id/040557)
+            Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.
             The response parameter `notifications[].filterCond` will include the localized option names in the query string.
             - `default`: retrieves the default names
             - `en`: retrieves the localized English names
@@ -3350,8 +3347,7 @@ paths:
               - zh
             type: string
           description: |-
-            Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:
-            [Setting Localized Names](https://us.kintone.help/k/en/id/040557)
+            Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.
             The localized language to retrieve the data in:
             - `default`: retrieves the default names
             - `en`: retrieves the localized English names
@@ -4566,8 +4562,7 @@ paths:
                     The values that can be specified vary depending on the type of field.
                     If ignored, the record will be added with default field values.
                     If field codes that don't exist are specified, these will be ignored.
-                    For more information on field types, refer to the following article:
-                    [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)
+                    For more information on field types, refer to the [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/) article.
               required:
                 - app
                 - record
@@ -4626,9 +4621,7 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/RecordWritableObject'
-                  description: |-
-                    Field codes and values are specified in this object. If ignored, the record will not be updated. For more information on field types, refer to the following article:
-                    [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)
+                  description: Field codes and values are specified in this object. If ignored, the record will not be updated. For more information on field types, refer to the [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/) article.
                 id:
                   format: int64
                   type: integer
@@ -5074,8 +5067,7 @@ paths:
                   type: string
                   description: |-
                     The Action name of the action to run.
-                    If the localization feature has been used to apply multiple translations of the Action name, specify the name of the Action in the language settings of the user that will run the API. API Tokens follow the language settings set in the User & System Administration settings. For more information, refer to the following article:
-                    [Configuring System Language](https://us.kintone.help/general/en/id/020114)
+                    If the localization feature has been used to apply multiple translations of the Action name, specify the name of the Action in the language settings of the user that will run the API. API Tokens follow the language settings set in the User & System Administration settings. For more information, refer to the [Configuring System Language](https://us.kintone.help/general/en/id/020114) article.
                 id:
                   format: int64
                   type: integer
@@ -5362,8 +5354,7 @@ paths:
                     The values that can be specified vary depending on the type of field.
                     Fields that are not included in the objects are added with their default value.
                     Objects containing field codes that do not exist are ignored.
-                    For more information on field types, refer to the following article:
-                    [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)
+                    For more information on field types, refer to the [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/) article.
               required:
                 - app
                 - records
@@ -5616,8 +5607,7 @@ paths:
                     The maximum number of records the Get Cursor API can retrieve from this cursor with one request.
                     The maximum number is 500 records. If ignored, the default number of records to be retrieved is 100.
                     To retrieve all records, repeatedly call the Get Cursor API.
-                    For more information, refer to the following article:
-                    [Get Cursor](https://kintone.dev/en/docs/kintone/rest-api/records/get-cursor/)
+                    For more information, refer to the [Get Cursor](https://kintone.dev/en/docs/kintone/rest-api/records/get-cursor/) article.
                 query:
                   format: query
                   type: string
@@ -6573,8 +6563,7 @@ paths:
                   type: integer
                   description: |-
                     The Space Template ID.
-                    For instructions on creating Space Templates, refer to the following article:
-                    [Creating a Template from a Space](https://us.kintone.help/k/en/id/04075)
+                    For instructions on creating Space Templates, refer to the [Creating a Template from a Space](https://us.kintone.help/k/en/id/04075) article.
                     The Space Template ID is listed on the Space Templates list page, found under https://{domainname}.kintone.com/k/admin/system/spacetemplate/
                 isPrivate:
                   type: boolean
@@ -7323,8 +7312,7 @@ paths:
               - zh
             type: string
           description: |-
-            Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:
-            [Setting Localized Names](https://us.kintone.help/k/en/id/040557)
+            Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.
             The response parameter `notifications[].filterCond` will include the localized option names in the query string.
             - `default`: retrieves the default names
             - `en`: retrieves the localized English names
@@ -7381,8 +7369,7 @@ paths:
               - zh
             type: string
           description: |-
-            Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:
-            [Setting Localized Names](https://us.kintone.help/k/en/id/040557)
+            Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.
             The localized language to retrieve the data in:
             - `default`: retrieves the default names
             - `en`: retrieves the localized English names
@@ -9546,8 +9533,7 @@ paths:
               - zh
             type: string
           description: |-
-            Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:
-            [Setting Localized Names](https://us.kintone.help/k/en/id/040557)
+            Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.
             The response parameter `notifications[].filterCond` will include the localized option names in the query string.
             - `default`: retrieves the default names
             - `en`: retrieves the localized English names
@@ -9656,8 +9642,7 @@ paths:
               - zh
             type: string
           description: |-
-            Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:
-            [Setting Localized Names](https://us.kintone.help/k/en/id/040557)
+            Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.
             The localized language to retrieve the data in:
             - `default`: retrieves the default names
             - `en`: retrieves the localized English names
@@ -10745,8 +10730,7 @@ paths:
                     The values that can be specified vary depending on the type of field.
                     If ignored, the record will be added with default field values.
                     If field codes that don't exist are specified, these will be ignored.
-                    For more information on field types, refer to the following article:
-                    [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)
+                    For more information on field types, refer to the [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/) article.
               required:
                 - app
                 - record
@@ -10797,9 +10781,7 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/RecordWritableObject'
-                  description: |-
-                    Field codes and values are specified in this object. If ignored, the record will not be updated. For more information on field types, refer to the following article:
-                    [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)
+                  description: Field codes and values are specified in this object. If ignored, the record will not be updated. For more information on field types, refer to the [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/) article.
                 id:
                   format: int64
                   type: integer
@@ -11226,8 +11208,7 @@ paths:
                   type: string
                   description: |-
                     The Action name of the action to run.
-                    If the localization feature has been used to apply multiple translations of the Action name, specify the name of the Action in the language settings of the user that will run the API. API Tokens follow the language settings set in the User & System Administration settings. For more information, refer to the following article:
-                    [Configuring System Language](https://us.kintone.help/general/en/id/020114)
+                    If the localization feature has been used to apply multiple translations of the Action name, specify the name of the Action in the language settings of the user that will run the API. API Tokens follow the language settings set in the User & System Administration settings. For more information, refer to the [Configuring System Language](https://us.kintone.help/general/en/id/020114) article.
                 id:
                   format: int64
                   type: integer
@@ -11491,8 +11472,7 @@ paths:
                     The values that can be specified vary depending on the type of field.
                     Fields that are not included in the objects are added with their default value.
                     Objects containing field codes that do not exist are ignored.
-                    For more information on field types, refer to the following article:
-                    [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)
+                    For more information on field types, refer to the [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/) article.
               required:
                 - app
                 - records
@@ -11707,8 +11687,7 @@ paths:
                     The maximum number of records the Get Cursor API can retrieve from this cursor with one request.
                     The maximum number is 500 records. If ignored, the default number of records to be retrieved is 100.
                     To retrieve all records, repeatedly call the Get Cursor API.
-                    For more information, refer to the following article:
-                    [Get Cursor](https://kintone.dev/en/docs/kintone/rest-api/records/get-cursor/)
+                    For more information, refer to the [Get Cursor](https://kintone.dev/en/docs/kintone/rest-api/records/get-cursor/) article.
                 query:
                   format: query
                   type: string
@@ -12520,8 +12499,7 @@ paths:
                   type: integer
                   description: |-
                     The Space Template ID.
-                    For instructions on creating Space Templates, refer to the following article:
-                    [Creating a Template from a Space](https://us.kintone.help/k/en/id/04075)
+                    For instructions on creating Space Templates, refer to the [Creating a Template from a Space](https://us.kintone.help/k/en/id/04075) article.
                     The Space Template ID is listed on the Space Templates list page, found under https://{domainname}.kintone.com/k/admin/system/spacetemplate/
                 isPrivate:
                   type: boolean
@@ -18172,8 +18150,7 @@ components:
           type: string
           description: |-
             The profile image of the Guest user.
-            Specify a fileKey of an uploaded file. fileKeys can be found from the response of the Upload File API. For more information, refer to the following article:
-            [Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/)
+            Specify a fileKey of an uploaded file. fileKeys can be found from the response of the Upload File API. For more information, refer to the [Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/) article.
             If ignored, a default image will be set.
         password:
           maxLength: 64
@@ -18622,8 +18599,7 @@ components:
             The query string that App Action can be used.
             If ignored, the condition will not be changed.
             If an empty string is specified when creating or updating the `Action`, the condition will be set as `All records`.
-            For more information on query string, refer to the following article:
-            [Query string](https://kintone.dev/en/docs/kintone/overview/query-string/)
+            For more information on query string, refer to the [Query string](https://kintone.dev/en/docs/kintone/overview/query-string/) article.
             There are restrictions on the conditions that can be specified:
             [Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)
         destApp:
@@ -30605,8 +30581,7 @@ components:
           type: string
           description: |-
             The record's filter condition in query string format.
-            For more information on query formats refer to the following article:
-            [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)
+            For more information on query formats refer to the [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/) article.
             There are restrictions on the conditions that can be specified:
             [Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)
             [Additional Restrictions for Each API](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#additional-restrictions-for-each-api)
@@ -31438,8 +31413,7 @@ components:
             - SPLINE_AREA
           type: string
           description: |-
-            The chart type of the graph. For more information, refer to the following article:
-            [Chart Types and Their Usage](https://us.kintone.help/k/en/id/040581)
+            The chart type of the graph. For more information, refer to the [Chart Types and Their Usage](https://us.kintone.help/k/en/id/040581) article.
             - **BAR**: Bar chart
             - **COLUMN**: Column chart
             - **PIE**: Pie chart
@@ -31535,8 +31509,7 @@ components:
             - SPLINE_AREA
           type: string
           description: |-
-            The chart type of the graph. For more information, refer to the following article:
-            [Chart Types and Their Usage](https://us.kintone.help/k/en/id/040581)
+            The chart type of the graph. For more information, refer to the [Chart Types and Their Usage](https://us.kintone.help/k/en/id/040581) article.
             - **BAR**: Bar chart
             - **COLUMN**: Column chart
             - **PIE**: Pie chart
@@ -31580,8 +31553,7 @@ components:
             - PERCENTAGE
           type: string
           description: |-
-            The display mode of the graph. For more information, refer to the following article:
-            [Chart Types and Their Usage](https://us.kintone.help/k/en/id/040581)
+            The display mode of the graph. For more information, refer to the [Chart Types and Their Usage](https://us.kintone.help/k/en/id/040581) article.
             - **NORMAL**: Clustered graph or Non-stacked graph
             - **STACKED**: Stacked graph
             - **PERCENTAGE**: 100% stacked graph
@@ -32159,8 +32131,7 @@ components:
                 - Department selection
                 - Group selection
                 If `CUSTOM_FIELD` is specified for `entity.type`, state the field code of the Custom Field.
-                For more information, refer to the following article:
-                [Adding Fields in User Information (Custom Fields)](https://us.kintone.help/general/en/id/020219)
+                For more information, refer to the [Adding Fields in User Information (Custom Fields)](https://us.kintone.help/general/en/id/020219) article.
                 If `CREATOR` is specified for `entity.type`, ignore this parameter.
             type:
               enum:
@@ -32179,8 +32150,7 @@ components:
                 - `FIELD_ENTITY`: User/Group/Department selection field
                 - `CREATOR`: Created by field
                 - `CUSTOM_FIELD`: A Custom Field
-                For more information, refer to the following article:
-                [Adding Fields in User Information (Custom Fields)](https://us.kintone.help/general/en/id/020219)
+                For more information, refer to the [Adding Fields in User Information (Custom Fields)](https://us.kintone.help/general/en/id/020219) article.
                 Required, for each entity stated.
                 Departments cannot be specified in guest space Apps.
           required:
@@ -33846,8 +33816,7 @@ components:
           type: string
           description: |-
             The filter condition in a query format.
-            For more information on query formats refer to the following article:
-            [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)
+            For more information on query formats refer to the [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/) article.
             For more information on the limitations regarding filter conditions, refer to the following section:
             Limitations
             If this parameter is ignored, the filter condition will be "All records".
@@ -33990,8 +33959,7 @@ components:
           type: string
           description: |-
             The filter condition in a query format.
-            For more information on query formats refer to the following article:
-            [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)
+            For more information on query formats refer to the [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/) article.
             For more information on the limitations regarding filter conditions, refer to the following section:
             Limitations
             If this parameter is ignored, the filter condition will be "All records".
@@ -34190,9 +34158,7 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/RecordWritableObject'
-          description: |-
-            Field codes and values are specified in this object. If ignored, the record will not be updated. For more information on field types, refer to the following article:
-            [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)
+          description: Field codes and values are specified in this object. If ignored, the record will not be updated. For more information on field types, refer to the [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/) article.
         id:
           format: int64
           type: integer
@@ -34246,8 +34212,7 @@ components:
           type: string
           description: |-
             The Action name of the action to run.
-            If the localization feature has been used to apply multiple translations of the Action name, specify the name of the Action in the language settings of the user that will run the API. API Tokens follow the language settings set in the User & System Administration settings. For more information, refer to the following article:
-            [Configuring System Language](https://us.kintone.help/general/en/id/020114)
+            If the localization feature has been used to apply multiple translations of the Action name, specify the name of the Action in the language settings of the user that will run the API. API Tokens follow the language settings set in the User & System Administration settings. For more information, refer to the [Configuring System Language](https://us.kintone.help/general/en/id/020114) article.
         id:
           format: int64
           type: integer
@@ -35073,8 +35038,7 @@ components:
           type: string
           description: |-
             The fileKey of the attachment file.
-            fileKeys can be found from the response of the Upload File API. For more information, refer to the following article:
-            [Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/)
+            fileKeys can be found from the response of the Upload File API. For more information, refer to the [Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/) article.
       required:
         - fileKey
       type: object

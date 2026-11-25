@@ -28,8 +28,7 @@
             - zh
           type: string
         description: |-
-          Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:
-          [Setting Localized Names](https://us.kintone.help/k/en/id/040557)
+          Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.
           The localized language to retrieve the data in:
           - `default`: retrieves the default names
           - `en`: retrieves the localized English names

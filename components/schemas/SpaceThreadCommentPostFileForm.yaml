@@ -9,8 +9,7 @@ properties:
     type: string
     description: |-
       The fileKey of the attachment file.
-      fileKeys can be found from the response of the Upload File API. For more information, refer to the following article:
-      [Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/)
+      fileKeys can be found from the response of the Upload File API. For more information, refer to the [Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/) article.
 required:
   - fileKey
 type: object

@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Kintone REST API",
-    "version": "2026.11.20",
+    "version": "2026.11.26",
     "description": "OpenAPI specification for Kintone's REST API.\n\n## Authentication\nEach operation can be executed with either **API token authentication (recommended)** or **password authentication** (see `security`). Because API tokens are scoped per app, some APIs—such as user/organization/group management (User API) and space administration—cannot be run with a token and require **password authentication**.\n\nIf **Basic authentication (access restriction)** or **secure access (client certificate)** is enabled on your environment, you must additionally provide an extra gate (`Authorization: Basic ...` header / client certificate) on top of the above. **Session authentication** (browser cookie + CSRF token) is available on virtually all APIs, but this spec targets server-to-server integration and therefore does not include it in `security`. Details of these methods that `security` cannot express are described in a structured form under `x-kintone-additional-auth` at the document root.\n\n## Limitations (Kintone-specific)\n- **Record schemas are dynamic per app.** Field codes are arbitrary keys (`additionalProperties`) and values are represented as a union per field type (`oneOf`/`anyOf` with a `type` discriminator). The exact types of an individual app cannot be fully expressed, so supplement real app types with examples / fixtures.\n- **When a GET query is long**, you can avoid URL-length limits by sending `POST` with the `X-HTTP-Method-Override: GET` header and putting parameters in the body (the server processes it as GET). Such GET operations are marked with `x-kintone-method-override: true`. No duplicate operation is defined; the GET definition is authoritative.\n- **Authentication differs per endpoint.** Which methods (API token / password / OAuth2) each API accepts is taken directly from the \"Authentication\" row of the official documentation pages (cybozu.dev) via harvest and reflected in `security`. Management APIs that do not support tokens (space/guest administration, app move, plugins, statistics, etc.) end up as password authentication only. The OAuth2 scope each operation needs is taken the same way from the scope list in the official documentation; an API that the list does not cover yet has no OAuth2 entry.\n\nCopyright (c) 2026 Cybozu, Inc. Licensed under MIT No Attribution (SPDX: MIT-0), which does not require attribution.",
     "contact": {
       "name": "Kintone Developer Program",
@@ -1084,7 +1084,7 @@
               ],
               "type": "string"
             },
-            "description": "Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:\n[Setting Localized Names](https://us.kintone.help/k/en/id/040557)\nThe response parameter `notifications[].filterCond` will include the localized option names in the query string.\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
+            "description": "Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.\nThe response parameter `notifications[].filterCond` will include the localized option names in the query string.\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
           }
         ],
         "responses": {
@@ -1173,7 +1173,7 @@
               ],
               "type": "string"
             },
-            "description": "Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:\n[Setting Localized Names](https://us.kintone.help/k/en/id/040557)\nThe localized language to retrieve the data in:\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
+            "description": "Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.\nThe localized language to retrieve the data in:\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
           }
         ],
         "responses": {
@@ -5037,7 +5037,7 @@
               ],
               "type": "string"
             },
-            "description": "Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:\n[Setting Localized Names](https://us.kintone.help/k/en/id/040557)\nThe response parameter `notifications[].filterCond` will include the localized option names in the query string.\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
+            "description": "Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.\nThe response parameter `notifications[].filterCond` will include the localized option names in the query string.\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
           }
         ],
         "responses": {
@@ -5212,7 +5212,7 @@
               ],
               "type": "string"
             },
-            "description": "Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:\n[Setting Localized Names](https://us.kintone.help/k/en/id/040557)\nThe localized language to retrieve the data in:\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
+            "description": "Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.\nThe localized language to retrieve the data in:\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
           }
         ],
         "responses": {
@@ -6995,7 +6995,7 @@
                     "additionalProperties": {
                       "$ref": "#/components/schemas/RecordWritableObject"
                     },
-                    "description": "Field codes and values are specified in this object.\nThe values that can be specified vary depending on the type of field.\nIf ignored, the record will be added with default field values.\nIf field codes that don't exist are specified, these will be ignored.\nFor more information on field types, refer to the following article:\n[Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)"
+                    "description": "Field codes and values are specified in this object.\nThe values that can be specified vary depending on the type of field.\nIf ignored, the record will be added with default field values.\nIf field codes that don't exist are specified, these will be ignored.\nFor more information on field types, refer to the [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/) article."
                   }
                 },
                 "required": [
@@ -7091,7 +7091,7 @@
                     "additionalProperties": {
                       "$ref": "#/components/schemas/RecordWritableObject"
                     },
-                    "description": "Field codes and values are specified in this object. If ignored, the record will not be updated. For more information on field types, refer to the following article:\n[Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)"
+                    "description": "Field codes and values are specified in this object. If ignored, the record will not be updated. For more information on field types, refer to the [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/) article."
                   },
                   "id": {
                     "format": "int64",
@@ -7761,7 +7761,7 @@
                   },
                   "action": {
                     "type": "string",
-                    "description": "The Action name of the action to run.\nIf the localization feature has been used to apply multiple translations of the Action name, specify the name of the Action in the language settings of the user that will run the API. API Tokens follow the language settings set in the User & System Administration settings. For more information, refer to the following article:\n[Configuring System Language](https://us.kintone.help/general/en/id/020114)"
+                    "description": "The Action name of the action to run.\nIf the localization feature has been used to apply multiple translations of the Action name, specify the name of the Action in the language settings of the user that will run the API. API Tokens follow the language settings set in the User & System Administration settings. For more information, refer to the [Configuring System Language](https://us.kintone.help/general/en/id/020114) article."
                   },
                   "id": {
                     "format": "int64",
@@ -8053,7 +8053,7 @@
                       }
                     },
                     "type": "array",
-                    "description": "Holds an array of record objects, that contains field codes and their values.\nThe values that can be specified vary depending on the type of field.\nFields that are not included in the objects are added with their default value.\nObjects containing field codes that do not exist are ignored.\nFor more information on field types, refer to the following article:\n[Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)"
+                    "description": "Holds an array of record objects, that contains field codes and their values.\nThe values that can be specified vary depending on the type of field.\nFields that are not included in the objects are added with their default value.\nObjects containing field codes that do not exist are ignored.\nFor more information on field types, refer to the [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/) article."
                   }
                 },
                 "required": [
@@ -8448,7 +8448,7 @@
                   "size": {
                     "format": "int64",
                     "type": "integer",
-                    "description": "The maximum number of records the Get Cursor API can retrieve from this cursor with one request.\nThe maximum number is 500 records. If ignored, the default number of records to be retrieved is 100.\nTo retrieve all records, repeatedly call the Get Cursor API.\nFor more information, refer to the following article:\n[Get Cursor](https://kintone.dev/en/docs/kintone/rest-api/records/get-cursor/)"
+                    "description": "The maximum number of records the Get Cursor API can retrieve from this cursor with one request.\nThe maximum number is 500 records. If ignored, the default number of records to be retrieved is 100.\nTo retrieve all records, repeatedly call the Get Cursor API.\nFor more information, refer to the [Get Cursor](https://kintone.dev/en/docs/kintone/rest-api/records/get-cursor/) article."
                   },
                   "query": {
                     "format": "query",
@@ -9705,7 +9705,7 @@
                   "id": {
                     "format": "int64",
                     "type": "integer",
-                    "description": "The Space Template ID.\nFor instructions on creating Space Templates, refer to the following article:\n[Creating a Template from a Space](https://us.kintone.help/k/en/id/04075)\nThe Space Template ID is listed on the Space Templates list page, found under https://{domainname}.kintone.com/k/admin/system/spacetemplate/"
+                    "description": "The Space Template ID.\nFor instructions on creating Space Templates, refer to the [Creating a Template from a Space](https://us.kintone.help/k/en/id/04075) article.\nThe Space Template ID is listed on the Space Templates list page, found under https://{domainname}.kintone.com/k/admin/system/spacetemplate/"
                   },
                   "isPrivate": {
                     "type": "boolean",
@@ -10825,7 +10825,7 @@
               ],
               "type": "string"
             },
-            "description": "Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:\n[Setting Localized Names](https://us.kintone.help/k/en/id/040557)\nThe response parameter `notifications[].filterCond` will include the localized option names in the query string.\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
+            "description": "Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.\nThe response parameter `notifications[].filterCond` will include the localized option names in the query string.\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
           }
         ],
         "responses": {
@@ -10904,7 +10904,7 @@
               ],
               "type": "string"
             },
-            "description": "Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:\n[Setting Localized Names](https://us.kintone.help/k/en/id/040557)\nThe localized language to retrieve the data in:\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
+            "description": "Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.\nThe localized language to retrieve the data in:\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
           }
         ],
         "responses": {
@@ -14320,7 +14320,7 @@
               ],
               "type": "string"
             },
-            "description": "Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:\n[Setting Localized Names](https://us.kintone.help/k/en/id/040557)\nThe response parameter `notifications[].filterCond` will include the localized option names in the query string.\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
+            "description": "Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.\nThe response parameter `notifications[].filterCond` will include the localized option names in the query string.\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
           }
         ],
         "responses": {
@@ -14473,7 +14473,7 @@
               ],
               "type": "string"
             },
-            "description": "Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the following article:\n[Setting Localized Names](https://us.kintone.help/k/en/id/040557)\nThe localized language to retrieve the data in:\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
+            "description": "Set this parameter if there are fields that contain multiple options, and the Localization Settings have been set for those option names. For more information, refer to the [Setting Localized Names](https://us.kintone.help/k/en/id/040557) article.\nThe localized language to retrieve the data in:\n- `default`: retrieves the default names\n- `en`: retrieves the localized English names\n- `zh`: retrieves the localized Chinese names\n- `ja`: retrieves the localized Japanese names\n- `user`: retrieves the localized names, in the same language as the language setting* set on the user used for the authentication.\nIf ignored, the default names will be retrieved."
           }
         ],
         "responses": {
@@ -16070,7 +16070,7 @@
                     "additionalProperties": {
                       "$ref": "#/components/schemas/RecordWritableObject"
                     },
-                    "description": "Field codes and values are specified in this object.\nThe values that can be specified vary depending on the type of field.\nIf ignored, the record will be added with default field values.\nIf field codes that don't exist are specified, these will be ignored.\nFor more information on field types, refer to the following article:\n[Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)"
+                    "description": "Field codes and values are specified in this object.\nThe values that can be specified vary depending on the type of field.\nIf ignored, the record will be added with default field values.\nIf field codes that don't exist are specified, these will be ignored.\nFor more information on field types, refer to the [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/) article."
                   }
                 },
                 "required": [
@@ -16154,7 +16154,7 @@
                     "additionalProperties": {
                       "$ref": "#/components/schemas/RecordWritableObject"
                     },
-                    "description": "Field codes and values are specified in this object. If ignored, the record will not be updated. For more information on field types, refer to the following article:\n[Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)"
+                    "description": "Field codes and values are specified in this object. If ignored, the record will not be updated. For more information on field types, refer to the [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/) article."
                   },
                   "id": {
                     "format": "int64",
@@ -16803,7 +16803,7 @@
                   },
                   "action": {
                     "type": "string",
-                    "description": "The Action name of the action to run.\nIf the localization feature has been used to apply multiple translations of the Action name, specify the name of the Action in the language settings of the user that will run the API. API Tokens follow the language settings set in the User & System Administration settings. For more information, refer to the following article:\n[Configuring System Language](https://us.kintone.help/general/en/id/020114)"
+                    "description": "The Action name of the action to run.\nIf the localization feature has been used to apply multiple translations of the Action name, specify the name of the Action in the language settings of the user that will run the API. API Tokens follow the language settings set in the User & System Administration settings. For more information, refer to the [Configuring System Language](https://us.kintone.help/general/en/id/020114) article."
                   },
                   "id": {
                     "format": "int64",
@@ -17061,7 +17061,7 @@
                       }
                     },
                     "type": "array",
-                    "description": "Holds an array of record objects, that contains field codes and their values.\nThe values that can be specified vary depending on the type of field.\nFields that are not included in the objects are added with their default value.\nObjects containing field codes that do not exist are ignored.\nFor more information on field types, refer to the following article:\n[Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)"
+                    "description": "Holds an array of record objects, that contains field codes and their values.\nThe values that can be specified vary depending on the type of field.\nFields that are not included in the objects are added with their default value.\nObjects containing field codes that do not exist are ignored.\nFor more information on field types, refer to the [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/) article."
                   }
                 },
                 "required": [
@@ -17400,7 +17400,7 @@
                   "size": {
                     "format": "int64",
                     "type": "integer",
-                    "description": "The maximum number of records the Get Cursor API can retrieve from this cursor with one request.\nThe maximum number is 500 records. If ignored, the default number of records to be retrieved is 100.\nTo retrieve all records, repeatedly call the Get Cursor API.\nFor more information, refer to the following article:\n[Get Cursor](https://kintone.dev/en/docs/kintone/rest-api/records/get-cursor/)"
+                    "description": "The maximum number of records the Get Cursor API can retrieve from this cursor with one request.\nThe maximum number is 500 records. If ignored, the default number of records to be retrieved is 100.\nTo retrieve all records, repeatedly call the Get Cursor API.\nFor more information, refer to the [Get Cursor](https://kintone.dev/en/docs/kintone/rest-api/records/get-cursor/) article."
                   },
                   "query": {
                     "format": "query",
@@ -18439,7 +18439,7 @@
                   "id": {
                     "format": "int64",
                     "type": "integer",
-                    "description": "The Space Template ID.\nFor instructions on creating Space Templates, refer to the following article:\n[Creating a Template from a Space](https://us.kintone.help/k/en/id/04075)\nThe Space Template ID is listed on the Space Templates list page, found under https://{domainname}.kintone.com/k/admin/system/spacetemplate/"
+                    "description": "The Space Template ID.\nFor instructions on creating Space Templates, refer to the [Creating a Template from a Space](https://us.kintone.help/k/en/id/04075) article.\nThe Space Template ID is listed on the Space Templates list page, found under https://{domainname}.kintone.com/k/admin/system/spacetemplate/"
                   },
                   "isPrivate": {
                     "type": "boolean",
@@ -25826,7 +25826,7 @@
           },
           "image": {
             "type": "string",
-            "description": "The profile image of the Guest user.\nSpecify a fileKey of an uploaded file. fileKeys can be found from the response of the Upload File API. For more information, refer to the following article:\n[Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/)\nIf ignored, a default image will be set."
+            "description": "The profile image of the Guest user.\nSpecify a fileKey of an uploaded file. fileKeys can be found from the response of the Upload File API. For more information, refer to the [Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/) article.\nIf ignored, a default image will be set."
           },
           "password": {
             "maxLength": 64,
@@ -26378,7 +26378,7 @@
           },
           "filterCond": {
             "type": "string",
-            "description": "The query string that App Action can be used.\nIf ignored, the condition will not be changed.\nIf an empty string is specified when creating or updating the `Action`, the condition will be set as `All records`.\nFor more information on query string, refer to the following article:\n[Query string](https://kintone.dev/en/docs/kintone/overview/query-string/)\nThere are restrictions on the conditions that can be specified:\n[Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)"
+            "description": "The query string that App Action can be used.\nIf ignored, the condition will not be changed.\nIf an empty string is specified when creating or updating the `Action`, the condition will be set as `All records`.\nFor more information on query string, refer to the [Query string](https://kintone.dev/en/docs/kintone/overview/query-string/) article.\nThere are restrictions on the conditions that can be specified:\n[Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)"
           },
           "destApp": {
             "properties": {
@@ -36541,7 +36541,7 @@
           "filterCond": {
             "format": "query",
             "type": "string",
-            "description": "The record's filter condition in query string format.\nFor more information on query formats refer to the following article:\n[Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)\nThere are restrictions on the conditions that can be specified:\n[Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)\n[Additional Restrictions for Each API](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#additional-restrictions-for-each-api)\nThe following cases will have the same result:\n- \"All records\" is specified.\n- \"null\" is specified.\n- An empty string is specified.\n- The parameter is ignored.\nThe request will fail if a deleted User, Group, or Organization is specified in the filter condition."
+            "description": "The record's filter condition in query string format.\nFor more information on query formats refer to the [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/) article.\nThere are restrictions on the conditions that can be specified:\n[Available Operators and Functions for Each Field](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#available-operators-and-functions-for-each-field)\n[Additional Restrictions for Each API](https://kintone.dev/en/id/0d9792ee2b6e4b0e3829c9ee/#additional-restrictions-for-each-api)\nThe following cases will have the same result:\n- \"All records\" is specified.\n- \"null\" is specified.\n- An empty string is specified.\n- The parameter is ignored.\nThe request will fail if a deleted User, Group, or Organization is specified in the filter condition."
           },
           "title": {
             "maxLength": 100,
@@ -37420,7 +37420,7 @@
               "SPLINE_AREA"
             ],
             "type": "string",
-            "description": "The chart type of the graph. For more information, refer to the following article:\n[Chart Types and Their Usage](https://us.kintone.help/k/en/id/040581)\n- **BAR**: Bar chart\n- **COLUMN**: Column chart\n- **PIE**: Pie chart\n- **LINE**: Line chart\n- **PIVOT_TABLE**: Pivot Table\n- **TABLE**: Table\n- **AREA**: Area chart\n- **SPLINE**: Spline chart\n- **SPLINE_AREA**: Spline area chart\nRequired when updating an existing graph, or creating a new graph."
+            "description": "The chart type of the graph. For more information, refer to the [Chart Types and Their Usage](https://us.kintone.help/k/en/id/040581) article.\n- **BAR**: Bar chart\n- **COLUMN**: Column chart\n- **PIE**: Pie chart\n- **LINE**: Line chart\n- **PIVOT_TABLE**: Pivot Table\n- **TABLE**: Table\n- **AREA**: Area chart\n- **SPLINE**: Spline chart\n- **SPLINE_AREA**: Spline area chart\nRequired when updating an existing graph, or creating a new graph."
           },
           "name": {
             "maxLength": 64,
@@ -37501,7 +37501,7 @@
               "SPLINE_AREA"
             ],
             "type": "string",
-            "description": "The chart type of the graph. For more information, refer to the following article:\n[Chart Types and Their Usage](https://us.kintone.help/k/en/id/040581)\n- **BAR**: Bar chart\n- **COLUMN**: Column chart\n- **PIE**: Pie chart\n- **LINE**: Line chart\n- **PIVOT_TABLE**: Pivot Table\n- **TABLE**: Table\n- **AREA**: Area chart\n- **SPLINE**: Spline chart\n- **SPLINE_AREA**: Spline area chart\nRequired when updating an existing graph, or creating a new graph."
+            "description": "The chart type of the graph. For more information, refer to the [Chart Types and Their Usage](https://us.kintone.help/k/en/id/040581) article.\n- **BAR**: Bar chart\n- **COLUMN**: Column chart\n- **PIE**: Pie chart\n- **LINE**: Line chart\n- **PIVOT_TABLE**: Pivot Table\n- **TABLE**: Table\n- **AREA**: Area chart\n- **SPLINE**: Spline chart\n- **SPLINE_AREA**: Spline area chart\nRequired when updating an existing graph, or creating a new graph."
           },
           "name": {
             "maxLength": 64,
@@ -37528,7 +37528,7 @@
               "PERCENTAGE"
             ],
             "type": "string",
-            "description": "The display mode of the graph. For more information, refer to the following article:\n[Chart Types and Their Usage](https://us.kintone.help/k/en/id/040581)\n- **NORMAL**: Clustered graph or Non-stacked graph\n- **STACKED**: Stacked graph\n- **PERCENTAGE**: 100% stacked graph\nIf the **reports.{graphname}.chartType** parameter is set to **BAR** or **COLUMN**, **NORMAL** refers to \"Clustered graph\" display mode.\nIf the **reports.{graphname}.chartType** parameter is set to **AREA** or **SPLINE_AREA**, **NORMAL** refers to \"Non-stacked graph\" display mode.\nRequired when the **reports.{graphname}.chartType** parameter is set to **BAR**, **COLUMN**, **AREA**, or **SPLINE_AREA**."
+            "description": "The display mode of the graph. For more information, refer to the [Chart Types and Their Usage](https://us.kintone.help/k/en/id/040581) article.\n- **NORMAL**: Clustered graph or Non-stacked graph\n- **STACKED**: Stacked graph\n- **PERCENTAGE**: 100% stacked graph\nIf the **reports.{graphname}.chartType** parameter is set to **BAR** or **COLUMN**, **NORMAL** refers to \"Clustered graph\" display mode.\nIf the **reports.{graphname}.chartType** parameter is set to **AREA** or **SPLINE_AREA**, **NORMAL** refers to \"Non-stacked graph\" display mode.\nRequired when the **reports.{graphname}.chartType** parameter is set to **BAR**, **COLUMN**, **AREA**, or **SPLINE_AREA**."
           },
           "filterCond": {
             "format": "query",
@@ -38151,7 +38151,7 @@
             "properties": {
               "code": {
                 "type": "string",
-                "description": "The code of the Assignee.\nTo specify guest space users, add the string `guest/` before the guest's log in name.\nIf `FIELD_ENTITY` is specified for the `entity.type`, state the field code of the following fields:\n- Created by\n- Updated by\n- User selection\n- Department selection\n- Group selection\nIf `CUSTOM_FIELD` is specified for `entity.type`, state the field code of the Custom Field.\nFor more information, refer to the following article:\n[Adding Fields in User Information (Custom Fields)](https://us.kintone.help/general/en/id/020219)\nIf `CREATOR` is specified for `entity.type`, ignore this parameter."
+                "description": "The code of the Assignee.\nTo specify guest space users, add the string `guest/` before the guest's log in name.\nIf `FIELD_ENTITY` is specified for the `entity.type`, state the field code of the following fields:\n- Created by\n- Updated by\n- User selection\n- Department selection\n- Group selection\nIf `CUSTOM_FIELD` is specified for `entity.type`, state the field code of the Custom Field.\nFor more information, refer to the [Adding Fields in User Information (Custom Fields)](https://us.kintone.help/general/en/id/020219) article.\nIf `CREATOR` is specified for `entity.type`, ignore this parameter."
               },
               "type": {
                 "enum": [
@@ -38163,7 +38163,7 @@
                   "CUSTOM_FIELD"
                 ],
                 "type": "string",
-                "description": "The entity type of the Assignee.\n- `USER`: User\n- `GROUP`: Group\n- `ORGANIZATION`: Department\n- `FIELD_ENTITY`: User/Group/Department selection field\n- `CREATOR`: Created by field\n- `CUSTOM_FIELD`: A Custom Field\nFor more information, refer to the following article:\n[Adding Fields in User Information (Custom Fields)](https://us.kintone.help/general/en/id/020219)\nRequired, for each entity stated.\nDepartments cannot be specified in guest space Apps."
+                "description": "The entity type of the Assignee.\n- `USER`: User\n- `GROUP`: Group\n- `ORGANIZATION`: Department\n- `FIELD_ENTITY`: User/Group/Department selection field\n- `CREATOR`: Created by field\n- `CUSTOM_FIELD`: A Custom Field\nFor more information, refer to the [Adding Fields in User Information (Custom Fields)](https://us.kintone.help/general/en/id/020219) article.\nRequired, for each entity stated.\nDepartments cannot be specified in guest space Apps."
               }
             },
             "required": [
@@ -40135,7 +40135,7 @@
           "filterCond": {
             "format": "query",
             "type": "string",
-            "description": "The filter condition in a query format.\nFor more information on query formats refer to the following article:\n[Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)\nFor more information on the limitations regarding filter conditions, refer to the following section:\nLimitations\nIf this parameter is ignored, the filter condition will be \"All records\"."
+            "description": "The filter condition in a query format.\nFor more information on query formats refer to the [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/) article.\nFor more information on the limitations regarding filter conditions, refer to the following section:\nLimitations\nIf this parameter is ignored, the filter condition will be \"All records\"."
           }
         },
         "required": [
@@ -40294,7 +40294,7 @@
           "filterCond": {
             "format": "query",
             "type": "string",
-            "description": "The filter condition in a query format.\nFor more information on query formats refer to the following article:\n[Query String](https://kintone.dev/en/docs/kintone/overview/query-string/)\nFor more information on the limitations regarding filter conditions, refer to the following section:\nLimitations\nIf this parameter is ignored, the filter condition will be \"All records\"."
+            "description": "The filter condition in a query format.\nFor more information on query formats refer to the [Query String](https://kintone.dev/en/docs/kintone/overview/query-string/) article.\nFor more information on the limitations regarding filter conditions, refer to the following section:\nLimitations\nIf this parameter is ignored, the filter condition will be \"All records\"."
           }
         },
         "required": [
@@ -40596,7 +40596,7 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/RecordWritableObject"
             },
-            "description": "Field codes and values are specified in this object. If ignored, the record will not be updated. For more information on field types, refer to the following article:\n[Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/)"
+            "description": "Field codes and values are specified in this object. If ignored, the record will not be updated. For more information on field types, refer to the [Field Types](https://kintone.dev/en/docs/kintone/overview/field-types/) article."
           },
           "id": {
             "format": "int64",
@@ -40653,7 +40653,7 @@
         "properties": {
           "action": {
             "type": "string",
-            "description": "The Action name of the action to run.\nIf the localization feature has been used to apply multiple translations of the Action name, specify the name of the Action in the language settings of the user that will run the API. API Tokens follow the language settings set in the User & System Administration settings. For more information, refer to the following article:\n[Configuring System Language](https://us.kintone.help/general/en/id/020114)"
+            "description": "The Action name of the action to run.\nIf the localization feature has been used to apply multiple translations of the Action name, specify the name of the Action in the language settings of the user that will run the API. API Tokens follow the language settings set in the User & System Administration settings. For more information, refer to the [Configuring System Language](https://us.kintone.help/general/en/id/020114) article."
           },
           "id": {
             "format": "int64",
@@ -41784,7 +41784,7 @@
           },
           "fileKey": {
             "type": "string",
-            "description": "The fileKey of the attachment file.\nfileKeys can be found from the response of the Upload File API. For more information, refer to the following article:\n[Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/)"
+            "description": "The fileKey of the attachment file.\nfileKeys can be found from the response of the Upload File API. For more information, refer to the [Upload File](https://kintone.dev/en/docs/kintone/rest-api/files/upload-file/) article."
           }
         },
         "required": [
